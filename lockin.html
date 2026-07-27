@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lock In — 75 to Hyrox</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+  :root{
+    color-scheme: light;
+    --bg:#f4f5f7;
+    --card:#ffffff;
+    --ink:#16181d;
+    --muted:#6b7280;
+    --line:#e6e8ec;
+    --accent:#ff5a1f;
+    --accent-soft:#fff1ea;
+    --gold:#f2b705;
+    --good:#16a34a;
+    --good-soft:#e9f7ef;
+    --blue:#2563eb;
+    --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.05);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:880px;margin:0 auto;padding:20px 18px 56px;}
+
+  .hero{background:var(--ink);color:#fff;border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;background:var(--accent);opacity:.18;border-radius:50%;}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#ffd2bf;font-weight:700;margin:0}
+  .title{font-size:26px;font-weight:800;margin:6px 0 14px;letter-spacing:-.01em}
+  .heroStats{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-end;position:relative;z-index:1}
+  .big{font-size:40px;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .big small{font-size:15px;font-weight:600;color:#c9ccd2;margin-left:4px}
+  .heroLbl{font-size:12px;color:#aab0ba;margin-top:6px;letter-spacing:.02em}
+  .accentNum{color:var(--accent)}
+  .barOuter{height:9px;background:#2a2d34;border-radius:999px;margin-top:16px;overflow:hidden;position:relative;z-index:1}
+  .barInner{height:100%;background:linear-gradient(90deg,var(--accent),#ff8a4f);border-radius:999px;width:0%}
+
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+  .card .n{font-size:24px;font-weight:800;letter-spacing:-.01em}
+  .card .l{font-size:11.5px;color:var(--muted);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+  .flame{color:var(--accent)}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin-top:16px;padding:18px}
+  .panelHd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+  .panelHd h2{font-size:15px;margin:0;font-weight:800;letter-spacing:.01em}
+  .panelHd .sub{font-size:12.5px;color:var(--muted);font-weight:600}
+  .navday{display:flex;align-items:center;gap:8px}
+  .navday button{border:1px solid var(--line);background:#fff;border-radius:9px;width:30px;height:30px;font-size:16px;cursor:pointer;color:var(--ink);line-height:1}
+  .navday button:hover{background:var(--bg)}
+  .todayBtn{width:auto!important;padding:0 10px;font-size:12px!important;font-weight:700}
+
+  .list{margin-top:8px}
+  .item{display:flex;align-items:center;gap:12px;padding:11px 8px;border-radius:11px;cursor:pointer;border:1px solid transparent}
+  .item:hover{background:var(--bg)}
+  .item.done{background:var(--good-soft)}
+  .box{width:24px;height:24px;border-radius:7px;border:2px solid #cfd3da;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;transition:.12s}
+  .item.done .box{background:var(--good);border-color:var(--good)}
+  .itxt{flex:1;min-width:0}
+  .itxt .h{font-size:14.5px;font-weight:700}
+  .itxt .s{font-size:12px;color:var(--muted);margin-top:1px}
+  .item.done .itxt .h{color:#137a36}
+  .emoji{font-size:18px;width:24px;text-align:center;flex:0 0 auto}
+  .callsBox{display:flex;align-items:center;gap:6px}
+  .callsBox input{width:54px;padding:5px 6px;border:1px solid var(--line);border-radius:8px;font-size:13px;text-align:center;font-weight:700;color:var(--ink)}
+  .stepper{border:1px solid var(--line);background:#fff;border-radius:7px;width:26px;height:26px;font-size:15px;cursor:pointer;line-height:1}
+  .stepper:hover{background:var(--bg)}
+
+  /* training log */
+  .tlog{margin-top:12px;border-top:1px dashed var(--line);padding-top:14px}
+  .tlogHd{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px}
+  .session{margin-bottom:12px}
+  .session label{font-size:12.5px;font-weight:700;color:var(--ink);display:block;margin-bottom:5px}
+  .session input.type{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:9px;font-size:13.5px;color:var(--ink)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .chip{font-size:11.5px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:4px 10px;cursor:pointer}
+  .chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+
+  .perfectTag{display:none;margin-top:12px;background:#fff8e1;border:1px solid #f6e29a;color:#8a6d00;font-weight:700;font-size:13px;padding:9px 12px;border-radius:11px;text-align:center}
+  .perfectTag.show{display:block}
+
+  /* charts */
+  .chartBox{position:relative;height:240px;margin-top:8px}
+  .callout{display:flex;gap:14px;flex-wrap:wrap;margin:4px 0 6px}
+  .callout .c{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:9px 13px;min-width:120px}
+  .callout .c .v{font-size:19px;font-weight:800}
+  .callout .c .k{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+
+  /* sim table */
+  .simRow{display:flex;align-items:center;gap:10px;padding:9px 6px;border-bottom:1px solid var(--line)}
+  .simRow:last-child{border-bottom:0}
+  .simWk{width:104px;flex:0 0 auto}
+  .simWk .w{font-size:13.5px;font-weight:800}
+  .simWk .d{font-size:11px;color:var(--muted)}
+  .simRow input.time{width:88px;padding:7px 8px;border:1px solid var(--line);border-radius:9px;font-size:14px;font-weight:700;text-align:center;color:var(--ink);font-variant-numeric:tabular-nums}
+  .simRow input.note{flex:1;min-width:60px;padding:7px 9px;border:1px solid var(--line);border-radius:9px;font-size:12.5px;color:var(--ink)}
+  .delta{width:78px;flex:0 0 auto;text-align:right;font-size:12.5px;font-weight:800;font-variant-numeric:tabular-nums}
+  .delta.up{color:var(--good)} .delta.down{color:#dc2626} .delta.flat{color:var(--muted)}
+  .simRow.current{background:var(--accent-soft);border-radius:10px}
+
+  .grid{display:grid;grid-template-columns:repeat(15,1fr);gap:6px;margin-top:12px}
+  .cell{aspect-ratio:1/1;border-radius:7px;background:#eceef1;border:1px solid #e2e5ea;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;color:#9aa0aa;font-weight:700;position:relative}
+  .cell:hover{outline:2px solid var(--accent)}
+  .cell.partial{background:var(--accent-soft);border-color:#ffd9c6;color:#c2410c}
+  .cell.perfect{background:var(--gold);border-color:#d99e00;color:#5c4500}
+  .cell.future{opacity:.5}
+  .cell.today{box-shadow:0 0 0 2px var(--ink);font-weight:800;color:var(--ink)}
+  .cell.sim:after{content:"";position:absolute;top:3px;right:3px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+  .gridLegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:var(--muted)}
+  .gridLegend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:12px;height:12px;border-radius:4px;display:inline-block;border:1px solid #d8dbe0}
+
+  .footer{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.6;text-align:center}
+  .footer b{color:var(--ink)}
+  @media(max-width:560px){
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .grid{grid-template-columns:repeat(10,1fr)}
+    .big{font-size:34px}.title{font-size:22px}
+    .simWk{width:84px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="eyebrow">75 · Lock In Protocol</p>
+    <div class="title">Rebuild the routine → Hyrox ready</div>
+    <div class="heroStats">
+      <div><div class="big">Day <span id="dayNum" class="accentNum">1</span><small>/ 75</small></div><div class="heroLbl" id="dayDate">—</div></div>
+      <div><div class="big" id="toEvent">—</div><div class="heroLbl">days to Hyrox · 24 Sep</div></div>
+      <div><div class="big" id="perfPct">0%</div><div class="heroLbl">perfect-day rate</div></div>
+    </div>
+    <div class="barOuter"><div class="barInner" id="bar"></div></div>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="n flame">🔥 <span id="streak">0</span></div><div class="l">Current streak</div></div>
+    <div class="card"><div class="n"><span id="best">0</span></div><div class="l">Best streak</div></div>
+    <div class="card"><div class="n"><span id="perfect">0</span></div><div class="l">Perfect days</div></div>
+    <div class="card"><div class="n"><span id="elapsed">0</span><small style="font-size:13px;color:var(--muted)">/75</small></div><div class="l">Days elapsed</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="panelHd">
+      <div><h2 id="dayHd">Today</h2><div class="sub" id="dayHdSub">—</div></div>
+      <div class="navday">
+        <button id="prevDay" title="Previous day">‹</button>
+        <button id="todayJump" class="todayBtn">Today</button>
+        <button id="nextDay" title="Next day">›</button>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+
+    <div class="tlog">
+      <div class="tlogHd">Training log — what did you do?</div>
+      <div class="session">
+        <label>Session 1 <span style="color:var(--muted);font-weight:500">· commute counts on weekdays</span></label>
+        <input class="type" id="t1type" placeholder="e.g. easy 5k run">
+        <div class="chips" id="chips1"></div>
+      </div>
+      <div class="session">
+        <label>Session 2 <span style="color:var(--muted);font-weight:500">· weekends = double day</span></label>
+        <input class="type" id="t2type" placeholder="e.g. sled + wall balls">
+        <div class="chips" id="chips2"></div>
+      </div>
+    </div>
+
+    <div class="perfectTag" id="perfectTag">✅ Perfect day — all locked in. Streak protected.</div>
+  </div>
+
+  <div class="panel">
+    <div class="panelHd"><h2>Weekly Hyrox sim — timed</h2><div class="sub">1× / week · lower = faster</div></div>
+    <div class="callout">
+      <div class="c"><div class="v" id="simBest">—</div><div class="k">Best time</div></div>
+      <div class="c"><div class="v" id="simLatest">—</div><div class="k">Latest</div></div>
+      <div class="c"><div class="v" id="simGain">—</div><div class="k">vs first sim</div></div>
+    </div>
+    <div class="chartBox"><canvas id="simChart"></canvas></div>
+    <div id="simRows" style="margin-top:10px"></div>
+    <div style="font-size:11.5px;color:var(--muted);margin-top:8px">Enter as <b>mm:ss</b> (e.g. 38:20) or <b>h:mm:ss</b> for a full sim. Add what format you ran in the note (full / scaled / no-sled etc.).</div>
+  </div>
+
+  <div class="panel">
+    <div class="panelHd"><h2>Consistency by week</h2><div class="sub">avg % of daily non-negotiables hit</div></div>
+    <div class="chartBox" style="height:200px"><canvas id="weekChart"></canvas></div>
+  </div>
+
+  <div class="panel">
+    <div class="panelHd"><h2>The 75-day board</h2><div class="sub">tap any day to log it</div></div>
+    <div class="grid" id="grid"></div>
+    <div class="gridLegend">
+      <span><i class="dot" style="background:#eceef1"></i>none</span>
+      <span><i class="dot" style="background:var(--accent-soft);border-color:#ffd9c6"></i>partial</span>
+      <span><i class="dot" style="background:var(--gold);border-color:#d99e00"></i>perfect</span>
+      <span><i class="dot" style="background:#fff;box-shadow:0 0 0 2px var(--ink)"></i>today</span>
+      <span><i class="dot" style="background:var(--blue);border-radius:50%"></i>sim week</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <b>Rules:</b> 2× training/day (weekday commute = 1, weekends double) · Annabell AI 25+ calls · Annabell AI 45-min build · no alcohol (weekend allowance) · no nicotine · nutrition on-plan · 3L water · 10 pages · progress photo · 5-min shutdown.<br>
+    <b>Day 1:</b> 3 Jun 2026 · <b>Day 75:</b> 16 Aug · then peak & taper into <b>Hyrox · 24 Sep</b>.
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="hyrox75_v1", SIMKEY="hyrox75_sims_v1";
+  var START=new Date(2026,5,3), EVENT=new Date(2026,8,24), TOTAL=75;
+  var WEEKS=Math.ceil(TOTAL/7);
+
+  var HABITS=[
+    {id:"train1",e:"🏃",h:"Training 1 · 45 min",s:"Weekday commute counts as this one"},
+    {id:"train2",e:"💪",h:"Training 2 · 45 min",s:"Weekends = double dedicated day"},
+    {id:"calls",e:"📞",h:"Annabell AI · 25+ calls",s:"",calls:true},
+    {id:"build",e:"🤖",h:"Annabell AI · 45-min build",s:"Focused, non-negotiable block"},
+    {id:"alcohol",e:"🚫",h:"No alcohol",s:"One weekend allowance"},
+    {id:"nicotine",e:"🚭",h:"No nicotine",s:"Zero. No exceptions"},
+    {id:"nutrition",e:"🥗",h:"Nutrition on-plan",s:"One treat meal / week"},
+    {id:"water",e:"💧",h:"Hydration · 3L",s:""},
+    {id:"read",e:"📖",h:"Read 10 pages",s:"Nonfiction / professional"},
+    {id:"photo",e:"📸",h:"Progress photo",s:""},
+    {id:"shutdown",e:"🌙",h:"5-min evening shutdown",s:"Plan tomorrow"}
+  ];
+  var TYPES=["Easy run","Intervals","Long run","Strength","SkiErg","Row","Sled","Wall balls","Compromised","Mobility","Rest"];
+
+  function load(k){ try{ return JSON.parse(localStorage.getItem(k))||{}; }catch(e){ return {}; } }
+  function save(k,d){ try{ localStorage.setItem(k,JSON.stringify(d)); }catch(e){} }
+  var DATA=load(KEY), SIMS=load(SIMKEY);
+
+  function pad(n){ return (n<10?"0":"")+n; }
+  function keyOf(dt){ return dt.getFullYear()+"-"+pad(dt.getMonth()+1)+"-"+pad(dt.getDate()); }
+  function midnight(dt){ return new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()); }
+  function dateForDay(n){ var d=new Date(START); d.setDate(d.getDate()+(n-1)); return d; }
+  function dayDiff(a,b){ return Math.round((midnight(a)-midnight(b))/86400000); }
+  function fmt(dt){ return dt.toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"short"}); }
+  function fmtShort(dt){ return dt.toLocaleDateString(undefined,{day:"numeric",month:"short"}); }
+
+  function isPerfect(rec){ if(!rec) return false; for(var i=0;i<HABITS.length;i++){ if(!rec[HABITS[i].id]) return false; } return true; }
+  function countDone(rec){ if(!rec) return 0; var c=0; for(var i=0;i<HABITS.length;i++){ if(rec[HABITS[i].id]) c++; } return c; }
+
+  // time parsing mm:ss or h:mm:ss -> seconds; "" -> null
+  function parseTime(s){ if(!s) return null; var p=String(s).trim().split(":").map(function(x){return parseInt(x,10);}); if(p.some(isNaN)||!p.length) return null;
+    if(p.length===2) return p[0]*60+p[1]; if(p.length===3) return p[0]*3600+p[1]*60+p[2]; if(p.length===1) return p[0]*60; return null; }
+  function fmtTime(sec){ if(sec==null) return "—"; var h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
+    return h>0 ? h+":"+pad(m)+":"+pad(s) : m+":"+pad(s); }
+  function fmtDelta(sec){ var sign=sec<0?"−":"+"; return sign+fmtTime(Math.abs(sec)); }
+
+  var today=midnight(new Date());
+  var todayDayNum=dayDiff(today,START)+1;
+  var selectedDay=Math.min(Math.max(todayDayNum,1),TOTAL);
+  var simChart=null, weekChart=null;
+
+  function weekStartDay(w){ return (w-1)*7+1; }
+  function simDayForWeek(w){ return Math.min(weekStartDay(w),TOTAL); } // marker = first day of week
+
+  function render(){
+    var shownDay=Math.min(Math.max(todayDayNum,1),TOTAL);
+    document.getElementById("dayNum").textContent=shownDay;
+    document.getElementById("dayDate").textContent=fmt(today);
+    document.getElementById("toEvent").textContent=Math.max(dayDiff(EVENT,today),0);
+    var elapsed=Math.min(Math.max(todayDayNum,0),TOTAL);
+    document.getElementById("elapsed").textContent=elapsed;
+    document.getElementById("bar").style.width=(elapsed/TOTAL*100)+"%";
+
+    var perfect=0,best=0,run=0;
+    for(var n=1;n<=TOTAL;n++){ var r=DATA[keyOf(dateForDay(n))]; if(isPerfect(r)){perfect++;run++;if(run>best)best=run;}else run=0; }
+    var streak=0,cur=todayDayNum;
+    if(cur>=1&&cur<=TOTAL&&!isPerfect(DATA[keyOf(dateForDay(cur))])) cur--;
+    while(cur>=1){ if(isPerfect(DATA[keyOf(dateForDay(cur))])){streak++;cur--;}else break; }
+    document.getElementById("perfect").textContent=perfect;
+    document.getElementById("best").textContent=best;
+    document.getElementById("streak").textContent=streak;
+    var denom=Math.max(Math.min(todayDayNum,TOTAL),1);
+    document.getElementById("perfPct").textContent=Math.round(perfect/denom*100)+"%";
+
+    renderDay(); renderSimRows(); renderGrid(); renderCharts();
+  }
+
+  function renderDay(){
+    var dt=dateForDay(selectedDay), k=keyOf(dt), rec=DATA[k]||{};
+    var isToday=(selectedDay===todayDayNum);
+    document.getElementById("dayHd").textContent=(isToday?"Today · ":"")+"Day "+selectedDay;
+    document.getElementById("dayHdSub").textContent=fmt(dt);
+
+    var wrap=document.getElementById("list"); wrap.innerHTML="";
+    HABITS.forEach(function(hb){
+      var done=!!rec[hb.id];
+      var row=document.createElement("div");
+      row.className="item"+(done?" done":"");
+      var inner='<div class="emoji">'+hb.e+'</div><div class="box">'+(done?"✓":"")+'</div>'+
+        '<div class="itxt"><div class="h">'+hb.h+'</div>'+(hb.s?'<div class="s">'+hb.s+'</div>':'')+'</div>';
+      if(hb.calls){ var c=rec.callsCount||0; inner+='<div class="callsBox" data-stop="1"><button class="stepper" data-act="minus">−</button><input type="number" min="0" value="'+c+'"><button class="stepper" data-act="plus">+</button></div>'; }
+      row.innerHTML=inner;
+      row.addEventListener("click",function(ev){ if(ev.target.closest('[data-stop]'))return; toggle(k,hb.id); });
+      if(hb.calls){ var box=row.querySelector('.callsBox'),input=box.querySelector('input');
+        box.querySelector('[data-act="minus"]').addEventListener("click",function(){input.value=Math.max(0,(parseInt(input.value)||0)-1);applyCalls(k,parseInt(input.value));});
+        box.querySelector('[data-act="plus"]').addEventListener("click",function(){input.value=(parseInt(input.value)||0)+1;applyCalls(k,parseInt(input.value));});
+        input.addEventListener("change",function(){applyCalls(k,parseInt(input.value)||0);}); }
+      wrap.appendChild(row);
+    });
+
+    // training type fields
+    var t1=document.getElementById("t1type"), t2=document.getElementById("t2type");
+    t1.value=rec.train1Type||""; t2.value=rec.train2Type||"";
+    t1.oninput=function(){ setField(k,"train1Type",t1.value); };
+    t2.oninput=function(){ setField(k,"train2Type",t2.value); };
+    buildChips("chips1",t1,k,"train1Type");
+    buildChips("chips2",t2,k,"train2Type");
+
+    document.getElementById("perfectTag").className="perfectTag"+(isPerfect(rec)?" show":"");
+  }
+
+  function buildChips(elId,input,k,field){
+    var box=document.getElementById(elId); box.innerHTML="";
+    TYPES.forEach(function(t){
+      var c=document.createElement("span"); c.className="chip"; c.textContent=t;
+      c.addEventListener("click",function(){
+        var v=input.value.trim();
+        input.value = v ? (v.replace(/\s*$/,'')+" + "+t) : t;
+        setField(k,field,input.value);
+      });
+      box.appendChild(c);
+    });
+  }
+
+  function setField(k,field,val){ DATA[k]=DATA[k]||{}; DATA[k][field]=val; save(KEY,DATA); }
+  function applyCalls(k,val){ DATA[k]=DATA[k]||{}; DATA[k].callsCount=val; DATA[k].calls=val>=25; save(KEY,DATA); render(); }
+  function toggle(k,id){ DATA[k]=DATA[k]||{}; DATA[k][id]=!DATA[k][id];
+    if(id==="calls"&&DATA[k][id]) DATA[k].callsCount=Math.max(DATA[k].callsCount||0,25);
+    save(KEY,DATA); render(); }
+
+  // ---- sims ----
+  function orderedSimWeeks(){ var arr=[]; for(var w=1;w<=WEEKS;w++){ var s=SIMS[w]; if(s&&s.sec!=null) arr.push({w:w,sec:s.sec}); } return arr; }
+
+  function renderSimRows(){
+    var wrap=document.getElementById("simRows"); wrap.innerHTML="";
+    var curWeek=Math.ceil(Math.min(Math.max(todayDayNum,1),TOTAL)/7);
+    var prevSec=null;
+    for(var w=1;w<=WEEKS;w++){
+      var s=SIMS[w]||{}; var dt=dateForDay(weekStartDay(w));
+      var row=document.createElement("div"); row.className="simRow"+(w===curWeek?" current":"");
+      var deltaTxt="—", deltaCls="flat";
+      if(s.sec!=null&&prevSec!=null){ var d=s.sec-prevSec; if(d<0){deltaTxt=fmtDelta(d);deltaCls="up";} else if(d>0){deltaTxt=fmtDelta(d);deltaCls="down";} else {deltaTxt="±0";deltaCls="flat";} }
+      row.innerHTML='<div class="simWk"><div class="w">Week '+w+'</div><div class="d">from '+fmtShort(dt)+'</div></div>'+
+        '<input class="time" placeholder="mm:ss" value="'+(s.sec!=null?fmtTime(s.sec):"")+'">'+
+        '<input class="note" placeholder="format / notes" value="'+(s.note?s.note.replace(/"/g,"&quot;"):"")+'">'+
+        '<div class="delta '+deltaCls+'">'+deltaTxt+'</div>';
+      (function(week,r){
+        var ti=r.querySelector(".time"), ni=r.querySelector(".note");
+        ti.addEventListener("change",function(){ var sec=parseTime(ti.value); SIMS[week]=SIMS[week]||{}; SIMS[week].sec=sec; if(sec!=null)ti.value=fmtTime(sec); save(SIMKEY,SIMS); render(); });
+        ni.addEventListener("change",function(){ SIMS[week]=SIMS[week]||{}; SIMS[week].note=ni.value; save(SIMKEY,SIMS); });
+      })(w,row);
+      wrap.appendChild(row);
+      if(s.sec!=null) prevSec=s.sec;
+    }
+    // callouts
+    var ord=orderedSimWeeks();
+    var bestEl=document.getElementById("simBest"),latEl=document.getElementById("simLatest"),gainEl=document.getElementById("simGain");
+    if(ord.length){
+      var best=ord.reduce(function(a,b){return b.sec<a.sec?b:a;});
+      var latest=ord[ord.length-1], first=ord[0];
+      bestEl.textContent=fmtTime(best.sec)+" (W"+best.w+")";
+      latEl.textContent=fmtTime(latest.sec)+" (W"+latest.w+")";
+      if(ord.length>1){ var g=first.sec-latest.sec; gainEl.textContent=fmtDelta(-g).replace("+","").replace("−","-")+ (g>0?" faster":g<0?" slower":""); gainEl.style.color=g>0?"var(--good)":g<0?"#dc2626":"var(--muted)"; }
+      else { gainEl.textContent="log W"+ (first.w+1) +" to compare"; gainEl.style.color="var(--muted)"; }
+    } else { bestEl.textContent="—"; latEl.textContent="—"; gainEl.textContent="—"; }
+  }
+
+  function renderGrid(){
+    var g=document.getElementById("grid"); g.innerHTML="";
+    var simDays={}; for(var w=1;w<=WEEKS;w++){ simDays[simDayForWeek(w)]=true; }
+    for(var n=1;n<=TOTAL;n++){
+      var dt=dateForDay(n), rec=DATA[keyOf(dt)];
+      var cls="cell";
+      if(isPerfect(rec)) cls+=" perfect"; else if(countDone(rec)>0) cls+=" partial";
+      if(dayDiff(dt,today)>0) cls+=" future";
+      if(n===todayDayNum) cls+=" today";
+      if(n===selectedDay) cls+=" today";
+      if(simDays[n]) cls+=" sim";
+      var cell=document.createElement("div"); cell.className=cls; cell.textContent=n;
+      (function(num){ cell.addEventListener("click",function(){ selectedDay=num; render(); }); })(n);
+      g.appendChild(cell);
+    }
+  }
+
+  function renderCharts(){
+    if(!window.Chart) return;
+    // sim line
+    var labels=[],pts=[];
+    for(var w=1;w<=WEEKS;w++){ labels.push("W"+w); pts.push(SIMS[w]&&SIMS[w].sec!=null?SIMS[w].sec:null); }
+    var sctx=document.getElementById("simChart");
+    if(simChart) simChart.destroy();
+    simChart=new Chart(sctx,{type:"line",data:{labels:labels,datasets:[{data:pts,borderColor:"#ff5a1f",backgroundColor:"rgba(255,90,31,.12)",borderWidth:3,pointRadius:5,pointBackgroundColor:"#ff5a1f",tension:.25,spanGaps:true,fill:true}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y==null?"":fmtTime(c.parsed.y);}}}},
+      scales:{y:{ticks:{callback:function(v){return fmtTime(v);}},title:{display:true,text:"time (lower = faster)"}}}}});
+
+    // weekly consistency bar
+    var wlabels=[],wvals=[];
+    for(var ww=1;ww<=WEEKS;ww++){
+      wlabels.push("W"+ww);
+      var sum=0,cnt=0;
+      for(var d=weekStartDay(ww); d<=Math.min(ww*7,TOTAL); d++){
+        if(d>todayDayNum) continue;
+        var r=DATA[keyOf(dateForDay(d))]; sum+=countDone(r)/HABITS.length; cnt++;
+      }
+      wvals.push(cnt?Math.round(sum/cnt*100):null);
+    }
+    var wctx=document.getElementById("weekChart");
+    if(weekChart) weekChart.destroy();
+    weekChart=new Chart(wctx,{type:"bar",data:{labels:wlabels,datasets:[{data:wvals,backgroundColor:function(c){var v=c.raw;return v>=100?"#f2b705":v>=70?"#16a34a":"#ff8a4f";},borderRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return (c.parsed.y==null?"—":c.parsed.y+"%")+" hit";}}}},
+      scales:{y:{min:0,max:100,ticks:{callback:function(v){return v+"%";}}}}}});
+  }
+
+  document.getElementById("prevDay").addEventListener("click",function(){ if(selectedDay>1){selectedDay--;render();} });
+  document.getElementById("nextDay").addEventListener("click",function(){ if(selectedDay<TOTAL){selectedDay++;render();} });
+  document.getElementById("todayJump").addEventListener("click",function(){ selectedDay=Math.min(Math.max(todayDayNum,1),TOTAL); render(); });
+
+  render();
+})();
+</script>
+</body>
+</html>
