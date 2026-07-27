@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freddie Gebbett</title>
+<meta name="description" content="Freddie Gebbett — operations & engagement at Lawhive, building Annabell AI, training for Hyrox.">
+
+<!-- Open Graph (for nice link previews) -->
+<meta property="og:title" content="Freddie Gebbett">
+<meta property="og:description" content="Operations & engagement at Lawhive · building Annabell AI · training for Hyrox.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fwg.fyi">
+
+<style>
+  :root{
+    color-scheme: light;
+    --bg:#fbfbfa;
+    --ink:#1a1a1a;
+    --soft:#6b6b6b;
+    --line:#e7e6e3;
+    --accent:#c2410c;     /* quiet warm accent, used sparingly */
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;font-size:17px;
+  }
+  .wrap{max-width:620px;margin:0 auto;padding:88px 26px 72px}
+
+  /* top monogram */
+  .top{font-size:14px;letter-spacing:.04em;color:var(--soft);font-weight:600;margin-bottom:64px}
+  .top b{color:var(--ink)}
+
+  /* hero */
+  h1{font-size:42px;line-height:1.1;letter-spacing:-.02em;font-weight:700;margin:0 0 14px}
+  .tagline{font-size:18px;color:var(--soft);margin:0 0 30px;font-weight:500}
+  .intro{font-size:18px;margin:0 0 6px}
+  .intro a{color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:1px}
+  .intro a:hover{color:var(--accent)}
+
+  .rule{height:1px;background:var(--line);border:0;margin:48px 0}
+
+  /* section heading */
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--soft);font-weight:700;margin:0 0 18px}
+
+  /* now list */
+  .now{display:flex;flex-direction:column;gap:16px}
+  .nowItem{display:flex;gap:14px;align-items:flex-start}
+  .nowItem .k{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:9px;opacity:.85}
+  .nowItem .t{font-size:17px}
+  .nowItem .t b{font-weight:700}
+  .nowItem .t span{color:var(--soft)}
+
+  /* link rows */
+  .links{display:flex;flex-direction:column}
+  .lrow{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:18px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);transition:.15s}
+  .lrow:first-of-type{border-top:1px solid var(--line)}
+  .lrow:hover{padding-left:10px}
+  .lrow .l .name{font-size:18px;font-weight:600}
+  .lrow .l .desc{font-size:14px;color:var(--soft);margin-top:1px}
+  .lrow .arr{font-size:18px;color:var(--soft);transition:.15s}
+  .lrow:hover .arr{color:var(--accent);transform:translateX(3px)}
+
+  /* contact */
+  .contact{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;
+    text-decoration:none;padding:13px 22px;border-radius:999px;font-weight:600;font-size:16px;transition:.15s}
+  .contact:hover{background:var(--accent)}
+
+  footer{margin-top:64px;font-size:13.5px;color:var(--soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:var(--soft)}
+
+  @media(max-width:560px){
+    .wrap{padding:56px 20px 56px}
+    h1{font-size:34px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top"><b>Freddie Gebbett</b> · London</div>
+
+  <h1>Freddie Gebbett</h1>
+  <p class="tagline">Operations &amp; people by day. Building Annabell&nbsp;AI by night. Chasing a Hyrox finish line in between.</p>
+  <p class="intro">I run office, operations and engagement at <a href="https://lawhive.co.uk">Lawhive</a>, helping a fast-moving legal-tech team do their best work. Outside that I'm building <a href="#annabell">Annabell&nbsp;AI</a> and training hard for Hyrox.</p>
+
+  <hr class="rule">
+
+  <h2>What I'm focused on right now</h2>
+  <div class="now">
+    <div class="nowItem"><span class="k"></span><div class="t"><b>Building Annabell AI</b> <span>— an early-stage venture of my own. Heads-down on it daily.</span></div></div>
+    <div class="nowItem"><span class="k"></span><div class="t"><b>Office &amp; Engagement at Lawhive</b> <span>— keeping the team running and the culture sharp.</span></div></div>
+    <div class="nowItem"><span class="k"></span><div class="t"><b>75-day lock-in → Hyrox</b> <span>— rebuilding the routine after a year of marathons. Race day: 24 Sep 2026.</span></div></div>
+  </div>
+
+  <hr class="rule">
+
+  <h2>Elsewhere</h2>
+  <div class="links">
+    <!-- EDIT: point this at your Annabell AI site once it's live -->
+    <a class="lrow" id="annabell" href="#">
+      <div class="l"><div class="name">Annabell AI</div><div class="desc">The thing I'm building</div></div>
+      <div class="arr">→</div>
+    </a>
+    <a class="lrow" href="https://lawhive.co.uk">
+      <div class="l"><div class="name">Lawhive</div><div class="desc">Where I work</div></div>
+      <div class="arr">→</div>
+    </a>
+    <!-- EDIT: replace USERNAME with your Strava handle/athlete id -->
+    <a class="lrow" href="https://www.strava.com/athletes/USERNAME">
+      <div class="l"><div class="name">Strava</div><div class="desc">Training & the road to Hyrox</div></div>
+      <div class="arr">→</div>
+    </a>
+    <!-- EDIT: replace USERNAME with your Instagram handle -->
+    <a class="lrow" href="https://instagram.com/USERNAME">
+      <div class="l"><div class="name">Instagram</div><div class="desc">Day to day</div></div>
+      <div class="arr">→</div>
+    </a>
+    <!--
+      To add more, copy a row above. Examples:
+      <a class="lrow" href="https://www.linkedin.com/in/USERNAME"><div class="l"><div class="name">LinkedIn</div><div class="desc">Work history</div></div><div class="arr">&rarr;</div></a>
+      <a class="lrow" href="https://x.com/USERNAME"><div class="l"><div class="name">X</div><div class="desc">Thoughts</div></div><div class="arr">&rarr;</div></a>
+    -->
+  </div>
+
+  <hr class="rule">
+
+  <h2>Say hello</h2>
+  <a class="contact" href="mailto:gebbettfreddie@gmail.com">✉ gebbettfreddie@gmail.com</a>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Freddie Gebbett</span>
+    <span>fwg.fyi</span>
+  </footer>
+
+</div>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
