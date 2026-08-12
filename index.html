@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Freddie Gebbett — fwg.fyi</title>
-<meta name="description" content="Freddie Gebbett — operations & engagement at Lawhive, building Annabell AI, training for Hyrox. London.">
+<meta name="description" content="Freddie Gebbett — operations & engagement at Lawhive, building a new venture in the tattoo space, training for Hyrox. London.">
 <meta name="theme-color" content="#0d0d1a">
 
 <!-- Open Graph (for nice link previews) -->
 <meta property="og:title" content="Freddie Gebbett">
-<meta property="og:description" content="Operations & engagement at Lawhive · building Annabell AI · training for Hyrox.">
+<meta property="og:description" content="Operations & engagement at Lawhive · building in the tattoo space · training for Hyrox.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fwg.fyi">
 <!-- TODO: add a 1200x630 og:image PNG later and reference it here -->
@@ -114,19 +114,49 @@
     font-family:var(--px);font-size:9px;letter-spacing:.08em;color:var(--soft);margin-bottom:10px;
   }
   .xp .xplabel .race{color:var(--red)}
-  .xptrack{
-    height:20px;background:var(--bg);margin:4px;position:relative;
+  /* year tracker: fill to today, race checkpoints as ticks */
+  .yeartrack{
+    height:24px;background:var(--bg);margin:4px;position:relative;overflow:hidden;
     box-shadow:0 -4px 0 0 var(--line), 0 4px 0 0 var(--line),
               -4px 0 0 0 var(--line), 4px 0 0 0 var(--line);
   }
-  .xpfill{
+  .yearfill{
     height:100%;background:var(--green);transition:width 1.2s steps(24);
-    /* segment notches */
     background-image:repeating-linear-gradient(90deg, transparent 0 12px, rgba(13,13,26,.55) 12px 15px);
   }
+  .cp{position:absolute;top:0;bottom:0;width:4px;margin-left:-2px;background:var(--yellow)}
+  .cp.done{background:var(--bg)}   /* dark notch punched into the done portion */
+  .races{list-style:none;margin:16px 4px 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:460px){.races{grid-template-columns:1fr}}
+  .races li{font-family:var(--px);font-size:8px;letter-spacing:.05em;line-height:1.6;
+    color:var(--ink);display:flex;align-items:center;gap:9px}
+  .races li .dot{width:8px;height:8px;flex:0 0 8px;background:var(--line)}
+  .races li.done .dot{background:var(--green)}
+  .races li.up .dot{background:var(--yellow)}
+  .races li .when{color:var(--soft)}
 
   /* builds */
   .build .t{margin-top:2px}
+
+  /* high scores — testimonials */
+  .quote{font-size:23px;color:var(--ink);line-height:1.5;margin:2px 0 14px}
+  .review .support{color:var(--soft);margin:0 0 16px}
+  .byline{font-family:var(--px);font-size:9px;letter-spacing:.08em;color:var(--soft);margin:0}
+  .byline .star{color:var(--green)}
+  .byline .who{color:var(--ink)}
+  details.more{margin-top:14px}
+  details.more>summary{
+    font-family:var(--px);font-size:9px;letter-spacing:.08em;color:var(--cyan);
+    cursor:pointer;list-style:none;display:inline-block;padding:6px 2px;
+  }
+  details.more>summary::-webkit-details-marker{display:none}
+  details.more>summary::before{content:"▸ "}
+  details.more[open]>summary::before{content:"▾ "}
+  details.more>summary:hover{color:var(--green)}
+  details.more .full{margin-top:12px;color:var(--soft)}
+  details.more .full p{margin:0 0 14px}
+  details.more .full p:last-child{margin-bottom:0}
+  details.more .full em{color:var(--ink);font-style:normal}
 
   /* inventory link rows */
   .links{display:flex;flex-direction:column;margin:0 4px}
@@ -181,8 +211,8 @@
     <div class="boot" style="animation-delay:.12s">
       <p class="eyebrow">PLAYER 1</p>
       <h1>FREDDIE GEBBETT<span class="cursor" aria-hidden="true">▊</span></h1>
-      <p class="tagline">Operations &amp; people by day. Building Annabell&nbsp;AI by night. Chasing a Hyrox finish line in between.</p>
-      <p class="intro">I run office, operations and engagement at <a href="https://lawhive.co.uk">Lawhive</a>, helping a fast-moving legal-tech team do their best work. Outside that I'm building <a href="#annabell">Annabell&nbsp;AI</a> and training hard for Hyrox.</p>
+      <p class="tagline">Operations &amp; people by day. Building something new in the tattoo world on the side. Chasing a Hyrox finish line in between.</p>
+      <p class="intro">I run office, operations and engagement at <a href="https://lawhive.co.uk">Lawhive</a>, helping a fast-moving legal-tech team do their best work. Outside that I'm building a new early-stage venture in the tattoo space and training hard for Hyrox.</p>
     </div>
 
     <section class="boot" style="animation-delay:.24s" aria-label="What I'm focused on right now">
@@ -191,7 +221,9 @@
 
       <div class="panel">
         <span class="qlabel main">MAIN QUEST</span>
-        <div class="t"><b>Building Annabell AI</b> <span>— an early-stage venture of my own. Heads-down on it daily.</span></div>
+        <div class="t"><b>Building in the tattoo space</b> <span>— a new early-stage venture of my own, in a deliberately niche corner. Heads-down on it daily.</span></div>
+        <!-- EDIT: drop in the product name + a one-line description once you're ready to show it. -->
+
       </div>
 
       <div class="panel">
@@ -201,14 +233,23 @@
 
       <div class="panel">
         <span class="qlabel side">SIDE QUEST</span>
-        <div class="t"><b>75-day lock-in → Hyrox</b> <span>— rebuilding the routine after a year of marathons. Race day: 24 Sep 2026.</span></div>
-        <!-- Training block runs 3 Jun 2026 → race day 24 Sep 2026; JS fills the bar with % elapsed. -->
+        <div class="t"><b>Into my fitness</b> <span>— marathons, ultras and Hyrox. Here's my 2026, checkpoint by checkpoint.</span></div>
+        <!-- Year tracker: fill = % through 2026; ticks are race days (DOY/365). JS sets the fill live. -->
         <div class="xp">
-          <div class="xplabel"><span>HYROX LOADING… <span id="xpDays">59</span> DAYS LEFT</span><span class="race">RACE: 24 SEP 2026</span></div>
-          <div class="xptrack" id="xp" role="progressbar" aria-label="Training block progress towards Hyrox race day"
-               aria-valuemin="0" aria-valuemax="100" aria-valuenow="48">
-            <div class="xpfill" id="xpBar" style="width:48%"></div>
+          <div class="xplabel"><span>2026 RACE CALENDAR</span><span><span id="yrPct">61</span>% THROUGH</span></div>
+          <div class="yeartrack" aria-hidden="true">
+            <div class="yearfill" id="yearFill" style="width:61%"></div>
+            <span class="cp done" style="left:31.5%"></span><!-- London Marathon, 26 Apr -->
+            <span class="cp done" style="left:40.8%"></span><!-- Girona Ultra, 30 May -->
+            <span class="cp" style="left:79.5%"></span><!-- Blickling Half, 18 Oct -->
+            <span class="cp" style="left:91.8%"></span><!-- Hyrox, 2 Dec -->
           </div>
+          <ul class="races">
+            <li class="done"><span class="dot"></span> LONDON MARATHON <span class="when">· 26 APR</span></li>
+            <li class="done"><span class="dot"></span> GIRONA ULTRA <span class="when">· 30 MAY</span></li>
+            <li class="up"><span class="dot"></span> BLICKLING HALF <span class="when">· 18 OCT</span></li>
+            <li class="up"><span class="dot"></span> HYROX <span class="when">· 2 DEC</span></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -218,9 +259,9 @@
       <p class="sub">Things I'm making</p>
 
       <div class="panel build" id="annabell">
-        <span class="qlabel main">IN DEVELOPMENT</span>
-        <div class="t"><b>Annabell AI</b> <span class="badge" aria-label="site coming soon">COMING SOON</span></div>
-        <div class="t" style="margin-top:8px"><span>An early-stage AI venture, built nights and weekends. More here once it's ready to show.</span></div>
+        <span class="qlabel side">SHIPPED · 2026</span>
+        <div class="t"><b>Annabell AI</b> <span class="badge" aria-label="completed project">COMPLETE</span></div>
+        <div class="t" style="margin-top:8px"><span>An AI venture I designed and built end to end — now shipped and wrapped.</span></div>
       </div>
 
       <!--
@@ -233,16 +274,34 @@
       -->
     </section>
 
-    <section class="boot" style="animation-delay:.48s" aria-label="Where to find me">
+    <section class="boot" style="animation-delay:.48s" aria-label="What the people I work with say">
+      <h2><span class="hx" aria-hidden="true">▸</span> HIGH SCORES</h2>
+      <p class="sub">What the people I work with say</p>
+
+      <!-- To add another, copy this panel. Keep quotes verbatim; attribute clearly. -->
+      <div class="panel review">
+        <p class="quote">“I've worked with senior lawyers at top-tier firms that are less capable operators than Freddie.”</p>
+        <p class="support">On the benefits rollout, a specialist who single-handedly runs global benefits for a 1,500-person company “couldn't believe this was his first time doing this — super proactive… learns advanced concepts quickly and thinks three steps ahead.” On his use of AI: “operating at a genius level… top 1% of users… a prime example of how our company should be using AI to get work done.”</p>
+        <p class="byline"><span class="star" aria-hidden="true">★</span> <span class="who">HARRY GREEN</span> · LAWHIVE · APR 2026</p>
+        <!-- EDIT: add Harry's role/title here for extra weight, e.g. "· HEAD OF …" -->
+
+        <details class="more">
+          <summary>READ THE FULL FEEDBACK</summary>
+          <div class="full">
+            <p>I've been really impressed with Freddie in respect of two projects: Benefits and the Hackathon.</p>
+            <p>For the Benefits implementation, I've seen Freddie proactively reach out to my partner (who single-handedly runs global benefits for a 1500+ headcount company) to get insights and advice about best practice. He joins each call well prepared with detailed notes and insightful questions. This prompted my partner to ask how many years he's been doing Benefits, because he had such a depth of knowledge about the nuances of brokering different types of insurance and salary-sacrifice benefits — she couldn't believe this was his first time. In her own words: <em>“he is super proactive, focused on the task at hand, has a pragmatic and fast-paced approach to delivering value to the employees; he has learned advanced concepts quickly and thinks three steps ahead — he has a vision and isn't just ticking a box.”</em></p>
+            <p>For the Hackathon, I've been working with Freddie to organise the logistics with Google. He has a well-organised Notion space containing all of the information about the project. Before our first call, he provided a comprehensive pre-call briefing summarising all previous discussions and agenda items, so I could jump straight in with everything I needed. He ran the call professionally and efficiently, making sure every action item from previous discussions was addressed and all items were covered in the 30-minute slot. I've worked with senior lawyers at top-tier firms that are less capable operators than Freddie.</p>
+            <p>As an aside — both of these seem to stem from Freddie's expert use of AI to augment himself. I've seen many smart people make themselves dumb by over-reliance on AI; whereas Freddie is operating at a genius level because he is responsibly deploying AI to do the heavy-lifting under his careful direction. I'm genuinely blown away by how he uses Claude — skills, slash-commands, scheduled runs and other features that put him in the top 1% of users. He's miles ahead of some members of our AI Team. He's a prime example of how our company should be using AI to get work done — he could genuinely run a session to educate the company on his workflows.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="boot" style="animation-delay:.6s" aria-label="Where to find me">
       <h2><span class="hx" aria-hidden="true">▸</span> INVENTORY</h2>
       <p class="sub">Where to find me</p>
 
       <div class="links">
-        <!-- EDIT: point this at your Annabell AI site once it's live -->
-        <a class="lrow" href="#annabell">
-          <div class="l"><div class="name">ANNABELL AI</div><div class="desc">The thing I'm building</div></div>
-          <div class="arr" aria-hidden="true">▸</div>
-        </a>
         <a class="lrow" href="https://lawhive.co.uk">
           <div class="l"><div class="name">LAWHIVE</div><div class="desc">Where I work</div></div>
           <div class="arr" aria-hidden="true">▸</div>
@@ -259,7 +318,7 @@
         </a>
         <!-- EDIT: replace USERNAME with your Strava handle/athlete id -->
         <a class="lrow" href="https://www.strava.com/athletes/USERNAME">
-          <div class="l"><div class="name">STRAVA</div><div class="desc">Training &amp; the road to Hyrox</div></div>
+          <div class="l"><div class="name">STRAVA</div><div class="desc">Training &amp; racing</div></div>
           <div class="arr" aria-hidden="true">▸</div>
         </a>
         <!-- EDIT: replace USERNAME with your Instagram handle -->
@@ -277,7 +336,7 @@
       </div>
     </section>
 
-    <section class="boot" style="animation-delay:.6s" aria-label="Say hello">
+    <section class="boot" style="animation-delay:.72s" aria-label="Say hello">
       <h2><span class="hx" aria-hidden="true">▸</span> SAVE POINT</h2>
       <p class="sub">Say hello</p>
       <p class="press" aria-hidden="true">▶ PRESS START</p>
@@ -285,7 +344,7 @@
     </section>
   </main>
 
-  <footer class="boot" style="animation-delay:.72s">
+  <footer class="boot" style="animation-delay:.84s">
     <span>© <span id="yr">2026</span> FREDDIE GEBBETT</span>
     <span>FWG.FYI · NO CONTINUES USED</span>
   </footer>
@@ -294,15 +353,12 @@
 <script>
   document.getElementById("yr").textContent = new Date().getFullYear();
 
-  // Hyrox XP bar: training block 3 Jun 2026 → race day 24 Sep 2026
+  // Year tracker: fill = % through 2026 (race ticks are static in the markup)
   (function(){
-    var START = Date.UTC(2026,5,3), RACE = Date.UTC(2026,8,24);
-    var now = Date.now();
-    var daysLeft = Math.max(0, Math.ceil((RACE - now) / 864e5));
-    var pct = Math.round(Math.min(100, Math.max(0, (now - START) / (RACE - START) * 100)));
-    document.getElementById("xpDays").textContent = daysLeft;
-    document.getElementById("xpBar").style.width = pct + "%";
-    document.getElementById("xp").setAttribute("aria-valuenow", pct);
+    var start = Date.UTC(2026,0,1), end = Date.UTC(2027,0,1), now = Date.now();
+    var pct = Math.round(Math.min(100, Math.max(0, (now - start) / (end - start) * 100)));
+    document.getElementById("yearFill").style.width = pct + "%";
+    document.getElementById("yrPct").textContent = pct;
   })();
 </script>
 </body>
