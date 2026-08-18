@@ -467,7 +467,8 @@
             </a>
           </div>
           <p class="press">▶ CHAT TO ME NOW!</p>
-          <a class="btn" href="tel:+447376357720">✆ +44 7376 357720</a>
+          <!-- Number is gated: kept out of the page source and revealed by JS on tap (deters scrapers). -->
+          <a class="btn" id="tel" href="#reveal" role="button">✆ TAP TO SHOW NUMBER</a>
           <a class="btn" href="mailto:gebbettfreddie@gmail.com">✉ GEBBETTFREDDIE@GMAIL.COM</a>
         </section>
 
@@ -495,6 +496,21 @@
     var pct = Math.round(Math.min(100, Math.max(0,(now-start)/(end-start)*100)));
     document.getElementById("yearFill").style.width = pct + "%";
     document.getElementById("yrPct").textContent = pct;
+  })();
+
+  // Gated phone: digits live encoded, not in the page source. First tap reveals
+  // and makes the button callable; a second tap places the call.
+  (function(){
+    var tel = document.getElementById("tel");
+    if(!tel) return;
+    tel.addEventListener("click", function(e){
+      if(tel.dataset.shown) return;            // already revealed → let tel: work
+      e.preventDefault();
+      var raw = atob("KzQ0NzM3NjM1NzcyMA=="), local = raw.slice(3);
+      tel.href = "tel:" + raw;
+      tel.textContent = "✆ +44 " + local.slice(0,4) + " " + local.slice(4);
+      tel.dataset.shown = "1";
+    });
   })();
 
   // ---- Overworld map controller (desktop only) ----
