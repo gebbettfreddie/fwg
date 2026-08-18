@@ -467,9 +467,9 @@
             </a>
           </div>
           <p class="press">▶ CHAT TO ME NOW!</p>
-          <!-- Number is gated: kept out of the page source and revealed by JS on tap (deters scrapers). -->
-          <a class="btn" id="tel" href="#reveal" role="button">✆ TAP TO SHOW NUMBER</a>
-          <a class="btn" href="mailto:gebbettfreddie@gmail.com">✉ GEBBETTFREDDIE@GMAIL.COM</a>
+          <!-- Contacts are gated: kept out of the page source, revealed by JS on tap (deters scrapers). -->
+          <a class="btn" id="tel" href="#reveal" role="button" aria-label="Show phone number">📞</a>
+          <a class="btn" id="mail" href="#reveal" role="button" aria-label="Show email">📧</a>
         </section>
 
       </div>
@@ -498,18 +498,26 @@
     document.getElementById("yrPct").textContent = pct;
   })();
 
-  // Gated phone: digits live encoded, not in the page source. First tap reveals
-  // and makes the button callable; a second tap places the call.
+  // Gated contacts: number + email live base64-encoded, never in the page source.
+  // First tap reveals and makes the button actionable; a second tap calls/emails.
   (function(){
-    var tel = document.getElementById("tel");
-    if(!tel) return;
-    tel.addEventListener("click", function(e){
-      if(tel.dataset.shown) return;            // already revealed → let tel: work
-      e.preventDefault();
-      var raw = atob("KzQ0NzM3NjM1NzcyMA=="), local = raw.slice(3);
-      tel.href = "tel:" + raw;
-      tel.textContent = "✆ +44 " + local.slice(0,4) + " " + local.slice(4);
-      tel.dataset.shown = "1";
+    function gate(id, scheme, enc, fmt){
+      var el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener("click", function(e){
+        if(el.dataset.shown) return;           // already revealed → let the link work
+        e.preventDefault();
+        var raw = atob(enc);
+        el.href = scheme + raw;
+        el.textContent = fmt(raw);
+        el.dataset.shown = "1";
+      });
+    }
+    gate("tel", "tel:", "KzQ0NzM3NjM1NzcyMA==", function(raw){
+      var l = raw.slice(3); return "✆ +44 " + l.slice(0,4) + " " + l.slice(4);
+    });
+    gate("mail", "mailto:", "Z2ViYmV0dGZyZWRkaWVAZ21haWwuY29t", function(raw){
+      return "✉ " + raw.toUpperCase();
     });
   })();
 
