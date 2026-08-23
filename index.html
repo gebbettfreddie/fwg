@@ -266,7 +266,7 @@
 
     /* the hero walks to the selected node */
     .js .hero{position:absolute;left:12%;top:44%;z-index:4;transform:translate(-50%,-118%);
-      transition:left .8s steps(16),top .8s steps(16);pointer-events:none;width:34px;height:34px}
+      transition:left .34s steps(7),top .34s steps(7);pointer-events:none;width:34px;height:34px}
     .js .hero svg{width:100%;height:100%;animation:bob 1s steps(2) infinite}
     .js .hero::after{content:"▼";position:absolute;left:50%;top:-16px;transform:translateX(-50%);
       font-family:var(--px);font-size:10px;color:var(--yellow);animation:point .9s steps(2) infinite}
@@ -327,7 +327,7 @@
 
   <!-- OVERWORLD (desktop + JS) -->
   <div class="hint">
-    <span><b>◀ ▲ ▼ ▶</b> MOVE</span><span><b>ENTER</b> OPEN</span><span><b>ESC</b> BACK</span><span>OR CLICK A PLACE</span>
+    <span><b>◀ ▶</b> MOVE</span><span><b>ENTER</b> OPEN</span><span><b>ESC</b> BACK</span><span>OR CLICK A PLACE</span>
   </div>
   <div class="stage" id="stage" aria-hidden="true">
     <div class="lake"></div>
@@ -573,13 +573,15 @@
   var reset = document.getElementById("reset");
   var mq = window.matchMedia("(min-width:721px)");
   var STORE = "fwg_visited";
-  var WALK = 850;  // ms — let the hero finish walking before a place opens
+  var STEP_MS = 340;  // ms per trail segment — hero walks node-by-node so he follows the path
   function reduceMotion(){ return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
 
-  var els = [];      // node button elements
-  var sel = 0;       // selected node index
-  var visited = {};  // ids opened
-  var openId = null; // currently open quest id
+  var els = [];       // node button elements
+  var sel = 0;        // selected node index
+  var heroPos = 0;    // node index the hero currently stands on
+  var walkSeq = 0;    // bumped to cancel an in-flight walk
+  var visited = {};   // ids opened
+  var openId = null;  // currently open quest id
   var lastNode = null;
 
   // build node buttons
@@ -593,34 +595,34 @@
       "<span class='chk' aria-hidden='true'>✓</span>" +
       "<span class='tile'><svg viewBox='0 0 16 16' shape-rendering='crispEdges' fill='currentColor'>" + ICONS[n.icon] + "</svg></span>" +
       "<span class='nlabel'>" + n.label + "</span>";
-    b.addEventListener("click", function(){
-      var moved = (sel !== i);
-      select(i);
-      setTimeout(function(){ open(n.id); }, (moved && !reduceMotion()) ? WALK : 0);
-    });
+    b.addEventListener("click", function(){ select(i, function(){ open(n.id); }); });
     stage.insertBefore(b, hero);
     els.push(b);
   });
 
-  function select(i){
-    sel = i;
-    els.forEach(function(e, k){ e.classList.toggle("sel", k === i); });
+  function placeHero(i){
     hero.style.left = NODES[i].x + "%";
     hero.style.top  = NODES[i].y + "%";
   }
 
-  // move to the nearest node in a direction (dx,dy)
-  function move(dx, dy){
-    var cur = NODES[sel], best = -1, bestScore = Infinity;
-    NODES.forEach(function(n, i){
-      if(i === sel) return;
-      var vx = n.x - cur.x, vy = n.y - cur.y, dist = Math.hypot(vx, vy);
-      var dot = vx*dx + vy*dy, align = dot / dist;
-      if(align < 0.35) return;               // roughly within the pressed direction
-      var score = dist / align;
-      if(score < bestScore){ bestScore = score; best = i; }
-    });
-    if(best >= 0) select(best);
+  // walk the hero one node at a time toward `target` — since the trail links
+  // nodes in index order, stepping through them keeps him on the path.
+  function walkTo(target, onArrive){
+    if(reduceMotion()){ heroPos = target; placeHero(target); if(onArrive) onArrive(); return; }
+    var seq = ++walkSeq;
+    (function step(){
+      if(seq !== walkSeq) return;             // a newer walk superseded this one
+      if(heroPos === target){ if(onArrive) onArrive(); return; }
+      heroPos += (target > heroPos) ? 1 : -1;
+      placeHero(heroPos);
+      setTimeout(step, STEP_MS);
+    })();
+  }
+
+  function select(i, onArrive){
+    sel = i;
+    els.forEach(function(e, k){ e.classList.toggle("sel", k === i); });
+    walkTo(i, onArrive);
   }
 
   function open(id){
@@ -678,11 +680,10 @@
       return;
     }
     switch(e.key){
-      case "ArrowLeft": case "a": case "A": e.preventDefault(); move(-1,0); break;
-      case "ArrowRight":case "d": case "D": e.preventDefault(); move(1,0); break;
-      case "ArrowUp":   case "w": case "W": e.preventDefault(); move(0,-1); break;
-      case "ArrowDown": case "s": case "S": e.preventDefault(); move(0,1); break;
-      case "Enter": case " ": e.preventDefault(); open(NODES[sel].id); break;
+      case "ArrowLeft": case "a": case "A": e.preventDefault(); if(sel > 0) select(sel - 1); break;
+      case "ArrowRight":case "d": case "D": e.preventDefault(); if(sel < NODES.length - 1) select(sel + 1); break;
+      case "Enter": case " ": e.preventDefault(); select(sel, function(){ open(NODES[sel].id); }); break;
+      // up/down intentionally do nothing — the trail is a single left/right line
     }
   });
 
@@ -709,16 +710,20 @@
     render();
   })();
   if(reset) reset.addEventListener("click", function(){
-    var moved = (sel !== 0);
-    select(0);                                   // run the hero home to START…
-    setTimeout(resetProgress, (moved && !reduceMotion()) ? WALK : 0);  // …then clear the bar
+    select(0, resetProgress);   // hero walks home along the path, then the bar clears
   });
 
-  // deep-link: /#q-workshop opens that quest on load (and is shareable)
+  // deep-link: /#q-workshop opens that quest on load (and is shareable).
+  // Jump the hero straight there — no walk animation behind the modal on load.
   (function(){
     var id = (location.hash || "").slice(1);
     var i = NODES.findIndex(function(n){ return n.id === id; });
-    if(i >= 0 && mq.matches){ select(i); open(id); }
+    if(i >= 0 && mq.matches){
+      sel = i; heroPos = i;
+      els.forEach(function(e, k){ e.classList.toggle("sel", k === i); });
+      placeHero(i);
+      open(id);
+    }
   })();
 })();
 </script>
