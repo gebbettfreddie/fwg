@@ -708,7 +708,11 @@
     }catch(e){}
     render();
   })();
-  if(reset) reset.addEventListener("click", resetProgress);
+  if(reset) reset.addEventListener("click", function(){
+    var moved = (sel !== 0);
+    select(0);                                   // run the hero home to START…
+    setTimeout(resetProgress, (moved && !reduceMotion()) ? WALK : 0);  // …then clear the bar
+  });
 
   // deep-link: /#q-workshop opens that quest on load (and is shareable)
   (function(){
