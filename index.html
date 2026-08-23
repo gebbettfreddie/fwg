@@ -266,7 +266,7 @@
 
     /* the hero walks to the selected node */
     .js .hero{position:absolute;left:12%;top:44%;z-index:4;transform:translate(-50%,-118%);
-      transition:left .5s steps(10),top .5s steps(10);pointer-events:none;width:34px;height:34px}
+      transition:left .8s steps(16),top .8s steps(16);pointer-events:none;width:34px;height:34px}
     .js .hero svg{width:100%;height:100%;animation:bob 1s steps(2) infinite}
     .js .hero::after{content:"▼";position:absolute;left:50%;top:-16px;transform:translateX(-50%);
       font-family:var(--px);font-size:10px;color:var(--yellow);animation:point .9s steps(2) infinite}
@@ -573,7 +573,7 @@
   var reset = document.getElementById("reset");
   var mq = window.matchMedia("(min-width:721px)");
   var STORE = "fwg_visited";
-  var WALK = 520;  // ms — let the hero finish walking before a place opens
+  var WALK = 850;  // ms — let the hero finish walking before a place opens
   function reduceMotion(){ return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
 
   var els = [];      // node button elements
