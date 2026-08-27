@@ -401,17 +401,20 @@
 
         <section class="quest" id="q-office" data-node="3" aria-labelledby="t-office">
           <h2 class="qtitle" id="t-office"><span class="qtag">MAIN QUEST</span> The Office</h2>
-          <p class="lead"><b>Office &amp; Engagement at <a class="link" href="https://lawhive.co.uk">Lawhive</a></b> — I keep a fast-moving legal-tech team running and the culture sharp: operations, the office, and the day-to-day that lets everyone do their best work.</p>
+          <!-- gen:office · from data/profile.json — run `node bin/gen.mjs`; do not hand-edit -->
+          <p class="lead"><b>Office &amp; Engagement Manager at <a class="link" href="https://lawhive.co.uk">Lawhive</a></b> — I keep a fast-moving legal-tech team running and the culture sharp: operations, the office, and the day-to-day that lets everyone do their best work.</p>
+          <!-- /gen -->
         </section>
 
         <section class="quest" id="q-workshop" data-node="3" aria-labelledby="t-workshop">
           <h2 class="qtitle" id="t-workshop"><span class="qtag cyan">THE WORKSHOP</span> Builds</h2>
+          <!-- gen:builds · from data/profile.json — run `node bin/gen.mjs`; do not hand-edit -->
           <div class="b-row">
             <div class="b-head"><span class="b-name">Inkly</span> <span class="badge">BUILDING</span></div>
             <p class="lead">One booking link for tattoo artists: clients see the work, book a piece and pay the deposit up front, so the Instagram-DM admin and the no-shows both disappear.</p>
           </div>
           <div class="b-row">
-            <div class="b-head"><span class="b-name">Annabell AI</span> <span class="badge done">WRAPPED · JUL 2026</span></div>
+            <div class="b-head"><span class="b-name">Annabel AI</span> <span class="badge done">WRAPPED · JUL 2026</span></div>
             <p class="lead">An AI receptionist for dentists — answering calls and booking patients when the front desk was busy or closed. A side project I built and ran with my brother; wound it down in July after three months.</p>
             <ul class="stats3">
               <li><span class="n">10+</span> <span><b>practices onboarded</b> across 3 London boroughs</span></li>
@@ -420,13 +423,7 @@
             </ul>
             <p class="lead">Loved building it and learned a ton, but it was taking too much of my time — on to the next.</p>
           </div>
-          <!--
-            To add a build, copy a .b-row above:
-            <div class="b-row">
-              <div class="b-head"><span class="b-name">Project</span> <span class="badge done">SHIPPED</span></div>
-              <p class="lead">One line. <a class="link" href="https://example.com">See it →</a></p>
-            </div>
-          -->
+          <!-- /gen -->
         </section>
 
         <section class="quest" id="q-training" data-node="4" aria-labelledby="t-training">
@@ -434,21 +431,25 @@
           <p class="lead">I'm properly into my fitness now — I wasn't always. As I've got older I've found that staying fit and doing hard things spills over into everything else; it keeps reminding me I'm more capable than I think.</p>
           <p class="lead">Football 2–3 times a week, running that crept up on me over the last few years, and I've finally caved and signed up for my first Hyrox (I promise I'm not the stereotype). Just bought a bike too — so an Ironman's only a matter of time.</p>
           <p class="lead">Here's my 2026, checkpoint by checkpoint:</p>
-          <!-- Year tracker: fill = % through 2026; ticks are race days (DOY/365). JS sets the fill live. -->
+          <!-- Year tracker: JS sets the fill live; the ticks below are generated from race dates. -->
           <div class="xp">
             <div class="xplabel"><span>2026 RACE CALENDAR</span><span><span id="yrPct">61</span>% THROUGH</span></div>
             <div class="yeartrack" aria-hidden="true">
               <div class="yearfill" id="yearFill" style="width:61%"></div>
-              <span class="cp done" style="left:31.5%"></span><!-- London Marathon, 26 Apr -->
-              <span class="cp done" style="left:40.8%"></span><!-- Girona Ultra, 30 May -->
-              <span class="cp" style="left:79.5%"></span><!-- Blickling Half, 18 Oct -->
-              <span class="cp" style="left:91.8%"></span><!-- Hyrox, 2 Dec -->
+              <!-- gen:race-ticks · from data/profile.json — run `node bin/gen.mjs`; do not hand-edit -->
+              <span class="cp done" style="left:31.8%"></span><!-- London Marathon, 26 Apr -->
+              <span class="cp done" style="left:41.1%"></span><!-- Girona Ultra, 30 May -->
+              <span class="cp" style="left:79.7%"></span><!-- Blickling Half Marathon, 18 Oct -->
+              <span class="cp" style="left:92.1%"></span><!-- London Hyrox, 2 Dec -->
+              <!-- /gen -->
             </div>
             <ul class="races">
+              <!-- gen:race-list · from data/profile.json — run `node bin/gen.mjs`; do not hand-edit -->
               <li class="done"><span class="dot"></span> LONDON MARATHON <span class="when">· 26 APR</span></li>
               <li class="done"><span class="dot"></span> GIRONA ULTRA <span class="when">· 30 MAY</span></li>
               <li class="up"><span class="dot"></span> BLICKLING HALF MARATHON <span class="when">· 18 OCT</span></li>
               <li class="up"><span class="dot"></span> LONDON HYROX <span class="when">· 2 DEC</span></li>
+              <!-- /gen -->
             </ul>
           </div>
         </section>
@@ -489,8 +490,10 @@
           </div>
           <p class="press">▶ CHAT TO ME NOW!</p>
           <!-- Contacts are gated: kept out of the page source, revealed by JS on tap (deters scrapers). -->
-          <a class="btn iconbtn" id="tel" href="#reveal" role="button" aria-label="Show phone number">📞</a>
-          <a class="btn iconbtn" id="mail" href="#reveal" role="button" aria-label="Show email">📧</a>
+          <!-- gen:contacts · from data/profile.json — run `node bin/gen.mjs`; do not hand-edit -->
+          <a class="btn iconbtn" id="tel" href="#reveal" role="button" aria-label="Show phone number" data-scheme="tel:" data-enc="KzQ0NzM3NjM1NzcyMA==">📞</a>
+          <a class="btn iconbtn" id="mail" href="#reveal" role="button" aria-label="Show email" data-scheme="mailto:" data-enc="Z2ViYmV0dGZyZWRkaWVAZ21haWwuY29t">📧</a>
+          <!-- /gen -->
         </section>
 
       </div>
@@ -519,25 +522,26 @@
     document.getElementById("yrPct").textContent = pct;
   })();
 
-  // Gated contacts: number + email live base64-encoded, never in the page source.
+  // Gated contacts: the base64 payloads come from data/profile.json via the buttons' data-enc,
+  // so they are never plaintext in the page source and never duplicated in the CV.
   // First tap reveals and makes the button actionable; a second tap calls/emails.
   (function(){
-    function gate(id, scheme, enc, fmt){
+    function gate(id, fmt){
       var el = document.getElementById(id);
       if(!el) return;
       el.addEventListener("click", function(e){
         if(el.dataset.shown) return;           // already revealed → let the link work
         e.preventDefault();
-        var raw = atob(enc);
-        el.href = scheme + raw;
+        var raw = atob(el.dataset.enc);
+        el.href = el.dataset.scheme + raw;
         el.textContent = fmt(raw);
         el.dataset.shown = "1";
       });
     }
-    gate("tel", "tel:", "KzQ0NzM3NjM1NzcyMA==", function(raw){
+    gate("tel", function(raw){
       var l = raw.slice(3); return "✆ +44 " + l.slice(0,4) + " " + l.slice(4);
     });
-    gate("mail", "mailto:", "Z2ViYmV0dGZyZWRkaWVAZ21haWwuY29t", function(raw){
+    gate("mail", function(raw){
       return "✉ " + raw.toUpperCase();
     });
   })();

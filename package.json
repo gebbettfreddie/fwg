@@ -1,0 +1,10 @@
+{
+  "name": "fwg-fyi",
+  "private": true,
+  "description": "fwg.fyi and the CV, both generated from one profile.",
+  "scripts": {
+    "gen": "node bin/gen.mjs",
+    "check": "node bin/check.mjs",
+    "test": "node --test bin/*.test.mjs"
+  }
+}
