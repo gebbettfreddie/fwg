@@ -1,0 +1,8 @@
+#!/bin/sh
+# Refuses a push whose published files disagree with data/profile.json.
+# Enable once per clone:  git config core.hooksPath bin/hooks
+node bin/check.mjs || {
+  echo ""
+  echo "Push refused: the site and CV have drifted from data/profile.json."
+  exit 1
+}
