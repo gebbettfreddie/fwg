@@ -2,7 +2,7 @@
   "_": "The single source of truth for fwg.fyi and the CV. Edit here, then run: node bin/gen.mjs",
 
   "name": "Freddie Gebbett",
-  "headline": "CVs, cover letters and personal summaries are boring. Find out more about me at fwg.fyi.",
+  "headline": "CVs, cover letters and personal summaries are boring. Find out more about me at fwg.fyi. Hi if that's where you came from :)",
   "location": "United Kingdom",
 
   "contact": {
