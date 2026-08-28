@@ -19,6 +19,7 @@ export const Surfaces = {
       "index.html": {
         office: Render.officeLine(Profile.currentRole(profile)),
         contacts: Render.contactButtons(profile.contact),
+        links: Render.linkRows(profile.links),
         builds: Render.builds(profile.builds),
         "race-ticks": Render.raceTicks(profile.races, today),
         "race-list": Render.raceList(profile.races, today),
