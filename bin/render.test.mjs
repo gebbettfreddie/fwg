@@ -93,3 +93,17 @@ test("each tick sits where its race falls in the year, and says which race it is
     `<span class="cp done" style="left:31.8%"></span><!-- London Marathon, 26 Apr -->`,
   )
 })
+
+test("a save-point row names the destination and says what it is", () => {
+  const links = [{ name: "LinkedIn", desc: "Work history", href: "https://www.linkedin.com/in/x/" }]
+
+  assert.equal(
+    Render.linkRows(links),
+    [
+      `<a class="lrow" href="https://www.linkedin.com/in/x/" target="_blank" rel="noopener noreferrer">`,
+      `  <span class="l"><span class="name">LINKEDIN</span><span class="desc">Work history</span></span>`,
+      `  <span class="arr" aria-hidden="true">▸</span>`,
+      `</a>`,
+    ].join("\n"),
+  )
+})

@@ -115,6 +115,25 @@ export const Render = {
   },
 
   /**
+   * SAVE POINT — where to find me. One row per link, in the order the data lists them.
+   *
+   * @param {import("./profile.mjs").Link[]} links
+   * @returns {string}
+   */
+  linkRows(links) {
+    return links
+      .flatMap((link) => [
+        `<a class="lrow" href="${link.href}" target="_blank" rel="noopener noreferrer">`,
+        ...nest([
+          `<span class="l"><span class="name">${escape(link.name.toUpperCase())}</span><span class="desc">${escape(link.desc)}</span></span>`,
+          `<span class="arr" aria-hidden="true">▸</span>`,
+        ]),
+        `</a>`,
+      ])
+      .join("\n")
+  },
+
+  /**
    * THE WORKSHOP — the builds, newest first as authored.
    *
    * @param {import("./profile.mjs").Build[]} builds
