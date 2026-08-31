@@ -77,17 +77,17 @@
       "start": "2026-05-01",
       "end": "2026-07-31",
       "withWhom": "my brother",
-      "blurb": "An AI receptionist for dentists — answering calls and booking patients when the front desk was busy or closed. A side project I built and ran with my brother; wound it down in July after three months.",
-      "coda": "Loved building it and learned a ton, but it was taking too much of my time — on to the next.",
+      "blurb": "An AI receptionist for dentists — answering calls and booking patients when the front desk was busy or closed. My brother and I ran it together for three months: he owned the engineering, I owned everything that got it into practices.",
+      "coda": "Loved building it and learned a lot. Turns out AI voice agents are pretty competitive in 2026.",
       "metrics": [
         { "n": "10+",    "label": "practices onboarded", "note": " across 3 London boroughs" },
         { "n": "1,000+", "label": "patient calls answered" },
         { "n": "100+",   "label": "appointments booked", "note": " — new patients captured while the desk was busy or closed" }
       ],
       "cvBullets": [
-        "Built and ran an AI voice receptionist answering calls and booking patients for UK dental practices — onboarding 10+ practices across three London boroughs.",
+        "Built and ran an AI voice receptionist for UK dental practices with my brother — he led the engineering, I owned go-to-market — onboarding 10+ practices across three London boroughs.",
         "Answered 1,000+ patient calls and booked 100+ appointments, capturing new patients while front desks were busy or closed.",
-        "Led it end to end — market research, build, branding, website and outbound sales — and taught myself to code properly along the way.",
+        "Owned everything but the build: market research, positioning, branding, the website and all outbound sales — and picked up enough of the stack alongside him to hold my own on product decisions.",
         "Wound it down after three months to put the time elsewhere — the full story is on fwg.fyi and LinkedIn."
       ]
     }
