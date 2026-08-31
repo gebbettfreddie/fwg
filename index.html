@@ -248,7 +248,7 @@
     .js .node{
       position:absolute;transform:translate(-50%,-50%);z-index:3;
       display:flex;flex-direction:column;align-items:center;gap:7px;
-      background:none;border:0;cursor:pointer;padding:6px;color:var(--green);
+      background:none;border:0;cursor:pointer;padding:6px;color:var(--red);
     }
     .js .node .tile{
       width:46px;height:46px;display:grid;place-items:center;background:var(--panel);color:inherit;
@@ -260,9 +260,14 @@
     .js .node .chk{position:absolute;top:-6px;right:-2px;font-family:var(--px);font-size:9px;color:var(--bg);
       background:var(--green);padding:2px 3px;display:none}
     .js .node.visited .chk{display:block}
-    .js .node.c-cyan{color:var(--cyan)} .js .node.c-yellow{color:var(--yellow)}
+
+    /* A tile's colour IS its visit state: red = not been there, yellow = standing on it,
+       green = been and left. `.sel` comes after `.visited` on purpose — walking back onto a
+       cleared node should read as "here", not "done". */
+    .js .node.visited{color:var(--green)}
+    .js .node.sel{color:var(--yellow)}
     .js .node:hover .tile,.js .node.sel .tile{transform:translateY(-3px)}
-    .js .node.sel .tile{box-shadow:0 -4px 0 0 var(--yellow),0 4px 0 0 var(--yellow),-4px 0 0 0 var(--yellow),4px 0 0 0 var(--yellow),0 0 0 2px rgba(247,213,29,.35)}
+    .js .node.sel .tile{box-shadow:0 -4px 0 0 currentColor,0 4px 0 0 currentColor,-4px 0 0 0 currentColor,4px 0 0 0 currentColor,0 0 0 2px rgba(247,213,29,.35)}
 
     /* the hero walks to the selected node */
     .js .hero{position:absolute;left:12%;top:44%;z-index:4;transform:translate(-50%,-118%);
@@ -554,13 +559,13 @@
 
   // ---- Overworld map controller (desktop only) ----
   var NODES = [
-    {id:"q-start",    x:12, y:44, label:"START",           colour:"c-yellow", icon:"flag"},
-    {id:"q-journey",  x:30, y:22, label:"THE JOURNEY",     colour:"",         icon:"book"},
-    {id:"q-office",   x:50, y:32, label:"THE OFFICE",      colour:"c-cyan",   icon:"building"},
-    {id:"q-workshop", x:70, y:22, label:"THE WORKSHOP",    colour:"c-yellow", icon:"hammer"},
-    {id:"q-training", x:82, y:52, label:"TRAINING",        colour:"",         icon:"mountain"},
-    {id:"q-allies",   x:60, y:68, label:"REVIEWS",         colour:"c-yellow", icon:"trophy"},
-    {id:"q-contact",  x:33, y:76, label:"SAVE POINT",      colour:"c-cyan",   icon:"save"}
+    {id:"q-start",    x:12, y:44, label:"START",        icon:"flag"},
+    {id:"q-journey",  x:30, y:22, label:"THE JOURNEY",  icon:"book"},
+    {id:"q-office",   x:50, y:32, label:"THE OFFICE",   icon:"building"},
+    {id:"q-workshop", x:70, y:22, label:"THE WORKSHOP", icon:"hammer"},
+    {id:"q-training", x:82, y:52, label:"TRAINING",     icon:"mountain"},
+    {id:"q-allies",   x:60, y:68, label:"REVIEWS",      icon:"trophy"},
+    {id:"q-contact",  x:33, y:76, label:"SAVE POINT",   icon:"save"}
   ];
   var ICONS = {
     flag:"<rect x='4' y='2' width='2' height='12'/><rect x='6' y='2' width='7' height='5'/>",
@@ -597,7 +602,7 @@
   // build node buttons
   NODES.forEach(function(n, i){
     var b = document.createElement("button");
-    b.className = "node " + n.colour;
+    b.className = "node";
     b.style.left = n.x + "%";
     b.style.top  = n.y + "%";
     b.setAttribute("aria-label", "Open " + n.label);
@@ -717,6 +722,7 @@
         if(i >= 0){ visited[id] = true; els[i].classList.add("visited"); }
       });
     }catch(e){}
+    els[sel].classList.add("sel");   // the hero starts on START, so that tile reads as "here"
     render();
   })();
   if(reset) reset.addEventListener("click", function(){
