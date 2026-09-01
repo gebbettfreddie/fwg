@@ -1,6 +1,7 @@
 // @ts-check
-import { readFileSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 
+import { Pdf } from "./pdf.mjs"
 import { Profile } from "./profile.mjs"
 import { Splice } from "./splice.mjs"
 import { Surfaces } from "./surfaces.mjs"
@@ -62,6 +63,25 @@ for (const file of Object.keys(Surfaces.render(profile, TODAY))) {
 
     failures.push(file)
     console.error(`✖ ${file} exposes a plaintext ${what} in its source — it must stay base64-gated`)
+  }
+}
+
+// The downloadable PDF is generated from cv.html. Verifying it needs only a hash, never a
+// browser — so this check works on any machine, Chrome installed or not.
+const cvPdf = new URL("Freddie_Gebbett_CV.pdf", root).pathname
+const stampPath = `${cvPdf}.stamp`
+
+if (!existsSync(cvPdf) || !existsSync(stampPath)) {
+  failures.push("Freddie_Gebbett_CV.pdf")
+  console.error("✖ the downloadable CV PDF is missing — run `node bin/gen.mjs`")
+} else {
+  const want = Pdf.stamp(readFileSync(new URL("cv.html", root).pathname, "utf8"))
+
+  if (readFileSync(stampPath, "utf8").trim() !== want) {
+    failures.push("Freddie_Gebbett_CV.pdf")
+    console.error("✖ Freddie_Gebbett_CV.pdf was printed from an older cv.html — run `node bin/gen.mjs`")
+  } else {
+    console.log("✔ Freddie_Gebbett_CV.pdf matches cv.html")
   }
 }
 

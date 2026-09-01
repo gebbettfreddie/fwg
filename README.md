@@ -14,8 +14,9 @@ Two published pages, one set of facts.
 Edit `data/profile.json`, then:
 
 ```sh
-npm run gen      # writes the generated regions into index.html and cv.html
-npm run check    # proves both files agree with the data (this is what the pre-push hook runs)
+npm run gen      # writes the generated regions into index.html and cv.html,
+                 # and re-prints the downloadable CV PDF (needs Chrome installed)
+npm run check    # proves both files, and the PDF, agree with the data (the pre-push hook runs this)
 npm test         # the renderers' unit tests
 ```
 
@@ -59,8 +60,19 @@ git config core.hooksPath bin/hooks
 
 ## The CV as a PDF
 
-Open [fwg.fyi/cv](https://fwg.fyi/cv) and press **Download as PDF** (or Cmd-P). The print CSS is
-tuned to hold everything on one A4 page; if you add much more, re-check that it still does.
+`Freddie_Gebbett_CV.pdf` is a **generated artefact, never a source** — the download button on the CV
+page serves it directly, so a recruiter gets a file rather than a print dialog.
+
+`npm run gen` re-prints it from `cv.html` whenever that page has changed, which means **`gen` needs a
+Chromium-based browser installed locally** (Chrome, Chromium, Edge or Brave). It also writes
+`Freddie_Gebbett_CV.pdf.stamp`, a hash of the page it printed.
+
+`npm run check` compares that stamp to the current `cv.html` and fails if the PDF was built from an
+older version — so a stale download cannot be pushed. **Checking only hashes, so it needs no
+browser** and works on any machine.
+
+The print CSS is tuned to hold everything on one A4 page; if you add much more, re-check that it
+still does.
 
 ## Publishing
 
