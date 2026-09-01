@@ -76,7 +76,8 @@
 
   /* ---------- the download affordance (screen only) ---------- */
   .dl{
-    display:block; margin:0 auto 20px; padding:9px 18px;
+    display:block; width:max-content; margin:0 auto 20px; padding:9px 18px;
+    text-decoration:none; text-align:center;
     background:var(--ink); color:#fff; border:0; border-radius:3px;
     font:600 12px/1 var(--sans); letter-spacing:.9px; text-transform:uppercase; cursor:pointer;
   }
@@ -127,7 +128,7 @@
 </head>
 <body>
 
-<button class="dl noprint" type="button" onclick="window.print()">Download as PDF</button>
+<a class="dl noprint" href="Freddie_Gebbett_CV.pdf" download>Download CV (PDF)</a>
 
 <main class="sheet">
 
