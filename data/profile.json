@@ -101,7 +101,7 @@
   ],
 
   "credentials": [
-    { "institution": "University of Reading", "award": "BSc Biomedical Sciences", "detail": "Upper Second-Class Honours (2:1)" },
+    { "institution": "University of Reading", "award": "BSc Biomedical Sciences", "detail": "First-Class Honours" },
     { "institution": "Jumpstart", "award": "Cohort Member", "period": "Sep–Nov 2025", "detail": "Selected into the top ~1% of 4,000+ applicants for the UK's only startup graduate scheme." },
     { "institution": "The Sales Circle", "award": "Get into Tech Sales Programme", "detail": "Intensive SDR programme: multi-channel prospecting (cold call, email, LinkedIn) with personalisation, qualification & discovery, managing AE relationships and defining your ICP." }
   ],

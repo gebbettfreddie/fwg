@@ -62,7 +62,7 @@ test("a project carries who it was built with, and its own span", () => {
 })
 
 test("a credential shows its period only when it has one", () => {
-  const reading = { institution: "University of Reading", award: "BSc Biomedical Sciences", detail: "Upper Second-Class Honours (2:1)" }
+  const reading = { institution: "University of Reading", award: "BSc Biomedical Sciences", detail: "First-Class Honours" }
 
   const out = Render.cvCredentials([reading, { ...reading, institution: "Jumpstart", period: "Sep–Nov 2025" }])
 
