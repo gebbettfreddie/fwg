@@ -5,17 +5,17 @@ Two published pages, one set of facts.
 | | |
 |---|---|
 | `index.html` | the map — [fwg.fyi](https://fwg.fyi) |
-| `cv.html` | the boring version — [fwg.fyi/cv](https://fwg.fyi/cv). Unlisted and `noindex`; nothing links to it |
 | `lockin.html` | the 75-to-Hyrox tracker |
 | `data/profile.json` | **the single source of truth** |
+| `../fwg-cv/cv.html` | the boring version — **private**, lives in a sibling folder that is never pushed. See [The CV is private](#the-cv-is-private) |
 
 ## Changing anything factual
 
 Edit `data/profile.json`, then:
 
 ```sh
-npm run gen      # writes the generated regions into index.html and cv.html,
-                 # and re-prints the downloadable CV PDF (needs Chrome installed)
+npm run gen      # writes the generated regions into index.html and ../fwg-cv/cv.html,
+                 # and re-prints the CV PDF (needs Chrome installed)
 npm run check    # proves both files, and the PDF, agree with the data (the pre-push hook runs this)
 npm test         # the renderers' unit tests
 ```
@@ -58,18 +58,31 @@ Once per clone:
 git config core.hooksPath bin/hooks
 ```
 
-## The CV as a PDF
+## The CV is private
 
-`Freddie_Gebbett_CV.pdf` is a **generated artefact, never a source** — the download button on the CV
-page serves it directly, so a recruiter gets a file rather than a print dialog.
+This repo is public and is what Pages serves, so anything committed here is on the internet. The CV
+is not: `cv.html`, `Freddie_Gebbett_CV.pdf` and its `.stamp` live in `../fwg-cv/` (override with
+`FWG_CV_HOME=/path/to/folder`), a sibling folder with its own local git and no remote. `check` fails
+if either file ever reappears in this repo.
 
-`npm run gen` re-prints it from `cv.html` whenever that page has changed, which means **`gen` needs a
-Chromium-based browser installed locally** (Chrome, Chromium, Edge or Brave). It also writes
-`Freddie_Gebbett_CV.pdf.stamp`, a hash of the page it printed.
+`bin/home.mjs` is the one place that knows a surface has a *home* — `published` (here) or `private`
+(the sibling). `gen` and `check` skip a surface whose home is missing on this machine, so a fresh
+clone of the site still passes the pre-push guard without ever seeing the CV.
+
+On the map, the CV row is a request: a visitor leaves their email (and a line about why), and
+Web3Forms emails it to the site's contact address with the requester as reply-to. Sending the PDF
+is a human step — reply to that email with `../fwg-cv/Freddie_Gebbett_CV.pdf` attached. The form's
+access key is public by design (it only addresses the inbox) and is hand-written in `index.html`.
+
+### The PDF
+
+`Freddie_Gebbett_CV.pdf` is a **generated artefact, never a source**. `npm run gen` re-prints it
+from `cv.html` whenever that page has changed, which means **`gen` needs a Chromium-based browser
+installed locally** (Chrome, Chromium, Edge or Brave). It also writes `Freddie_Gebbett_CV.pdf.stamp`,
+a hash of the page it printed.
 
 `npm run check` compares that stamp to the current `cv.html` and fails if the PDF was built from an
-older version — so a stale download cannot be pushed. **Checking only hashes, so it needs no
-browser** and works on any machine.
+older version. **Checking only hashes, so it needs no browser** and works on any machine.
 
 The print CSS is tuned to hold everything on one A4 page; if you add much more, re-check that it
 still does.
