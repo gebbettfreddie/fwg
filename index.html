@@ -195,6 +195,26 @@
 
   .press{font-family:var(--px);font-size:10px;color:var(--yellow);letter-spacing:.14em;margin:0 0 16px;animation:blink 1.4s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
+
+  /* the CV request row and its form (README → "The CV is private") */
+  .cvreq summary.lrow{border-top:0;cursor:pointer;list-style:none}
+  .cvreq summary.lrow::-webkit-details-marker{display:none}
+  .cvreq[open] summary .arr{transform:rotate(90deg);color:var(--cyan)}
+  .cvreq[open] summary .name{color:var(--green)}
+  .cvform{display:flex;flex-direction:column;gap:14px;padding:18px 6px 22px;border-bottom:3px solid var(--line)}
+  .cvform label{display:flex;flex-direction:column;gap:8px}
+  .cvform label span{font-family:var(--px);font-size:9px;letter-spacing:.08em;color:var(--soft)}
+  .cvform input[type=email],.cvform input[type=text]{
+    font:inherit;font-size:18px;color:var(--ink);background:var(--bg);
+    border:3px solid var(--line);padding:12px 14px;border-radius:0;-webkit-appearance:none;appearance:none}
+  .cvform input:focus{outline:none;border-color:var(--cyan)}
+  .cvform input::placeholder{color:var(--line)}
+  .cvform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .cvform .btn{align-self:flex-start;margin:4px 8px 4px 4px;border:0;cursor:pointer}
+  .cvform .btn:disabled{opacity:.6;cursor:default;transform:none}
+  .cvmsg{font-family:var(--px);font-size:9px;letter-spacing:.08em;line-height:2;color:var(--yellow);margin:0;min-height:1em}
+  .cvform.sent label{display:none}
+  .cvform.sent .cvmsg{color:var(--green)}
   .btn{display:inline-block;font-family:var(--px);font-size:11px;letter-spacing:.04em;
     color:var(--bg);background:var(--green);padding:16px 20px;margin:8px 8px 4px;overflow-wrap:anywhere;line-height:1.8;
     box-shadow:0 -4px 0 0 var(--green),0 4px 0 0 var(--green),-4px 0 0 0 var(--green),4px 0 0 0 var(--green),6px 10px 0 0 #000,10px 6px 0 0 #000,6px 6px 0 0 #000}
@@ -494,6 +514,27 @@
               <span class="arr" aria-hidden="true">▸</span>
             </a>
             <!-- /gen -->
+            <details class="cvreq" id="cvreq">
+              <summary class="lrow">
+                <span class="l"><span class="name">CV</span><span class="desc">Ask and I'll send it</span></span>
+                <span class="arr" aria-hidden="true">▸</span>
+              </summary>
+              <form class="cvform" id="cvform" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="726c635d-66dc-42ff-9626-7e2fa80a1738">
+                <input type="hidden" name="subject" value="CV request via fwg.fyi">
+                <input type="hidden" name="from_name" value="fwg.fyi">
+                <input type="hidden" name="redirect" value="https://fwg.fyi/#q-contact">
+                <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <label><span>YOUR EMAIL</span>
+                  <input type="email" name="email" required autocomplete="email" placeholder="you@somewhere.com">
+                </label>
+                <label><span>WHO ARE YOU?</span>
+                  <input type="text" name="who" autocomplete="organization" placeholder="Name, company, what it's for">
+                </label>
+                <button class="btn" type="submit">SEND REQUEST</button>
+                <p class="cvmsg" role="status" aria-live="polite" tabindex="-1"></p>
+              </form>
+            </details>
           </div>
           <p class="press">▶ CHAT TO ME NOW!</p>
           <!-- Contacts are gated: kept out of the page source, revealed by JS on tap (deters scrapers). -->
@@ -550,6 +591,45 @@
     });
     gate("mail", function(raw){
       return "✉ " + raw.toUpperCase();
+    });
+  })();
+
+  // CV request: posts to Web3Forms as JSON so the page never leaves. Without JS the form still
+  // submits normally and the redirect field brings the visitor back here.
+  (function(){
+    var form = document.getElementById("cvform");
+    if(!form || !window.fetch || !window.AbortSignal || !AbortSignal.timeout) return;
+    var btn = form.querySelector("button"), msg = form.querySelector(".cvmsg");
+    var IDLE = "SEND REQUEST";
+
+    function tell(text){ msg.textContent = text; msg.focus(); }
+    function failed(){
+      btn.disabled = false; btn.textContent = IDLE;
+      tell("DIDN'T SEND — EMAIL ME INSTEAD ↓");
+    }
+    function payload(){
+      var data = Object.fromEntries(new FormData(form));
+      delete data.redirect;                        // only for the no-JS path
+      return JSON.stringify(data);
+    }
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      btn.disabled = true; btn.textContent = "SENDING…"; msg.textContent = "SENDING…";
+      fetch(form.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: payload(),
+        signal: AbortSignal.timeout(10000)
+      })
+        .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+        .then(function(res){
+          if(!res.success) return Promise.reject(res);
+          form.classList.add("sent");
+          btn.textContent = "SENT";
+          tell("GOT IT — I'LL SEND IT OVER.");
+        })
+        .catch(failed);
     });
   })();
 
