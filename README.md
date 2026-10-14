@@ -16,7 +16,8 @@ Edit `data/profile.json`, then:
 ```sh
 npm run gen      # writes the generated regions into index.html and ../fwg-cv/cv.html,
                  # and re-prints the CV PDF (needs Chrome installed)
-npm run check    # proves both files, and the PDF, agree with the data (the pre-push hook runs this)
+npm run check    # proves every file on this machine, and the PDF, agree with the data,
+                 # and that nothing private is in the repo (the pre-push hook runs this)
 npm test         # the renderers' unit tests
 ```
 
@@ -61,18 +62,27 @@ git config core.hooksPath bin/hooks
 ## The CV is private
 
 This repo is public and is what Pages serves, so anything committed here is on the internet. The CV
-is not: `cv.html`, `Freddie_Gebbett_CV.pdf` and its `.stamp` live in `../fwg-cv/` (override with
-`FWG_CV_HOME=/path/to/folder`), a sibling folder with its own local git and no remote. `check` fails
-if either file ever reappears in this repo.
+is kept out of it: `cv.html`, `Freddie_Gebbett_CV.pdf` and its `.stamp` live in `../fwg-cv/`
+(override with `FWG_CV_HOME=/path/to/folder`), a sibling folder with its own local git and no remote.
 
 `bin/home.mjs` is the one place that knows a surface has a *home* — `published` (here) or `private`
-(the sibling). `gen` and `check` skip a surface whose home is missing on this machine, so a fresh
-clone of the site still passes the pre-push guard without ever seeing the CV.
+(the sibling). A private home that resolves inside the repo is refused outright. `gen` and `check`
+skip a surface whose home is missing on this machine, so a fresh clone of the site still passes the
+pre-push guard without ever seeing the CV — unless `FWG_CV_HOME` was set and points nowhere, which
+fails.
+
+`check` also refuses to let the repo track any file a private surface owns, any PDF at all, or any
+file carrying the decoded phone number or email address.
+
+**What this does not do:** versions before October 2026 committed the PDF and `cv.html`, so they are
+still in this repo's public history (and the PDF carries the contacts in plain text). Only a history
+rewrite and force-push, plus a GitHub support request to purge cached commits, removes them.
 
 On the map, the CV row is a request: a visitor leaves their email (and a line about why), and
 Web3Forms emails it to the site's contact address with the requester as reply-to. Sending the PDF
 is a human step — reply to that email with `../fwg-cv/Freddie_Gebbett_CV.pdf` attached. The form's
-access key is public by design (it only addresses the inbox) and is hand-written in `index.html`.
+access key is public by design (it only addresses the inbox) and is hand-written in `index.html`;
+`check` fails if it is not a real key.
 
 ### The PDF
 

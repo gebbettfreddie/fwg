@@ -81,13 +81,15 @@ test("contacts reach both surfaces as base64, never as readable text", () => {
     { name: "Lawhive", desc: "Where I work", href: "https://lawhive.co.uk" },
   ]
 
+  const readable = [atob(contact.telB64), atob(contact.emailB64)]
+
   const cv = Render.cvContacts({ contact, links, location: "United Kingdom" })
   assert.match(cv, /data-enc="KzQ0NzM3NjM1NzcyMA=="/)
-  assert.doesNotMatch(cv, /\+447376357720|gebbettfreddie@gmail\.com/)
+  for (const value of readable) assert.ok(!cv.includes(value), "the CV header must not carry a readable contact")
   assert.match(cv, /linkedin\.com\/in\/freddie-gebbett/)
   assert.doesNotMatch(cv, /Lawhive/, "a link with no printable display stays off the CV header")
 
   const site = Render.contactButtons(contact)
   assert.match(site, /id="tel"[^>]*data-scheme="tel:"[^>]*data-enc="KzQ0NzM3NjM1NzcyMA=="/)
-  assert.doesNotMatch(site, /\+447376357720|gebbettfreddie@gmail\.com/)
+  for (const value of readable) assert.ok(!site.includes(value), "the buttons must not carry a readable contact")
 })

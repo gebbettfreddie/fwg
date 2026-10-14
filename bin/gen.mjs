@@ -8,23 +8,15 @@ import { Splice } from "./splice.mjs"
 import { Surfaces } from "./surfaces.mjs"
 
 /**
- * Writes every generated region into every surface, then rebuilds the CV's PDF from the page.
- * Idempotent — the PDF is only re-printed when the page it was built from has actually changed,
- * so a binary does not churn on every run.
- *
- * A surface whose home is not on this machine is skipped, not failed: the site is buildable from
- * a clone that has never seen the CV.
+ * Writes every generated region into every surface on this machine, then re-prints any PDF a
+ * surface owns. Idempotent — a PDF is only re-printed when the page it was built from has
+ * actually changed, so a binary does not churn on every run.
  */
 
 const TODAY = new Date().toISOString().slice(0, 10)
-const profile = Profile.load()
+const { present } = Surfaces.locate(Surfaces.render(Profile.load(), TODAY))
 
-for (const surface of Surfaces.render(profile, TODAY)) {
-  if (!Homes.present(surface.home)) {
-    console.log(`  ${surface.file} — ${surface.home} home not found at ${Homes.root(surface.home)}, skipped`)
-    continue
-  }
-
+for (const surface of present) {
   const path = Homes.path(surface)
   const before = readFileSync(path, "utf8")
 
@@ -33,27 +25,21 @@ for (const surface of Surfaces.render(profile, TODAY)) {
 
   if (after === before) {
     console.log(`  ${surface.file} — already current`)
-    continue
+  } else {
+    writeFileSync(path, after)
+    console.log(`✎ ${surface.file} — ${Object.keys(surface.regions).length} region(s) written`)
   }
 
-  writeFileSync(path, after)
-  console.log(`✎ ${surface.file} — ${Object.keys(surface.regions).length} region(s) written`)
-}
+  if (!surface.prints) continue
 
-// The PDF is what Freddie sends when someone asks for the CV, so it has to be regenerated
-// whenever the page changes — and stamped, so `check` can prove the PDF still matches the page.
-if (Homes.present("private")) {
-  const cvPage = Homes.path({ file: "cv.html", home: "private" })
-  const cvPdf = Homes.path({ file: "Freddie_Gebbett_CV.pdf", home: "private" })
-  const stampPath = `${cvPdf}.stamp`
+  const out = Homes.path({ file: surface.prints, home: surface.home })
+  const want = Pdf.stamp(after)
+  const have = existsSync(Pdf.stampPath(out)) ? readFileSync(Pdf.stampPath(out), "utf8").trim() : null
 
-  const want = Pdf.stamp(readFileSync(cvPage, "utf8"))
-  const have = existsSync(stampPath) ? readFileSync(stampPath, "utf8").trim() : null
-
-  if (have === want && existsSync(cvPdf)) {
-    console.log("  Freddie_Gebbett_CV.pdf — already current")
+  if (have === want && existsSync(out)) {
+    console.log(`  ${surface.prints} — already current`)
   } else {
-    const { bytes } = Pdf.write({ page: cvPage, out: cvPdf })
-    console.log(`✎ Freddie_Gebbett_CV.pdf — ${Math.round(bytes / 1024)} kB printed from cv.html`)
+    const { bytes } = Pdf.write({ page: path, out })
+    console.log(`✎ ${surface.prints} — ${Math.round(bytes / 1024)} kB printed from ${surface.file}`)
   }
 }

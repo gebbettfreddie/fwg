@@ -4,11 +4,11 @@ import { createHash } from "node:crypto"
 import { existsSync, readFileSync, writeFileSync } from "node:fs"
 
 /**
- * Prints cv.html to the PDF the download button serves.
+ * Prints a page to the PDF Freddie sends when someone asks for the CV.
  *
- * The PDF is a generated artefact, never a source: it is rebuilt from cv.html, and the stamp it
- * writes alongside lets `check` prove the committed PDF still matches the committed page. That is
- * what keeps a downloadable file from drifting away from the data the rest of this repo guarantees.
+ * The PDF is a generated artefact, never a source: it is rebuilt from the page, and the stamp it
+ * writes alongside lets `check` prove the PDF still matches the page. That is what keeps the file
+ * he sends from drifting away from the data the rest of this repo guarantees.
  *
  * Split so the decisions are testable without launching a browser: only `write` is impure.
  */
@@ -93,6 +93,11 @@ export const Pdf = {
     return createHash("sha256").update(html).digest("hex")
   },
 
+  /** @param {string} out  the PDF's path @returns {string}  where its stamp lives */
+  stampPath(out) {
+    return `${out}.stamp`
+  },
+
   /**
    * @param {{ page: string, out: string }} target  absolute paths
    * @returns {{ bytes: number, stamp: string }}
@@ -108,7 +113,7 @@ export const Pdf = {
     Pdf.assertPdf(bytes, out)
 
     const stamp = Pdf.stamp(readFileSync(page, "utf8"))
-    writeFileSync(`${out}.stamp`, `${stamp}\n`)
+    writeFileSync(Pdf.stampPath(out), `${stamp}\n`)
 
     return { bytes: bytes.length, stamp }
   },
