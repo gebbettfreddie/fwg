@@ -3,6 +3,6 @@
 # Enable once per clone:  git config core.hooksPath bin/hooks
 node bin/check.mjs || {
   echo ""
-  echo "Push refused: the site and CV have drifted from data/profile.json."
+  echo "Push refused: a surface has drifted from data/profile.json, or the CV is back in the repo."
   exit 1
 }

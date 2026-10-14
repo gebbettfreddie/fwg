@@ -13,8 +13,7 @@
   "links": [
     { "name": "Lawhive",  "desc": "Where I work", "href": "https://lawhive.co.uk" },
     { "name": "LinkedIn", "desc": "Work history", "href": "https://www.linkedin.com/in/freddie-gebbett-410057225/", "display": "linkedin.com/in/freddie-gebbett" },
-    { "name": "GitHub",   "desc": "Code",         "href": "https://github.com/gebbettfreddie", "display": "github.com/gebbettfreddie" },
-    { "name": "CV",       "desc": "The boring version", "href": "cv.html" }
+    { "name": "GitHub",   "desc": "Code",         "href": "https://github.com/gebbettfreddie", "display": "github.com/gebbettfreddie" }
   ],
 
   "roles": [
