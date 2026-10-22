@@ -2,7 +2,7 @@
   "_": "The single source of truth for fwg.fyi and the CV. Edit here, then run: node bin/gen.mjs",
 
   "name": "Freddie Gebbett",
-  "headline": "CVs, cover letters and personal summaries are boring. Find out more about me at fwg.fyi. Hi if that's where you came from :)",
+  "headline": "Ops generalist at a fast-growing AI startup, with a top-of-team sales record behind it. I take the problem nobody owns yet and ship it: a benefits package built from scratch for board sign-off, ops automated end to end, a side venture taken from zero to 10+ paying customers. Looking for a founders / ops associate seat at seed or Series A. More at fwg.fyi.",
   "location": "United Kingdom",
 
   "contact": {
@@ -25,10 +25,11 @@
       "end": null,
       "siteBlurb": "I keep a fast-moving legal-tech team running and the culture sharp: operations, the office, and the day-to-day that lets everyone do their best work.",
       "bullets": [
-        "Own day-to-day operations and team engagement at one of the UK's fastest-growing AI startups — running the office, events and recurring workflows end to end.",
-        "Single-handedly built a comprehensive employee benefits package for board approval — private medical insurance, cycle-to-work, dental, pension and nursery contributions — benchmarking the market, negotiating rates with every provider and securing zero platform fees for the first two years from the chosen benefits platform.",
-        "Taught myself insurance broking and salary-sacrifice mechanics from scratch, pressure-testing the design with a global benefits lead at a 1,500-person company who assumed I had years in the field.",
-        "Automated every recurring operational task using AI and n8n, removing manual overhead and freeing up significant time to redirect towards higher-impact work."
+        "Own operations end to end at one of the UK's fastest-growing AI startups — office, vendors, events, internal tooling and the recurring workflows that keep the team shipping — as the person who picks up whatever has no owner yet.",
+        "Built the company's employee benefits package from a blank page and took it to the board — private medical, dental, pension, cycle-to-work and nursery — benchmarking the market, negotiating every provider and securing zero platform fees for the first two years.",
+        "Learned insurance broking and salary-sacrifice mechanics from scratch to do it; the global benefits lead at a 1,500-person company who pressure-tested the design assumed I had years in the field.",
+        "Automated the recurring operational work with AI and n8n so the role runs on systems rather than my calendar, and the freed time goes to the next unowned problem.",
+        "Build small internal tools myself when buying one is overkill — an office hub for seating and desk requests, automated office signage — using AI-assisted development."
       ]
     },
     {
@@ -38,10 +39,9 @@
       "end": "2026-02-01",
       "mode": "Remote",
       "bullets": [
-        "Averaged 5 calls a day and booked 10–15 meetings a week — consistently the highest volume of meetings of anyone on the team each month across UK & Ireland.",
-        "Transitioned into a closing (AE) role on domestic solar and Air Source Heat Pump (ASHP) leads, holding a 21% close rate and, within three months, the highest closed MRR on the team.",
-        "Moved up to prospecting larger accounts, including some of the UK's largest domestic solar and ASHP providers.",
-        "Stepped across to the commercial side of the business (TNW Energy), owning the full sales cycle — prospected, booked and closed Custom Solar, one of the UK's largest commercial solar installers."
+        "Hired to book meetings; moved into closing within three months — 21% close rate and the highest closed MRR on the team.",
+        "Highest meeting volume on the team every month across UK & Ireland — 10–15 booked a week on domestic solar and heat-pump leads.",
+        "Stepped across to the commercial arm (TNW Energy) to own a full sales cycle — prospected, booked and closed Custom Solar, one of the UK's largest commercial solar installers."
       ]
     },
     {
@@ -50,11 +50,9 @@
       "start": "2024-12-01",
       "end": "2025-09-01",
       "bullets": [
-        "Achieved 150% of call quota and 133% of meeting quota (target 6, average 8) consistently.",
-        "Set a company record — 7 of 8 accountant meetings booked and attended in a single month, beating the prospect-attendance quota by 113%.",
-        "Built an email outreach strategy with the MD targeting accountant partners, lifting engagement by 15%.",
-        "Ran full-cycle SDR work — cold calling, email campaigns, lead qualification and clean handoff to Account Executives — keeping deals moving and CRM data clean.",
-        "Won the MVP Award three months running (April–June) for consistent quota attainment."
+        "First job out of university: 150% of call quota, 133% of meeting quota, MVP award three months running.",
+        "Built an email outreach strategy with the MD targeting accountant partners, lifting engagement by 15% — the first time I designed a process rather than ran one.",
+        "Set the company record for accountant meetings booked and attended in a month (7 of 8), 113% over quota."
       ]
     }
   ],
@@ -84,10 +82,9 @@
         { "n": "100+",   "label": "appointments booked", "note": " — new patients captured while the desk was busy or closed" }
       ],
       "cvBullets": [
-        "Built and ran an AI voice receptionist for UK dental practices with my brother — he led the engineering, I owned go-to-market — onboarding 10+ practices across three London boroughs.",
-        "Answered 1,000+ patient calls and booked 100+ appointments, capturing new patients while front desks were busy or closed.",
-        "Owned everything but the build: market research, positioning, branding, the website and all outbound sales — and picked up enough of the stack alongside him to hold my own on product decisions.",
-        "Wound it down after three months to put the time elsewhere — the full story is on fwg.fyi and LinkedIn."
+        "Co-founded and ran a three-month AI voice-receptionist venture for UK dental practices with my brother: he built it, I took it to market — 10+ practices onboarded across three London boroughs, 1,000+ patient calls answered, 100+ appointments booked.",
+        "Owned everything outside the code: market research, positioning, brand, website, pricing and all outbound — and learned enough of the stack to hold my own on product calls.",
+        "Called it after three months when the market got crowded — the full story is on fwg.fyi."
       ]
     }
   ],
@@ -102,7 +99,7 @@
   "credentials": [
     { "institution": "University of Reading", "award": "BSc Biomedical Sciences", "detail": "First-Class Honours" },
     { "institution": "Jumpstart", "award": "Cohort Member", "period": "Sep–Nov 2025", "detail": "Selected into the top ~1% of 4,000+ applicants for the UK's only startup graduate scheme." },
-    { "institution": "The Sales Circle", "award": "Get into Tech Sales Programme", "detail": "Intensive SDR programme: multi-channel prospecting (cold call, email, LinkedIn) with personalisation, qualification & discovery, managing AE relationships and defining your ICP." }
+    { "institution": "The Sales Circle", "award": "Get into Tech Sales Programme", "detail": "Intensive SDR programme: multi-channel prospecting, qualification and discovery, defining an ICP." }
   ],
 
   "highlights": [
