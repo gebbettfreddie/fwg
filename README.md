@@ -74,9 +74,10 @@ fails.
 `check` also refuses to let the repo track any file a private surface owns, any PDF at all, or any
 file carrying the decoded phone number or email address.
 
-**What this does not do:** versions before October 2026 committed the PDF and `cv.html`, so they are
-still in this repo's public history (and the PDF carries the contacts in plain text). Only a history
-rewrite and force-push, plus a GitHub support request to purge cached commits, removes them.
+**History:** versions before October 2026 committed the PDF and `cv.html`, and older pages carried
+the contacts in plain text. History was rewritten on 22 Oct 2026 (`git filter-repo`) to drop the CV
+files and redact both contacts, so no branch reaches them. GitHub can still serve the orphaned commits
+by hash until its support team purges them.
 
 On the map, the CV row is a request: a visitor leaves their email (and a line about why), and
 Web3Forms emails it to the site's contact address with the requester as reply-to. Sending the PDF
