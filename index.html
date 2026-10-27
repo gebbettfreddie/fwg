@@ -642,7 +642,7 @@
   var segs = pbar ? pbar.querySelectorAll(".seg") : [];
   var reset = document.getElementById("reset");
   var mq = window.matchMedia("(min-width:721px)");
-  var STORE = "fwg_visited";
+  var STORE = "fwg_visited";   // sessionStorage: progress survives a reload, but every new visit starts fresh
   var STEP_MS = 340;  // ms per trail segment — hero walks node-by-node so he follows the path
   function reduceMotion(){ return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
 
@@ -716,7 +716,7 @@
     if(n >= NODES.length){ counter.classList.add("done"); counter.textContent = "★ MAP CLEARED"; }
     else { counter.classList.remove("done"); counter.innerHTML = "QUESTS <b>" + n + "</b>/" + NODES.length; }
   }
-  function persist(){ try{ localStorage.setItem(STORE, JSON.stringify(Object.keys(visited))); }catch(e){} }
+  function persist(){ try{ sessionStorage.setItem(STORE, JSON.stringify(Object.keys(visited))); }catch(e){} }
   function markVisited(id){
     if(visited[id]) return;
     visited[id] = true;
@@ -726,7 +726,7 @@
   }
   function resetProgress(){
     visited = {};
-    try{ localStorage.removeItem(STORE); }catch(e){}
+    try{ sessionStorage.removeItem(STORE); }catch(e){}
     els.forEach(function(e){ e.classList.remove("visited"); });
     render();
   }
@@ -771,7 +771,7 @@
   // restore progress from a previous visit; wire the reset button
   (function(){
     try{
-      var stored = JSON.parse(localStorage.getItem(STORE) || "[]");
+      var stored = JSON.parse(sessionStorage.getItem(STORE) || "[]");
       stored.forEach(function(id){
         var i = NODES.findIndex(function(n){ return n.id === id; });
         if(i >= 0){ visited[id] = true; els[i].classList.add("visited"); }
