@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Freddie Gebbett — fwg.fyi</title>
 <meta name="description" content="Freddie Gebbett — operations & engagement at Lawhive, putting AI to work everywhere, building Inkly, fitness enthusiast. London.">
-<meta name="theme-color" content="#0d0d1a">
+<meta name="theme-color" content="#f0f0f0">
 
 <!-- Open Graph (for nice link previews) -->
 <meta property="og:title" content="Freddie Gebbett">
@@ -15,219 +15,208 @@
 <!-- TODO: add a 1200x630 og:image PNG later and reference it here -->
 
 <!-- Pixel "F" favicon, inline SVG -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%230d0d1a'/%3E%3Crect x='4' y='2' width='8' height='2' fill='%2392cc41'/%3E%3Crect x='4' y='4' width='2' height='10' fill='%2392cc41'/%3E%3Crect x='6' y='7' width='5' height='2' fill='%2392cc41'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' rx='3' fill='%23ffffff'/%3E%3Crect x='4' y='2' width='8' height='2' fill='%23ff8200'/%3E%3Crect x='4' y='4' width='2' height='10' fill='%23ff8200'/%3E%3Crect x='6' y='7' width='5' height='2' fill='%23ff8200'/%3E%3C/svg%3E">
 
 <!-- Flip to JS mode before paint so there's no flash of the fallback map/list -->
 <script>document.documentElement.className='js';</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+  /* Theme lifted from flipper.net/pages/downloads: Inter, light grey page, white rounded
+     cards, black bold headings, grey muted text, green CTA, orange brand links. */
   :root{
-    color-scheme: dark;
-    --bg:#0d0d1a;      /* deep navy, near-black — sky/void */
-    --panel:#16162a;   /* window fill */
-    --line:#2e2e52;    /* borders */
-    --ink:#e8e8f0;     /* headline text */
-    --soft:#9a9ac0;    /* body text */
-    --green:#92cc41;   /* NES green — primary accent */
-    --cyan:#3cbcfc;    /* NES sky blue — hovers/secondary */
-    --yellow:#f7d51d;  /* coin yellow — highlights/selection */
-    --red:#e76e55;     /* used sparingly */
-    /* overworld terrain */
-    --grass:#24632f;
-    --grass2:#1c4d26;
-    --dirt:#7a5a34;
-    --dirt2:#5c4326;
-    --water:#26467e;
-    --px:"Press Start 2P", monospace;
+    color-scheme: light;
+    --bg:#f0f0f0;        /* page */
+    --card:#ffffff;      /* cards / windows */
+    --line:#dfdfdf;      /* hairline borders */
+    --ink:#000000;       /* headings, strong text */
+    --text:#212121;      /* body */
+    --soft:#686868;      /* muted */
+    --orange:#ff8200;    /* brand accent — links, selection */
+    --green:#41c443;     /* CTA */
+    --green-dark:#35c352;
+    --dark:#212121;      /* black buttons / code */
+    --radius:24px;
+    --radius-sm:16px;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
-    background:var(--bg);color:var(--ink);
-    font-family:"VT323",ui-monospace,"SF Mono",Menlo,monospace;
-    font-size:21px;line-height:1.55;min-height:100vh;
+    background:var(--bg);color:var(--text);
+    font-family:var(--sans);font-size:16px;line-height:1.6;min-height:100vh;
+    -webkit-font-smoothing:antialiased;
   }
-  /* faint CRT scanlines over everything */
-  body::after{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:60;
-    background:repeating-linear-gradient(0deg, rgba(0,0,0,.14) 0 1px, transparent 1px 3px);
-  }
-  a{color:var(--green);text-decoration:none}
-  a:hover{color:var(--cyan)}
-  :focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
-  ::selection{background:var(--green);color:var(--bg)}
+  a{color:var(--orange);text-decoration:underline;text-underline-offset:2px}
+  a:hover{color:var(--ink)}
+  :focus-visible{outline:2px solid var(--dark);outline-offset:2px;border-radius:4px}
+  ::selection{background:var(--orange);color:#fff}
+  h2{font-weight:700;letter-spacing:-.01em;color:var(--ink)}
 
-  .shell{max-width:960px;margin:0 auto;padding:22px 16px 40px}
-  @media(min-width:721px){.shell{padding:28px 24px 48px}}
+  .shell{max-width:980px;margin:0 auto;padding:20px 16px 40px}
+  @media(min-width:721px){.shell{padding:24px 24px 48px}}
 
-  /* ---------- HUD ---------- */
+  /* ---------- HEADER BAR ---------- */
   .hud{
     display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
-    font-family:var(--px);font-size:10px;color:var(--soft);letter-spacing:.06em;
-    padding:12px 14px;background:var(--panel);
-    box-shadow:0 -4px 0 0 var(--line),0 4px 0 0 var(--line),-4px 0 0 0 var(--line),4px 0 0 0 var(--line);
-    margin:4px 4px 26px;
+    font-size:14px;font-weight:500;color:var(--soft);
+    padding:14px 22px;background:var(--card);border:1px solid var(--line);border-radius:999px;
+    margin:0 0 28px;
   }
-  .hud .who b{color:var(--ink);font-weight:400}
-  .hud .who .loc{color:var(--soft)}
+  .hud .who b{color:var(--ink);font-weight:700;letter-spacing:-.01em}
+  .hud .who .loc{color:var(--soft);font-weight:400}
   .hud .stats{display:flex;gap:16px;align-items:center}
-  .hud .lv{color:var(--green)}
-  .qcounter{display:none;color:var(--yellow)}
-  .qcounter b{color:var(--ink);font-weight:400}
-  .qcounter.done{color:var(--green)}
+  .qcounter{display:none;color:var(--soft)}
+  .qcounter b{color:var(--ink);font-weight:700}
+  .qcounter.done{color:var(--green-dark);font-weight:600}
 
   /* ---------- OVERWORLD MAP (desktop + JS only) ---------- */
   .stage{display:none}
   .hint{display:none}
 
   /* ---------- QUEST LOG (fallback: mobile + no-JS) ---------- */
-  .loghead{font-family:var(--px);font-size:12px;color:var(--green);letter-spacing:.1em;margin:0 4px 4px}
-  .logsub{color:var(--soft);margin:0 4px 22px;font-size:18px}
+  .loghead{font-size:32px;line-height:1.15;margin:8px 0 6px;text-align:center}
+  .logsub{color:var(--soft);margin:0 0 22px;font-size:16px;text-align:center}
 
   /* ---------- WINDOWS / PANELS ---------- */
-  .overlay{}                     /* base: transparent flow wrapper */
-  .window{}
   .wclose{display:none}
-  .window-body{display:flex;flex-direction:column;gap:20px}
+  .window-body{display:flex;flex-direction:column;gap:16px}
 
   .quest{
-    background:var(--panel);margin:0 4px;padding:20px 20px 18px;
-    box-shadow:0 -4px 0 0 var(--line),0 4px 0 0 var(--line),-4px 0 0 0 var(--line),4px 0 0 0 var(--line);
+    background:var(--card);border-radius:var(--radius);
+    padding:28px 24px 26px;
   }
+  @media(min-width:721px){.quest{padding:36px 40px 34px}}
   .qtitle{
-    font-family:var(--px);font-weight:400;font-size:14px;color:var(--ink);
-    letter-spacing:.04em;line-height:1.5;margin:0 0 14px;
-    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    font-size:28px;line-height:1.2;margin:0 0 16px;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
   }
   .qtag{
-    font-family:var(--px);font-size:8px;letter-spacing:.12em;color:var(--bg);
-    background:var(--green);padding:5px 7px 4px;
+    font-size:11px;font-weight:700;letter-spacing:.08em;color:#fff;
+    background:var(--dark);padding:5px 10px;border-radius:999px;
   }
-  .qtag.cyan{background:var(--cyan)}
-  .qtag.yellow{background:var(--yellow)}
+  .qtag.cyan{background:var(--orange)}
+  .qtag.yellow{background:var(--green)}
   .qtag.soft{background:var(--soft)}
   .quest p{margin:0 0 14px}
   .quest p:last-child{margin-bottom:0}
-  .quest a.link{border-bottom:3px solid var(--line);padding-bottom:1px}
-  .quest a.link:hover{border-bottom-color:var(--cyan)}
-  .lead{color:var(--soft)}
-  .lead b{color:var(--ink)}
+  .quest a.link{color:var(--orange)}
+  .quest a.link:hover{color:var(--ink)}
+  .lead{color:var(--text)}
+  .lead b{color:var(--ink);font-weight:700}
 
   /* character sheet (start panel) */
-  .sheet{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
-  .sheet li{font-family:var(--px);font-size:9px;letter-spacing:.06em;color:var(--soft);line-height:1.6}
-  .sheet li b{color:var(--cyan);font-weight:400}
+  .sheet{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px}
+  .sheet li{font-size:13px;letter-spacing:.04em;color:var(--soft);font-weight:500;line-height:1.6}
+  .sheet li b{color:var(--ink);font-weight:700}
 
   /* career path progression (journey) */
-  .path{font-family:var(--px);font-size:9px;letter-spacing:.05em;color:var(--soft);
+  .path{font-size:13px;letter-spacing:.05em;color:var(--soft);font-weight:600;
     margin:0 0 18px;line-height:1.9}
-  .path .arw{color:var(--cyan);padding:0 5px}
-  .path b{color:var(--green);font-weight:400}
+  .path .arw{color:var(--orange);padding:0 5px}
+  .path b{color:var(--ink);font-weight:700}
 
   /* build rows inside workshop */
-  .b-row{margin:0 0 18px}
-  .b-row:last-child{margin-bottom:0}
+  .b-row{margin:0 0 22px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+  .b-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:0}
   .b-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
-  .b-name{font-family:var(--px);font-size:11px;color:var(--ink);letter-spacing:.04em}
-  .badge{font-family:var(--px);font-size:8px;letter-spacing:.1em;color:var(--bg);background:var(--yellow);padding:5px 7px 4px;white-space:nowrap}
+  .b-name{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+  .badge{font-size:11px;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--orange);padding:4px 10px;border-radius:999px;white-space:nowrap}
   .badge.done{background:var(--green)}
   .b-row .lead{margin:0 0 12px}
   .b-row .lead:last-child{margin-bottom:0}
   /* achievement stat list */
-  .stats3{list-style:none;margin:0 0 12px;padding:12px 4px;display:grid;gap:11px;
-    border-top:3px solid var(--line);border-bottom:3px solid var(--line)}
-  .stats3 li{display:flex;align-items:baseline;gap:12px;color:var(--soft);font-size:18px;line-height:1.4}
-  .stats3 .n{font-family:var(--px);font-size:13px;color:var(--green);letter-spacing:.02em;
-    flex:0 0 auto;min-width:70px}
-  .stats3 b{color:var(--ink);font-weight:400}
+  .stats3{list-style:none;margin:0 0 14px;padding:14px 0;display:grid;gap:10px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats3 li{display:flex;align-items:baseline;gap:14px;color:var(--text);font-size:15px;line-height:1.5}
+  .stats3 .n{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-.02em;
+    flex:0 0 auto;min-width:76px;font-variant-numeric:tabular-nums}
+  .stats3 b{color:var(--ink);font-weight:600}
 
   /* year tracker (fitness) */
-  .xp{margin-top:16px}
+  .xp{margin-top:18px}
   .xplabel{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-    font-family:var(--px);font-size:9px;letter-spacing:.08em;color:var(--soft);margin-bottom:10px}
-  .yeartrack{height:24px;background:var(--bg);margin:4px;position:relative;overflow:hidden;
-    box-shadow:0 -4px 0 0 var(--line),0 4px 0 0 var(--line),-4px 0 0 0 var(--line),4px 0 0 0 var(--line)}
-  .yearfill{height:100%;background:var(--green);transition:width 1.2s steps(24);
-    background-image:repeating-linear-gradient(90deg,transparent 0 12px,rgba(13,13,26,.55) 12px 15px)}
-  .cp{position:absolute;top:0;bottom:0;width:4px;margin-left:-2px;background:var(--yellow)}
-  .cp.done{width:5px;margin-left:-2.5px;background:var(--cyan);box-shadow:0 0 0 1px rgba(13,13,26,.6)}
-  .races{list-style:none;margin:16px 4px 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+    font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--soft);margin-bottom:10px}
+  .yeartrack{height:12px;background:var(--bg);border-radius:999px;position:relative;overflow:visible}
+  .yearfill{height:100%;background:var(--green);border-radius:999px;transition:width 1.2s ease}
+  .cp{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;
+    background:var(--card);border:3px solid var(--orange)}
+  .cp.done{background:var(--green);border-color:var(--green)}
+  .races{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
   @media(max-width:460px){.races{grid-template-columns:1fr}}
-  .races li{font-family:var(--px);font-size:8px;letter-spacing:.05em;line-height:1.6;color:var(--ink);display:flex;align-items:center;gap:9px}
-  .races li .dot{width:8px;height:8px;flex:0 0 8px;background:var(--line)}
-  .races li.done .dot{background:var(--cyan)}
-  .races li.up .dot{background:var(--yellow)}
-  .races li .when{color:var(--soft)}
+  .races li{font-size:13px;font-weight:600;letter-spacing:.03em;line-height:1.6;color:var(--ink);display:flex;align-items:center;gap:9px}
+  .races li .dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:var(--line)}
+  .races li.done .dot{background:var(--green)}
+  .races li.up .dot{background:var(--orange)}
+  .races li .when{color:var(--soft);font-weight:400}
 
   /* testimonial (reviews) */
-  .quote{font-size:23px;color:var(--ink);line-height:1.5;margin:0 0 14px}
+  .quote{font-size:22px;font-weight:600;color:var(--ink);line-height:1.4;letter-spacing:-.01em;margin:0 0 14px}
   .support{color:var(--soft);margin:0 0 16px}
-  .byline{font-family:var(--px);font-size:9px;letter-spacing:.08em;color:var(--soft);margin:0}
-  .byline .star{color:var(--green)}
+  .byline{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--soft);margin:0}
+  .byline .star{color:var(--orange)}
   .byline a{color:var(--ink)}
-  .role{font-family:var(--px);font-size:8px;letter-spacing:.08em;color:var(--soft);margin:7px 0 0;line-height:1.7}
+  .role{font-size:12px;letter-spacing:.06em;color:var(--soft);margin:6px 0 0;line-height:1.7}
   details.more{margin-top:14px}
-  details.more>summary{font-family:var(--px);font-size:9px;letter-spacing:.08em;color:var(--cyan);cursor:pointer;list-style:none;display:inline-block;padding:6px 2px}
+  details.more>summary{font-size:14px;font-weight:600;color:var(--orange);cursor:pointer;list-style:none;display:inline-block;padding:6px 0;text-decoration:underline;text-underline-offset:2px}
   details.more>summary::-webkit-details-marker{display:none}
-  details.more>summary::before{content:"▸ "}
-  details.more[open]>summary::before{content:"▾ "}
-  details.more>summary:hover{color:var(--green)}
-  details.more .full{margin-top:12px;color:var(--soft)}
+  details.more>summary:hover{color:var(--ink)}
+  details.more .full{margin-top:12px;color:var(--text)}
   details.more .full p{margin:0 0 14px}
-  details.more .full em{color:var(--ink);font-style:normal}
+  details.more .full em{color:var(--ink);font-style:italic}
 
   /* links (contact) */
-  .links{display:flex;flex-direction:column;margin:0 0 20px}
+  .links{display:flex;flex-direction:column;margin:0 0 24px}
   .lrow{display:flex;align-items:center;justify-content:space-between;gap:16px;
-    padding:15px 6px;border-bottom:3px solid var(--line);color:var(--ink)}
-  .lrow:first-of-type{border-top:3px solid var(--line)}
-  .lrow:hover{background:var(--bg);padding-left:12px}
+    padding:16px 4px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+  .lrow:first-of-type{border-top:1px solid var(--line)}
+  .lrow:hover{color:var(--ink)}
   .lrow .l{display:block}
-  .lrow .name{display:block;font-family:var(--px);font-size:11px;letter-spacing:.04em}
-  .lrow .desc{display:block;font-size:18px;color:var(--soft);margin-top:5px}
-  .lrow .arr{font-family:var(--px);font-size:12px;color:var(--soft)}
-  .lrow:hover .arr{color:var(--cyan)}
-  .lrow:hover .name{color:var(--green)}
+  .lrow .name{display:block;font-size:16px;font-weight:700;letter-spacing:.02em}
+  .lrow .desc{display:block;font-size:14px;color:var(--soft);margin-top:2px}
+  .lrow .arr{font-size:16px;color:var(--soft);transition:transform .15s ease}
+  .lrow:hover .arr{color:var(--orange);transform:translateX(3px)}
+  .lrow:hover .name{color:var(--orange)}
 
-  .press{font-family:var(--px);font-size:10px;color:var(--yellow);letter-spacing:.14em;margin:0 0 16px;animation:blink 1.4s steps(1) infinite}
-  @keyframes blink{50%{opacity:0}}
+  .press{font-size:12px;font-weight:700;color:var(--soft);letter-spacing:.1em;margin:0 0 14px}
 
   /* the CV request row and its form (README → "The CV is private") */
   .cvreq summary.lrow{border-top:0;cursor:pointer;list-style:none}
   .cvreq summary.lrow::-webkit-details-marker{display:none}
-  .cvreq[open] summary .arr{transform:rotate(90deg);color:var(--cyan)}
-  .cvreq[open] summary .name{color:var(--green)}
-  .cvform{display:flex;flex-direction:column;gap:14px;padding:18px 6px 22px;border-bottom:3px solid var(--line)}
-  .cvform label{display:flex;flex-direction:column;gap:8px}
-  .cvform label span{font-family:var(--px);font-size:9px;letter-spacing:.08em;color:var(--soft)}
+  .cvreq[open] summary .arr{transform:rotate(90deg);color:var(--orange)}
+  .cvreq[open] summary .name{color:var(--orange)}
+  .cvform{display:flex;flex-direction:column;gap:14px;padding:18px 4px 22px;border-bottom:1px solid var(--line)}
+  .cvform label{display:flex;flex-direction:column;gap:6px}
+  .cvform label span{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--soft)}
   .cvform input[type=email],.cvform input[type=text]{
-    font:inherit;font-size:18px;color:var(--ink);background:var(--bg);
-    border:3px solid var(--line);padding:12px 14px;border-radius:0;-webkit-appearance:none;appearance:none}
-  .cvform input:focus{outline:none;border-color:var(--cyan)}
-  .cvform input::placeholder{color:var(--line)}
+    font:inherit;font-size:16px;color:var(--ink);background:var(--card);
+    border:1px solid var(--line);padding:12px 14px;border-radius:12px;-webkit-appearance:none;appearance:none}
+  .cvform input:focus{outline:none;border-color:var(--dark)}
+  .cvform input::placeholder{color:#a4a4a4}
   .cvform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-  .cvform .btn{align-self:flex-start;margin:4px 8px 4px 4px;border:0;cursor:pointer}
+  .cvform .btn{align-self:flex-start;margin:4px 0;border:0;cursor:pointer}
   .cvform .btn:disabled{opacity:.6;cursor:default;transform:none}
-  .cvmsg{font-family:var(--px);font-size:9px;letter-spacing:.08em;line-height:2;color:var(--yellow);margin:0;min-height:1em}
+  .cvmsg{font-size:13px;font-weight:600;letter-spacing:.02em;line-height:1.6;color:var(--orange);margin:0;min-height:1em}
   .cvform.sent label{display:none}
-  .cvform.sent .cvmsg{color:var(--green)}
-  .btn{display:inline-block;font-family:var(--px);font-size:11px;letter-spacing:.04em;
-    color:var(--bg);background:var(--green);padding:16px 20px;margin:8px 8px 4px;overflow-wrap:anywhere;line-height:1.8;
-    box-shadow:0 -4px 0 0 var(--green),0 4px 0 0 var(--green),-4px 0 0 0 var(--green),4px 0 0 0 var(--green),6px 10px 0 0 #000,10px 6px 0 0 #000,6px 6px 0 0 #000}
-  .btn:hover{color:var(--bg);background:var(--cyan);
-    box-shadow:0 -4px 0 0 var(--cyan),0 4px 0 0 var(--cyan),-4px 0 0 0 var(--cyan),4px 0 0 0 var(--cyan),6px 10px 0 0 #000,10px 6px 0 0 #000,6px 6px 0 0 #000}
-  .btn:active{transform:translate(3px,3px);box-shadow:0 -4px 0 0 var(--cyan),0 4px 0 0 var(--cyan),-4px 0 0 0 var(--cyan),4px 0 0 0 var(--cyan)}
+  .cvform.sent .cvmsg{color:var(--green-dark)}
+  .btn{display:inline-block;font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:0;
+    color:#fff;background:var(--green);padding:14px 24px;margin:0 8px 8px 0;overflow-wrap:anywhere;line-height:1.4;
+    border-radius:999px;text-decoration:none;transition:background .15s ease,transform .1s ease}
+  .btn:hover{color:#fff;background:var(--green-dark)}
+  .btn:active{transform:translateY(1px)}
   /* icon-only contact buttons: big emoji until revealed, then normal text size */
-  .iconbtn{font-size:34px;line-height:1;padding:14px 26px}
-  .iconbtn[data-shown]{font-size:11px;line-height:1.8;padding:16px 20px}
+  .iconbtn{font-size:26px;line-height:1;padding:12px 26px;background:var(--dark)}
+  .iconbtn:hover{background:#000}
+  .iconbtn[data-shown]{font-size:15px;line-height:1.4;padding:14px 24px;background:var(--green)}
+  .iconbtn[data-shown]:hover{background:var(--green-dark)}
 
   footer{
-    margin:34px 4px 0;padding-top:18px;border-top:4px solid var(--line);
-    font-family:var(--px);font-size:9px;color:var(--soft);letter-spacing:.06em;line-height:2.2;
+    margin:30px 4px 0;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;font-weight:500;color:var(--soft);letter-spacing:.04em;line-height:2;
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;
   }
 
@@ -239,101 +228,92 @@
     .js .qcounter{display:inline}
 
     .js .stage{
-      display:block;position:relative;margin:4px 4px 18px;height:clamp(420px,58vh,560px);
-      background:
-        radial-gradient(120% 90% at 50% 0%, rgba(60,188,252,.10), transparent 60%),
-        repeating-linear-gradient(45deg, rgba(255,255,255,.028) 0 6px, transparent 6px 12px),
-        repeating-linear-gradient(-45deg, rgba(0,0,0,.10) 0 6px, transparent 6px 12px),
-        linear-gradient(180deg, var(--grass) 0%, var(--grass2) 100%);
-      overflow:hidden;image-rendering:pixelated;
-      box-shadow:0 -4px 0 0 var(--line),0 4px 0 0 var(--line),-4px 0 0 0 var(--line),4px 0 0 0 var(--line);
+      display:block;position:relative;margin:0 0 16px;height:clamp(420px,58vh,560px);
+      background:var(--card);
+      background-image:radial-gradient(var(--line) 1px, transparent 1.2px);
+      background-size:22px 22px;
+      border-radius:var(--radius);overflow:hidden;
     }
-    /* a lake in the corner */
-    .js .lake{position:absolute;right:-30px;bottom:-30px;width:230px;height:150px;
-      background:linear-gradient(180deg,var(--water),#173058);
-      box-shadow:inset 0 6px 0 rgba(60,188,252,.35);
-      transform:rotate(-8deg);border-radius:40% 46% 44% 42%;opacity:.9}
-    .js .lake::after{content:"";position:absolute;inset:14px 20px auto 20px;height:4px;
-      background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 8px,transparent 8px 20px);
-      animation:shimmer 3s linear infinite}
-    @keyframes shimmer{to{background-position:40px 0}}
 
     /* the trail SVG sits under the nodes */
     .js .trail{position:absolute;inset:0;width:100%;height:100%;z-index:1}
-    .js .trail polyline{fill:none;stroke:var(--dirt);stroke-width:2.4;
-      stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.1 4.2}
-    .js .trail .under{stroke:var(--dirt2);stroke-width:4.2;stroke-dasharray:none;opacity:.6}
+    /* non-scaling-stroke: the viewBox is stretched, so without it the dots become ovals */
+    .js .trail polyline{fill:none;stroke:#bdbdbd;stroke-width:3;vector-effect:non-scaling-stroke;
+      stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0 9}
+    .js .trail .under{stroke:var(--card);stroke-width:14;stroke-dasharray:none;opacity:1}
 
     /* nodes */
     .js .node{
       position:absolute;transform:translate(-50%,-50%);z-index:3;
-      display:flex;flex-direction:column;align-items:center;gap:7px;
-      background:none;border:0;cursor:pointer;padding:6px;color:var(--red);
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      background:none;border:0;cursor:pointer;padding:6px;color:var(--soft);font-family:var(--sans);
     }
     .js .node .tile{
-      width:46px;height:46px;display:grid;place-items:center;background:var(--panel);color:inherit;
-      box-shadow:0 -4px 0 0 currentColor,0 4px 0 0 currentColor,-4px 0 0 0 currentColor,4px 0 0 0 currentColor;
+      width:52px;height:52px;display:grid;place-items:center;background:var(--card);color:inherit;
+      border:1.5px solid currentColor;border-radius:14px;
+      box-shadow:0 1px 2px rgba(0,0,0,.04),0 4px 14px rgba(0,0,0,.06);
+      transition:transform .15s ease,box-shadow .15s ease;
     }
     .js .node svg{width:26px;height:26px}
-    .js .node .nlabel{font-family:var(--px);font-size:7px;letter-spacing:.05em;color:var(--ink);
-      background:rgba(13,13,26,.72);padding:3px 5px;white-space:nowrap}
-    .js .node .chk{position:absolute;top:-6px;right:-2px;font-family:var(--px);font-size:9px;color:var(--bg);
-      background:var(--green);padding:2px 3px;display:none}
-    .js .node.visited .chk{display:block}
+    .js .node .nlabel{font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--ink);
+      background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap}
+    .js .node .chk{position:absolute;top:0;right:0;font-size:10px;font-weight:700;color:#fff;
+      background:var(--green);width:18px;height:18px;border-radius:50%;display:none;place-items:center;line-height:1}
+    .js .node.visited .chk{display:grid}
 
-    /* A tile's colour IS its visit state: red = not been there, yellow = standing on it,
+    /* A tile's colour IS its visit state: grey = not been there, orange = standing on it,
        green = been and left. `.sel` comes after `.visited` on purpose — walking back onto a
        cleared node should read as "here", not "done". */
     .js .node.visited{color:var(--green)}
-    .js .node.sel{color:var(--yellow)}
-    .js .node:hover .tile,.js .node.sel .tile{transform:translateY(-3px)}
-    .js .node.sel .tile{box-shadow:0 -4px 0 0 currentColor,0 4px 0 0 currentColor,-4px 0 0 0 currentColor,4px 0 0 0 currentColor,0 0 0 2px rgba(247,213,29,.35)}
+    .js .node.sel{color:var(--orange)}
+    .js .node:hover .tile,.js .node.sel .tile{transform:translateY(-3px);box-shadow:0 2px 4px rgba(0,0,0,.05),0 10px 24px rgba(0,0,0,.10)}
+    .js .node.sel .tile{box-shadow:0 0 0 4px rgba(255,130,0,.18),0 10px 24px rgba(0,0,0,.10)}
 
     /* the hero walks to the selected node */
     .js .hero{position:absolute;left:12%;top:44%;z-index:4;transform:translate(-50%,-118%);
       transition:left .34s steps(7),top .34s steps(7);pointer-events:none;width:34px;height:34px}
-    .js .hero svg{width:100%;height:100%;animation:bob 1s steps(2) infinite}
+    .js .hero svg{width:100%;height:100%;animation:bob 1s steps(2) infinite;image-rendering:pixelated}
     .js .hero::after{content:"▼";position:absolute;left:50%;top:-16px;transform:translateX(-50%);
-      font-family:var(--px);font-size:10px;color:var(--yellow);animation:point .9s steps(2) infinite}
+      font-size:10px;color:var(--orange);animation:point .9s steps(2) infinite}
     @keyframes bob{50%{transform:translateY(-2px)}}
     @keyframes point{50%{transform:translateX(-50%) translateY(3px)}}
 
     .js .hint{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;
-      font-family:var(--px);font-size:8px;color:var(--soft);letter-spacing:.06em;margin:0 4px 8px}
-    .js .hint b{color:var(--cyan);font-weight:400}
+      font-size:12px;font-weight:500;color:var(--soft);letter-spacing:.04em;margin:0 0 12px}
+    .js .hint b{color:var(--ink);font-weight:700;background:var(--card);border:1px solid var(--line);
+      border-radius:6px;padding:1px 7px;font-size:11px}
 
     /* modal */
     .js .overlay{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:24px;
-      background:rgba(5,5,12,.74)}
+      background:rgba(0,0,0,.45)}
     .js .overlay.open{display:grid}
-    .js .window{position:relative;width:100%;max-width:660px;max-height:84vh;overflow:auto;
-      background:var(--bg);padding:16px;
-      box-shadow:0 -6px 0 0 var(--ink),0 6px 0 0 var(--ink),-6px 0 0 0 var(--ink),6px 0 0 0 var(--ink),0 22px 0 0 rgba(0,0,0,.4)}
+    .js .window{position:relative;width:100%;max-width:680px;max-height:84vh;overflow:auto;
+      background:var(--card);padding:0;border-radius:var(--radius);
+      box-shadow:0 24px 60px rgba(0,0,0,.25)}
     .js .window-body{gap:0}
     .js .quest{margin:0}
-    .js .wclose{display:block;position:absolute;top:14px;right:14px;z-index:2;
-      font-family:var(--px);font-size:11px;color:var(--bg);background:var(--red);border:0;cursor:pointer;
-      padding:8px 10px;line-height:1}
-    .js .wclose:hover{background:var(--yellow)}
+    .js .wclose{display:grid;place-items:center;position:absolute;top:16px;right:16px;z-index:2;
+      font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink);background:var(--bg);border:0;cursor:pointer;
+      padding:8px 14px;border-radius:999px;line-height:1}
+    .js .wclose:hover{background:var(--line)}
     /* in modal, only the opened quest shows */
     .js .quest{display:none}
     .js .quest.is-open{display:block}
     .js footer{display:none}       /* footer only in fallback flow */
     .js .stage-foot{display:flex}
-    .js .progress{display:flex;align-items:center;gap:12px;margin:0 4px 12px}
-    .js .plabel{font-family:var(--px);font-size:8px;color:var(--soft);letter-spacing:.1em}
-    .js .pbar{display:flex;gap:4px;flex:1}
-    .js .pbar .seg{flex:1 1 0;height:16px;background:var(--bg);box-shadow:inset 0 0 0 2px var(--line)}
-    .js .pbar .seg.on{background:var(--green);box-shadow:inset 0 0 0 2px var(--green)}
-    .js .reset{font-family:var(--px);font-size:8px;color:var(--soft);letter-spacing:.08em;
-      background:var(--panel);border:0;cursor:pointer;padding:9px 12px;white-space:nowrap;
-      box-shadow:0 -3px 0 0 var(--line),0 3px 0 0 var(--line),-3px 0 0 0 var(--line),3px 0 0 0 var(--line)}
-    .js .reset:hover{color:var(--yellow)}
-    .js .reset:active{transform:translate(2px,2px)}
+    .js .progress{display:flex;align-items:center;gap:14px;margin:0 0 12px}
+    .js .plabel{font-size:12px;font-weight:600;color:var(--soft);letter-spacing:.08em}
+    .js .pbar{display:flex;gap:5px;flex:1}
+    .js .pbar .seg{flex:1 1 0;height:10px;background:var(--line);border-radius:999px;transition:background .2s ease}
+    .js .pbar .seg.on{background:var(--green)}
+    .js .reset{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--soft);letter-spacing:.04em;
+      background:var(--card);border:1px solid var(--line);cursor:pointer;padding:8px 14px;white-space:nowrap;border-radius:999px}
+    .js .reset:hover{color:var(--ink);border-color:var(--dark)}
+    .js .reset:active{transform:translateY(1px)}
   }
   .stage-foot,.progress{display:none}
   .stage-foot{justify-content:space-between;flex-wrap:wrap;gap:6px 16px;
-    margin:0 4px;font-family:var(--px);font-size:9px;color:var(--soft);letter-spacing:.06em;line-height:2.2}
+    margin:0 4px;font-size:12px;font-weight:500;color:var(--soft);letter-spacing:.04em;line-height:2}
 
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{animation:none !important;transition:none !important}
@@ -355,7 +335,6 @@
     <span><b>◀ ▶</b> MOVE</span><span><b>ENTER</b> OPEN</span><span><b>ESC</b> BACK</span><span>OR CLICK A PLACE</span>
   </div>
   <div class="stage" id="stage" aria-hidden="true">
-    <div class="lake"></div>
     <svg class="trail" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       <polyline class="under" points="12,44 30,22 50,32 70,22 82,52 60,68 33,76"/>
       <polyline points="12,44 30,22 50,32 70,22 82,52 60,68 33,76"/>
@@ -365,14 +344,14 @@
       <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
         <rect x="5" y="2" width="6" height="4" fill="#f0c090"/>
         <rect x="5" y="2" width="6" height="2" fill="#5a3b1a"/>
-        <rect x="4" y="6" width="8" height="5" fill="#92cc41"/>
-        <rect x="4" y="6" width="8" height="1" fill="#e8e8f0"/>
+        <rect x="4" y="6" width="8" height="5" fill="#ff8200"/>
+        <rect x="4" y="6" width="8" height="1" fill="#ffffff"/>
         <rect x="3" y="7" width="1" height="3" fill="#f0c090"/>
         <rect x="12" y="7" width="1" height="3" fill="#f0c090"/>
-        <rect x="5" y="11" width="2" height="3" fill="#2e2e52"/>
-        <rect x="9" y="11" width="2" height="3" fill="#2e2e52"/>
-        <rect x="4" y="14" width="3" height="1" fill="#0d0d1a"/>
-        <rect x="9" y="14" width="3" height="1" fill="#0d0d1a"/>
+        <rect x="5" y="11" width="2" height="3" fill="#212121"/>
+        <rect x="9" y="11" width="2" height="3" fill="#212121"/>
+        <rect x="4" y="14" width="3" height="1" fill="#000000"/>
+        <rect x="9" y="14" width="3" height="1" fill="#000000"/>
       </svg>
     </div>
   </div>
@@ -645,12 +624,12 @@
   ];
   var ICONS = {
     flag:"<rect x='4' y='2' width='2' height='12'/><rect x='6' y='2' width='7' height='5'/>",
-    book:"<rect x='3' y='3' width='10' height='11'/><rect x='5' y='6' width='6' height='1' fill='#16162a'/><rect x='5' y='8' width='6' height='1' fill='#16162a'/><rect x='5' y='10' width='4' height='1' fill='#16162a'/>",
-    building:"<rect x='3' y='3' width='10' height='11'/><g fill='#16162a'><rect x='5' y='5' width='2' height='2'/><rect x='9' y='5' width='2' height='2'/><rect x='5' y='8' width='2' height='2'/><rect x='9' y='8' width='2' height='2'/><rect x='7' y='11' width='2' height='3'/></g>",
+    book:"<rect x='3' y='3' width='10' height='11'/><rect x='5' y='6' width='6' height='1' fill='#ffffff'/><rect x='5' y='8' width='6' height='1' fill='#ffffff'/><rect x='5' y='10' width='4' height='1' fill='#ffffff'/>",
+    building:"<rect x='3' y='3' width='10' height='11'/><g fill='#ffffff'><rect x='5' y='5' width='2' height='2'/><rect x='9' y='5' width='2' height='2'/><rect x='5' y='8' width='2' height='2'/><rect x='9' y='8' width='2' height='2'/><rect x='7' y='11' width='2' height='3'/></g>",
     hammer:"<rect x='7' y='6' width='2' height='8'/><rect x='3' y='3' width='10' height='3'/><rect x='3' y='3' width='2' height='5'/>",
-    mountain:"<polygon points='1,14 6,4 11,14'/><polygon points='8,14 12,7 15,14'/><polygon points='4.5,8 6,4 7.5,8' fill='#e8e8f0'/>",
+    mountain:"<polygon points='1,14 6,4 11,14'/><polygon points='8,14 12,7 15,14'/><polygon points='4.5,8 6,4 7.5,8' fill='#ffffff'/>",
     trophy:"<rect x='5' y='3' width='6' height='4'/><rect x='3' y='3' width='2' height='2'/><rect x='11' y='3' width='2' height='2'/><rect x='7' y='7' width='2' height='3'/><rect x='4' y='10' width='8' height='2'/>",
-    save:"<rect x='3' y='3' width='10' height='10'/><rect x='6' y='3' width='4' height='3' fill='#16162a'/><rect x='5' y='9' width='6' height='4' fill='#16162a'/>"
+    save:"<rect x='3' y='3' width='10' height='10'/><rect x='6' y='3' width='4' height='3' fill='#ffffff'/><rect x='5' y='9' width='6' height='4' fill='#ffffff'/>"
   };
 
   var stage = document.getElementById("stage");

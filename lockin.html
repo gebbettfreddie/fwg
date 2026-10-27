@@ -5,29 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lock In — 75 to Hyrox</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* Tokens match index.html (flipper.net theme): Inter, light grey page, white rounded cards. */
   :root{
     color-scheme: light;
-    --bg:#f4f5f7;
+    --bg:#f0f0f0;
     --card:#ffffff;
-    --ink:#16181d;
-    --muted:#6b7280;
-    --line:#e6e8ec;
-    --accent:#ff5a1f;
-    --accent-soft:#fff1ea;
+    --ink:#000000;
+    --muted:#686868;
+    --line:#dfdfdf;
+    --accent:#ff8200;
+    --accent-soft:#fff3e6;
     --gold:#f2b705;
-    --good:#16a34a;
-    --good-soft:#e9f7ef;
+    --good:#41c443;
+    --good-soft:#ecf9ed;
     --blue:#2563eb;
-    --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.05);
+    --shadow:none;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;}
   .wrap{max-width:880px;margin:0 auto;padding:20px 18px 56px;}
 
-  .hero{background:var(--ink);color:#fff;border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+  .hero{background:var(--ink);color:#fff;border-radius:24px;padding:22px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
   .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;background:var(--accent);opacity:.18;border-radius:50%;}
   .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#ffd2bf;font-weight:700;margin:0}
   .title{font-size:26px;font-weight:800;margin:6px 0 14px;letter-spacing:-.01em}
@@ -37,15 +41,15 @@
   .heroLbl{font-size:12px;color:#aab0ba;margin-top:6px;letter-spacing:.02em}
   .accentNum{color:var(--accent)}
   .barOuter{height:9px;background:#2a2d34;border-radius:999px;margin-top:16px;overflow:hidden;position:relative;z-index:1}
-  .barInner{height:100%;background:linear-gradient(90deg,var(--accent),#ff8a4f);border-radius:999px;width:0%}
+  .barInner{height:100%;background:var(--accent);border-radius:999px;width:0%}
 
   .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
   .card .n{font-size:24px;font-weight:800;letter-spacing:-.01em}
   .card .l{font-size:11.5px;color:var(--muted);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
   .flame{color:var(--accent)}
 
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin-top:16px;padding:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);margin-top:16px;padding:18px}
   .panelHd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
   .panelHd h2{font-size:15px;margin:0;font-weight:800;letter-spacing:.01em}
   .panelHd .sub{font-size:12.5px;color:var(--muted);font-weight:600}
@@ -63,7 +67,7 @@
   .itxt{flex:1;min-width:0}
   .itxt .h{font-size:14.5px;font-weight:700}
   .itxt .s{font-size:12px;color:var(--muted);margin-top:1px}
-  .item.done .itxt .h{color:#137a36}
+  .item.done .itxt .h{color:#056f4b}
   .emoji{font-size:18px;width:24px;text-align:center;flex:0 0 auto}
   .callsBox{display:flex;align-items:center;gap:6px}
   .callsBox input{width:54px;padding:5px 6px;border:1px solid var(--line);border-radius:8px;font-size:13px;text-align:center;font-weight:700;color:var(--ink)}
