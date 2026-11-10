@@ -586,9 +586,13 @@
       btn.disabled = false; btn.textContent = IDLE;
       tell("DIDN'T SEND — EMAIL ME INSTEAD ↓");
     }
+    // The "Send CV" link in the notification email opens apps-script/send-cv.gs, which only
+    // Freddie can run (deployed by bin/send-cv-deploy.sh; the URL survives redeploys).
+    var SEND_CV_URL = "https://script.google.com/macros/s/AKfycbz5nDILH0WBVCQ9uyM5Hjc9tLkl4vU7CLmXewsW99bLvEnmTUKFlDFM0sP6P_n8g4nc/exec";
     function payload(){
       var data = Object.fromEntries(new FormData(form));
       delete data.redirect;                        // only for the no-JS path
+      if(SEND_CV_URL) data["Send CV"] = SEND_CV_URL + "?to=" + encodeURIComponent(data.email || "");
       return JSON.stringify(data);
     }
 

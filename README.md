@@ -101,3 +101,13 @@ still does.
 ## Publishing
 
 Push `main` — GitHub Pages serves it. `CNAME` holds the domain.
+
+## The "Send CV" link
+
+Each CV-request email carries a **Send CV** link (added by the form script when `SEND_CV_URL` in
+`index.html` is set). It opens `apps-script/send-cv.gs`, a web app in the personal Google account,
+deployed *Execute as: Me · Who has access: Only myself* — nobody else can run it. The page confirms
+the address (and warns if it was already sent), and the button emails the CV PDF it carries.
+
+After `npm run gen` re-prints the PDF, run `bin/send-cv-deploy.sh` (needs `clasp login` once) — it
+pushes the new PDF into the same deployment, so the link never changes.
