@@ -3,7 +3,8 @@
 
   "name": "Freddie Gebbett",
   "headline": "Ops generalist at Lawhive, one of the UK's fastest-growing AI startups, with a top-of-team sales record behind me. I run the office, the events and the partnerships, and I pick up whatever doesn't have an owner yet. Looking for a founders or ops associate role at a seed or Series A startup. More at fwg.fyi.",
-  "location": "United Kingdom",
+  "location": "London, UK",
+  "skills": ["Operations", "Partnerships & supplier negotiation", "Event management", "Employee benefits", "B2B sales & outbound", "Stakeholder management", "AI automation (n8n)", "Building internal tools"],
 
   "contact": {
     "telB64": "KzQ0NzM3NjM1NzcyMA==",
@@ -29,8 +30,8 @@
         "Led our office move and negotiated the deal: 17% off list price and a 2-year fixed term instead of the 5 years on the table.",
         "Built our benefits package from a blank page and got it signed off by the board: private medical, dental, pension, cycle-to-work and nursery. Ran the private medical tender with a broker across Bupa, AXA and Vitality, and negotiated a 2-year platform fee waiver with Kota, our benefits provider.",
         "Learned insurance broking and salary sacrifice from scratch to do it. A global benefits lead at a 1,500-person company assumed I'd been doing it for years.",
-        "Ran Lawhive's AI hackathon for 100 people on making the law more accessible, partnering with GV, Balderton, Lovable and Anthropic.",
-        "Built our office hub app myself (seating, room displays, signage, team requests) and automated the repeat admin with n8n."
+        "Ran Lawhive's AI hackathon for 100 people on making the law more accessible. Did the sponsor outreach myself and ran those conversations through to a yes: GV, Balderton, Lovable and Anthropic all sponsored.",
+        "Built our office hub myself, with 90+ releases this year and no engineer, to get the team using the office together: a question of the day on the office screens, a vote on which beer we order next, a shared playlist anyone can add to, plus aircon and 3D print requests. Automated the repeat admin with n8n."
       ]
     },
     {

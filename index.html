@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Freddie Gebbett — fwg.fyi</title>
-<meta name="description" content="Freddie Gebbett — operations & engagement at Lawhive, putting AI to work everywhere, building Inkly, fitness enthusiast. London.">
+<title>Freddie Gebbett | fwg.fyi</title>
+<meta name="description" content="Freddie Gebbett: operations & engagement at Lawhive, putting AI to work everywhere, building Inkly, fitness enthusiast. London.">
 <meta name="theme-color" content="#f0f0f0">
 
 <!-- Open Graph (for nice link previews) -->
@@ -380,9 +380,9 @@
 
         <section class="quest" id="q-start" data-node="1" aria-labelledby="t-start">
           <h2 class="qtitle" id="t-start"><span class="qtag yellow">START HERE</span> Welcome</h2>
-          <p class="lead">Congratulations — you made it this far! I built this so you could get to know me a little, instead of reading yet another CV.</p>
+          <p class="lead">Congratulations, you made it this far! I built this so you could get to know me a little, instead of reading yet another CV.</p>
           <p class="lead">I'm Freddie: I run operations at a legal-tech company, build things on the side, and I've gone all-in on AI over the last year. (This map is a small demo of that.)</p>
-          <p class="lead">Have a wander — six more signposts to explore:</p>
+          <p class="lead">Have a wander: six more signposts to explore:</p>
           <ul class="sheet">
             <li>THE JOURNEY · <b>MY BACKGROUND</b></li>
             <li>THE OFFICE · <b>MY DAY JOB</b></li>
@@ -391,14 +391,14 @@
             <li>REVIEWS · <b>WORDS FROM MY TEAM</b></li>
             <li>SAVE POINT · <b>HOW TO REACH ME</b></li>
           </ul>
-          <p class="lead">On the map, move with the arrow keys or click a signpost — Enter opens a place, Esc heads back. Clear all seven to finish the map.</p>
+          <p class="lead">On the map, move with the arrow keys or click a signpost. Enter opens a place, Esc heads back. Clear all seven to finish the map.</p>
         </section>
 
         <section class="quest" id="q-journey" data-node="2" aria-labelledby="t-journey">
           <h2 class="qtitle" id="t-journey"><span class="qtag">THE JOURNEY</span> Background</h2>
           <p class="path">KITCHEN <span class="arw" aria-hidden="true">▸</span> SALES <span class="arw" aria-hidden="true">▸</span> OPERATIONS <span class="arw" aria-hidden="true">▸</span> <b>OWNERSHIP</b></p>
-          <p class="lead">My path here wasn't a straight line — and I think that's the point.</p>
-          <p class="lead">I started out as a chef in professional kitchens. Somewhere along the way I realised what I really wanted: to run my own business one day. That sent me looking for a way into the corporate world, and I picked sales as the way in — there's no better school for learning to convey the real worth of a product, on the phone or in person.</p>
+          <p class="lead">My path here wasn't a straight line, and I think that's the point.</p>
+          <p class="lead">I started out as a chef in professional kitchens. Somewhere along the way I realised what I really wanted: to run my own business one day. That sent me looking for a way into the corporate world, and I picked sales as the way in. There's no better school for learning to convey the real worth of a product, on the phone or in person.</p>
           <p class="lead">After about eighteen months in sales I moved into my current role, which has given me real exposure to the operations side of a business.</p>
           <p class="lead">Now I'm after ownership: I want to run projects end to end, be directly accountable, and help drive the growth of a startup I believe in.</p>
         </section>
@@ -406,7 +406,7 @@
         <section class="quest" id="q-office" data-node="3" aria-labelledby="t-office">
           <h2 class="qtitle" id="t-office"><span class="qtag">MAIN QUEST</span> The Office</h2>
           <!-- gen:office · from data/profile.json — run `node bin/gen.mjs`; do not hand-edit -->
-          <p class="lead"><b>Office &amp; Engagement Manager at <a class="link" href="https://lawhive.co.uk">Lawhive</a></b> — I keep a fast-moving legal-tech team running and the culture sharp: operations, the office, and the day-to-day that lets everyone do their best work.</p>
+          <p class="lead"><b>Office &amp; Engagement Manager at <a class="link" href="https://lawhive.co.uk">Lawhive</a></b>. I keep a fast-moving legal-tech team running and the culture sharp: operations, the office, and the day-to-day that lets everyone do their best work.</p>
           <!-- /gen -->
         </section>
 
@@ -432,8 +432,8 @@
 
         <section class="quest" id="q-training" data-node="4" aria-labelledby="t-training">
           <h2 class="qtitle" id="t-training"><span class="qtag">TRAINING GROUNDS</span> Fitness</h2>
-          <p class="lead">I'm properly into my fitness now — I wasn't always. As I've got older I've found that staying fit and doing hard things spills over into everything else; it keeps reminding me I'm more capable than I think.</p>
-          <p class="lead">Football 2–3 times a week, running that crept up on me over the last few years, and I've finally caved and signed up for my first Hyrox (I promise I'm not the stereotype). Just bought a bike too — so an Ironman's only a matter of time.</p>
+          <p class="lead">I'm properly into my fitness now. I wasn't always. As I've got older I've found that staying fit and doing hard things spills over into everything else; it keeps reminding me I'm more capable than I think.</p>
+          <p class="lead">Football 2-3 times a week, running that crept up on me over the last few years, and I've finally caved and signed up for my first Hyrox (I promise I'm not the stereotype). Just bought a bike too, so an Ironman's only a matter of time.</p>
           <p class="lead">Here's my 2026, checkpoint by checkpoint:</p>
           <!-- Year tracker: JS sets the fill live; the ticks below are generated from race dates. -->
           <div class="xp">
@@ -584,7 +584,7 @@
     function tell(text){ msg.textContent = text; msg.focus(); }
     function failed(){
       btn.disabled = false; btn.textContent = IDLE;
-      tell("DIDN'T SEND — EMAIL ME INSTEAD ↓");
+      tell("DIDN'T SEND. EMAIL ME INSTEAD ↓");
     }
     // The "Send CV" link in the notification email opens apps-script/send-cv.gs, which only
     // Freddie can run (deployed by bin/send-cv-deploy.sh; the URL survives redeploys).
@@ -610,7 +610,7 @@
           if(!res.success) return Promise.reject(res);
           form.classList.add("sent");
           btn.textContent = "SENT";
-          tell("GOT IT — I'LL SEND IT OVER.");
+          tell("GOT IT, I'LL SEND IT OVER.");
         })
         .catch(failed);
     });

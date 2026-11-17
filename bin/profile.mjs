@@ -21,7 +21,7 @@ import { readFileSync } from "node:fs"
  *
  * @typedef {{ name: string, headline: string, location: string, contact: Contact, links: Link[],
  *             roles: Role[], builds: Build[], races: Race[], credentials: Credential[],
- *             highlights: Highlight[] }} ProfileData
+ *             highlights: Highlight[], skills: string[] }} ProfileData
  */
 
 export class ProfileInvalid extends Error {
@@ -147,6 +147,7 @@ export const Profile = {
       roles,
       builds,
       races,
+      skills: list(raw.skills ?? [], "skills").map((skill, i) => text(skill, `skills[${i}]`)),
     })
   },
 

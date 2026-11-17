@@ -68,7 +68,7 @@ test("the office line names the current role and links the employer", () => {
 
   assert.equal(
     Render.officeLine(role),
-    `<p class="lead"><b>Office &amp; Engagement Manager at <a class="link" href="https://lawhive.co.uk">Lawhive</a></b> — I keep a fast-moving legal-tech team running.</p>`,
+    `<p class="lead"><b>Office &amp; Engagement Manager at <a class="link" href="https://lawhive.co.uk">Lawhive</a></b>. I keep a fast-moving legal-tech team running.</p>`,
   )
 })
 
@@ -106,4 +106,18 @@ test("a save-point row names the destination and says what it is", () => {
       `</a>`,
     ].join("\n"),
   )
+})
+
+test("the CV's profile section lists skills on their own line under the headline", () => {
+  assert.equal(
+    Render.cvHeadline({ headline: "Ops generalist. More at fwg.fyi.", skills: ["Operations", "Partnerships & supplier negotiation"] }),
+    [
+      `<p class="lead">Ops generalist. More at <a href="https://fwg.fyi"><b>fwg.fyi</b></a>.</p>`,
+      `<p class="lead skills"><b>Skills:</b> Operations · Partnerships &amp; supplier negotiation</p>`,
+    ].join("\n"),
+  )
+})
+
+test("a profile with no skills renders the headline alone", () => {
+  assert.equal(Render.cvHeadline({ headline: "Ops generalist.", skills: [] }), `<p class="lead">Ops generalist.</p>`)
 })

@@ -77,7 +77,7 @@ export const Render = {
       ? `<a class="link" href="${role.orgHref}">${escape(role.org)}</a>`
       : escape(role.org)
 
-    return `<p class="lead"><b>${escape(role.title)} at ${employer}</b> — ${escape(role.siteBlurb ?? "")}</p>`
+    return `<p class="lead"><b>${escape(role.title)} at ${employer}</b>. ${escape(role.siteBlurb ?? "")}</p>`
   },
 
   /**
@@ -145,11 +145,16 @@ export const Render = {
   /**
    * The CV's PROFILE line. The one place the CV points back at the map.
    *
-   * @param {Pick<import("./profile.mjs").ProfileData, "headline">} profile
+   * Skills follow on their own line, for the keyword scanners as much as the reader.
+   *
+   * @param {Pick<import("./profile.mjs").ProfileData, "headline" | "skills">} profile
    * @returns {string}
    */
-  cvHeadline({ headline }) {
-    return `<p class="lead">${escape(headline).replace("fwg.fyi", `<a href="https://fwg.fyi"><b>fwg.fyi</b></a>`)}</p>`
+  cvHeadline({ headline, skills }) {
+    const lead = `<p class="lead">${escape(headline).replace("fwg.fyi", `<a href="https://fwg.fyi"><b>fwg.fyi</b></a>`)}</p>`
+    if (skills.length === 0) return lead
+
+    return [lead, `<p class="lead skills"><b>Skills:</b> ${skills.map(escape).join(" · ")}</p>`].join("\n")
   },
 
   /**
