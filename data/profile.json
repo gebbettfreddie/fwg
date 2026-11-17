@@ -2,7 +2,7 @@
   "_": "The single source of truth for fwg.fyi and the CV. Edit here, then run: node bin/gen.mjs",
 
   "name": "Freddie Gebbett",
-  "headline": "Ops generalist at a fast-growing AI startup, with a top-of-team sales record behind it. I take the problem nobody owns yet and ship it: a benefits package built from scratch for board sign-off, ops automated end to end, a side venture taken from zero to 10+ paying customers. Looking for a founders / ops associate seat at seed or Series A. More at fwg.fyi.",
+  "headline": "Ops generalist at a fast-growing AI startup, with a top-of-team sales and partnerships record behind it. I take the problem nobody owns yet and ship it: a benefits package built from scratch with five provider partners for board sign-off, ops automated end to end, a side venture taken from zero to 10+ paying customers. Looking for a founders / ops associate seat at seed or Series A. More at fwg.fyi.",
   "location": "United Kingdom",
 
   "contact": {
@@ -25,8 +25,8 @@
       "end": null,
       "siteBlurb": "I keep a fast-moving legal-tech team running and the culture sharp: operations, the office, and the day-to-day that lets everyone do their best work.",
       "bullets": [
-        "Own operations end to end at one of the UK's fastest-growing AI startups — office, vendors, events, internal tooling and the recurring workflows that keep the team shipping — as the person who picks up whatever has no owner yet.",
-        "Built the company's employee benefits package from a blank page and took it to the board — private medical, dental, pension, cycle-to-work and nursery — benchmarking the market, negotiating every provider and securing zero platform fees for the first two years.",
+        "Own operations end to end at one of the UK's fastest-growing AI startups — office, vendor and supplier relationships, events, internal tooling and the recurring workflows that keep the team shipping — as the person who picks up whatever has no owner yet.",
+        "Built the company's employee benefits package from a blank page and took it to the board — sourced, benchmarked and negotiated provider partnerships across private medical, dental, pension, cycle-to-work and nursery, securing zero platform fees for the first two years.",
         "Learned insurance broking and salary-sacrifice mechanics from scratch to do it; the global benefits lead at a 1,500-person company who pressure-tested the design assumed I had years in the field.",
         "Automated the recurring operational work with AI and n8n so the role runs on systems rather than my calendar, and the freed time goes to the next unowned problem.",
         "Build small internal tools myself when buying one is overkill — an office hub for seating and desk requests, automated office signage — using AI-assisted development."
@@ -51,8 +51,8 @@
       "end": "2025-09-01",
       "bullets": [
         "First job out of university: 150% of call quota, 133% of meeting quota, MVP award three months running.",
-        "Built an email outreach strategy with the MD targeting accountant partners, lifting engagement by 15% — the first time I designed a process rather than ran one.",
-        "Set the company record for accountant meetings booked and attended in a month (7 of 8), 113% over quota."
+        "Worked with the MD on the accountant-partner channel — designed the email outreach strategy to accountant partners, lifting engagement by 15% — the first time I designed a process rather than ran one.",
+        "Set the company record for accountant-partner meetings booked and attended in a month (7 of 8), 113% over quota."
       ]
     }
   ],
@@ -103,6 +103,7 @@
   ],
 
   "highlights": [
+    { "text": "Always taken things apart to see how they work — at 12 I bought a broken petrol RC car, stripped the engine, found a gummed-up carburettor, cleaned it and put it back together running" },
     { "text": "Captain, Holt Devs Football Team (2024)" },
     { "text": "Senior Non-Commissioned Officer (Army), CCF at Gresham's School" },
     { "text": "1st place, Pitch Deck Presentation — Final-Year Business & Innovation Module, University of Reading" },
