@@ -2,9 +2,9 @@
   "_": "The single source of truth for fwg.fyi and the CV. Edit here, then run: node bin/gen.mjs",
 
   "name": "Freddie Gebbett",
-  "headline": "Ops generalist at Lawhive, one of the UK's fastest-growing AI startups, with a top-of-team sales record behind me. I run the office, the events and the partnerships, and I pick up whatever doesn't have an owner yet. Looking for a founders or ops associate role at a seed or Series A startup. More at fwg.fyi.",
+  "headline": "Ops generalist at Lawhive, one of the UK's fastest-growing AI startups, with a top-of-team B2B sales record behind me. I run operations, events and partnerships, and I pick up whatever doesn't have an owner yet. Looking for a founders or ops associate role at a seed or Series A startup. More at fwg.fyi.",
   "location": "London, UK",
-  "skills": ["Operations", "Partnerships & supplier negotiation", "Event management", "Employee benefits", "B2B sales & outbound", "Stakeholder management", "AI automation (n8n)", "Building internal tools"],
+  "skills": ["Operations", "Project management", "Partnerships & supplier negotiation", "Go-to-market (GTM)", "B2B sales & pipeline", "Spreadsheet modelling", "Budgets & contracts", "Hiring & onboarding", "Event management", "Market research", "AI automation (n8n, Claude)", "Notion", "Building internal tools"],
 
   "contact": {
     "telB64": "KzQ0NzM3NjM1NzcyMA==",
@@ -21,17 +21,17 @@
     {
       "org": "Lawhive",
       "orgHref": "https://lawhive.co.uk",
-      "title": "Office & Engagement Manager",
+      "title": "Office & Engagement Manager (Operations)",
       "start": "2026-02-01",
       "end": null,
       "siteBlurb": "I keep a fast-moving legal-tech team running and the culture sharp: operations, the office, and the day-to-day that lets everyone do their best work.",
       "bullets": [
-        "Run the London office and everything around it: suppliers, events, partnerships and the tools the team uses every day. Started the company run club along the way.",
-        "Led our office move and negotiated the deal: 17% off list price and a 2-year fixed term instead of the 5 years on the table.",
-        "Built our benefits package from a blank page and got it signed off by the board: private medical, dental, pension, cycle-to-work and nursery. Ran the private medical tender with a broker across Bupa, AXA and Vitality, and negotiated a 2-year platform fee waiver with Kota, our benefits provider.",
-        "Learned insurance broking and salary sacrifice from scratch to do it. A global benefits lead at a 1,500-person company assumed I'd been doing it for years.",
-        "Ran Lawhive's AI hackathon for 100 people on making the law more accessible. Did the sponsor outreach myself and ran those conversations through to a yes: GV, Balderton, Lovable and Anthropic all sponsored.",
-        "Built our office hub myself, with 90+ releases this year and no engineer, to get the team using the office together: a question of the day on the office screens, a vote on which beer we order next, a shared playlist anyone can add to, plus aircon and 3D print requests. Automated the repeat admin with n8n."
+        "Own operations at one of the UK's fastest-growing AI startups: the office, suppliers, budgets, invoices and expenses, contracts, events and partnerships. Started the company run club along the way.",
+        "Ran the office move as a project from start to finish: scoped it, ran the supplier process, reviewed the lease and negotiated 17% off list price and a 2-year fixed term instead of the 5 years on the table.",
+        "Built our benefits package from a blank page, learning broking and salary sacrifice from scratch: modelled the costs, ran the private medical tender across Bupa, AXA and Vitality, negotiated a 2-year platform fee waiver with Kota, and wrote the board proposal that got it approved. Set up salary sacrifice with payroll, wrote the policies and handled the confidential salary and medical data.",
+        "Support hiring: screen candidates, coordinate interviews and onboard new joiners.",
+        "Ran Lawhive's AI hackathon for 100 people from start to finish, on making the law more accessible. Did the sponsor outreach myself and ran those conversations through to a yes: GV, Balderton, Lovable and Anthropic all sponsored.",
+        "Built our office hub myself (90+ releases, no engineer) to get the team using the office together: a question of the day on the office screens, a beer vote, a shared playlist, aircon and 3D print requests. Automated the repeat admin with n8n and Claude, and documented the processes."
       ]
     },
     {
@@ -41,8 +41,8 @@
       "end": "2026-02-01",
       "mode": "Remote",
       "bullets": [
-        "Hired to book meetings; moved into closing within three months: 21% close rate and the highest closed MRR on the team.",
-        "Highest meeting volume on the team every month across UK & Ireland, 10-15 booked a week on domestic solar and heat-pump leads.",
+        "Hired to book meetings, moved into full-cycle B2B sales within three months: 21% close rate, top closed MRR on the team.",
+        "Top meeting volume every month across UK & Ireland (10-15 a week), running my own pipeline in the CRM.",
         "Stepped across to the commercial arm (TNW Energy) to own a full sales cycle: prospected, booked and closed Custom Solar, one of the UK's largest commercial solar installers."
       ]
     },
@@ -53,7 +53,7 @@
       "end": "2025-09-01",
       "bullets": [
         "First job out of university: 150% of call quota, 133% of meeting quota, MVP award three months running.",
-        "Worked with the MD on the accountant-partner channel. Designed the email outreach to accountant partners and lifted engagement by 15%, the first time I designed a process rather than ran one.",
+        "Worked with the MD on the accountant-partner channel. Designed a new outbound email process to accountant partners and lifted engagement by 15%, the first time I designed a process rather than ran one.",
         "Set the company record for accountant-partner meetings booked and attended in a month (7 of 8), 113% over quota."
       ]
     }
@@ -67,8 +67,7 @@
       "blurb": "One booking link for tattoo artists: clients see the work, book a piece and pay the deposit up front, so the Instagram-DM admin and the no-shows both disappear.",
       "metrics": [],
       "cvBullets": [
-        "Building one booking link for tattoo artists: a portfolio, booking and deposit-taking flow in one, replacing the Instagram-DM admin that costs artists their evenings and their no-shows.",
-        "Designing and building it solo, end to end: product, payments, brand and front end."
+        "Building one booking link for tattoo artists, solo from product to payments, brand and front end: portfolio, booking and deposits in one, replacing the Instagram-DM admin that costs artists their evenings and their no-shows."
       ]
     },
     {
@@ -84,8 +83,8 @@
         { "n": "100+",   "label": "appointments booked", "note": ", new patients captured while the desk was busy or closed" }
       ],
       "cvBullets": [
-        "Co-founded and ran a three-month AI voice-receptionist venture for UK dental practices with my brother: he built it, I took it to market. 10+ practices onboarded across three London boroughs, 1,000+ patient calls answered, 100+ appointments booked.",
-        "Owned everything outside the code: market research, positioning, brand, website, pricing and all outbound, and learned enough of the stack to hold my own on product calls.",
+        "Co-founded a three-month AI voice-receptionist venture for UK dental practices with my brother: he built it, I took it to market. 10+ practices onboarded across three London boroughs, 1,000+ calls answered, 100+ appointments booked.",
+        "Owned go-to-market: ICP, market and competitor research, positioning, the pricing model, brand, website, all outbound and customer onboarding. Learned enough of the stack to hold my own on product calls.",
         "Called it after three months when the market got crowded. The full story is on fwg.fyi."
       ]
     }
@@ -105,14 +104,10 @@
   ],
 
   "highlights": [
-    { "text": "Always taken things apart to see how they work. At 12 I bought a broken petrol RC car, stripped the engine, found a gummed-up carburettor, cleaned it and put it back together running" },
+    { "text": "Always taken things apart to see how they work: at 12, rebuilt a broken petrol RC car's engine after tracing the fault to a gummed-up carb" },
     { "text": "Captain, Holt Devs Football Team (2024)" },
     { "text": "Senior Non-Commissioned Officer (Army), CCF at Gresham's School" },
     { "text": "1st place, Pitch Deck Presentation, Final-Year Business & Innovation Module, University of Reading" },
-    { "text": "Cert III Commercial Cookery" },
-    { "text": "PADI Advanced Open Water Diver + Search & Recovery Diver" },
-    { "text": "Les Carroz Regional Ski Team" },
-    { "text": "Avid reader of personal-development, business & autobiography books and podcasts" },
-    { "text": "Health & fitness enthusiast, recently completed my first ultra marathon" }
+    { "text": "Ran the London Marathon and my first ultra (Girona) in 2026; London Hyrox next" }
   ]
 }
