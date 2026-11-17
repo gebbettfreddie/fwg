@@ -61,7 +61,7 @@
   "builds": [
     {
       "name": "Inkly",
-      "start": "2026-08-01",
+      "start": "2026-11-01",
       "end": null,
       "blurb": "One booking link for tattoo artists: clients see the work, book a piece and pay the deposit up front, so the Instagram-DM admin and the no-shows both disappear.",
       "metrics": [],
