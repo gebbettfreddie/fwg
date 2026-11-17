@@ -2,9 +2,9 @@
   "_": "The single source of truth for fwg.fyi and the CV. Edit here, then run: node bin/gen.mjs",
 
   "name": "Freddie Gebbett",
-  "headline": "Ops generalist at Lawhive, one of the UK's fastest-growing AI startups, with a top-of-team B2B sales record behind me. I run operations, events and partnerships, and I pick up whatever doesn't have an owner yet. Looking for a founders or ops associate role at a seed or Series A startup. More at fwg.fyi.",
+  "headline": "First-class grad and top-of-team seller who went from booking meetings to closing in 3 months. Now I run operations, events and partnerships at Lawhive, an AI legal startup: £17k a year off the office lease, a £25k fee waiver from Kota, and GV, Balderton, Anthropic and Lovable sponsoring our 100-person hackathon. I build my own tools with Claude Code. Looking for a founders or ops associate role at seed or Series A. More at fwg.fyi.",
   "location": "London, UK",
-  "skills": ["Operations", "Project management", "Partnerships & supplier negotiation", "Go-to-market (GTM)", "B2B sales & pipeline", "Spreadsheet modelling", "Budgets & contracts", "Hiring & onboarding", "Event management", "Market research", "AI automation (n8n, Claude)", "Notion", "Building internal tools"],
+  "skills": ["Operations", "Project management", "Partnerships & supplier negotiation", "Go-to-market (GTM)", "B2B sales & pipeline", "Spreadsheet modelling", "Budgets & contracts", "Hiring & onboarding", "Event management", "Market research", "AI automation (n8n, Claude)", "Notion", "Building internal tools (Claude Code)"],
 
   "contact": {
     "telB64": "KzQ0NzM3NjM1NzcyMA==",
@@ -27,11 +27,11 @@
       "siteBlurb": "I keep a fast-moving legal-tech team running and the culture sharp: operations, the office, and the day-to-day that lets everyone do their best work.",
       "bullets": [
         "Own operations at one of the UK's fastest-growing AI startups: the office, suppliers, budgets, invoices and expenses, contracts, events and partnerships. Started the company run club along the way.",
-        "Ran the office move as a project from start to finish: scoped it, ran the supplier process, reviewed the lease and negotiated 17% off list price and a 2-year fixed term instead of the 5 years on the table.",
-        "Built our benefits package from a blank page, learning broking and salary sacrifice from scratch: modelled the costs, ran the private medical tender across Bupa, AXA and Vitality, negotiated a 2-year platform fee waiver with Kota, and wrote the board proposal that got it approved. Set up salary sacrifice with payroll, wrote the policies and handled the confidential salary and medical data.",
+        "Ran the office move as a project from start to finish: scoped it, ran the supplier process, reviewed the lease and negotiated 17% off list price (£17k a year saved) and a 2-year fixed term instead of the 5 years on the table.",
+        "Built our benefits package from a blank page, learning broking and salary sacrifice from scratch: modelled the costs, ran the private medical tender across Bupa, AXA and Vitality, got Kota to waive its platform fee for 2 years (£25k), and wrote the board proposal that got it approved. Set up salary sacrifice with payroll, wrote the policies and handled confidential medical data.",
         "Support hiring: screen candidates, coordinate interviews and onboard new joiners.",
-        "Ran Lawhive's AI hackathon for 100 people from start to finish, on making the law more accessible. Did the sponsor outreach myself and ran those conversations through to a yes: GV, Balderton, Lovable and Anthropic all sponsored.",
-        "Built our office hub myself (90+ releases, no engineer) to get the team using the office together: a question of the day on the office screens, a beer vote, a shared playlist, aircon and 3D print requests. Automated the repeat admin with n8n and Claude, and documented the processes."
+        "Ran Lawhive's AI hackathon for 100 people from start to finish, on making the law more accessible. Did the sponsor outreach myself and ran those conversations through to a yes: GV, Balderton, Lovable and Anthropic all sponsored, putting up a five-figure prize pool plus merch.",
+        "Built our office hub myself with Claude Code (90+ releases, no engineer) to get the team using the office together: a question of the day on the office screens, a beer vote, a shared playlist, aircon and 3D print requests. Automated the repeat admin with n8n and Claude, and documented the processes."
       ]
     },
     {
@@ -67,7 +67,7 @@
       "blurb": "One booking link for tattoo artists: clients see the work, book a piece and pay the deposit up front, so the Instagram-DM admin and the no-shows both disappear.",
       "metrics": [],
       "cvBullets": [
-        "Building one booking link for tattoo artists, solo from product to payments, brand and front end: portfolio, booking and deposits in one, replacing the Instagram-DM admin that costs artists their evenings and their no-shows."
+        "Building one booking link for tattoo artists, solo with Claude Code, from product to payments, brand and front end: portfolio, booking and deposits in one, replacing the Instagram-DM admin that costs artists their evenings and no-shows."
       ]
     },
     {
@@ -108,6 +108,6 @@
     { "text": "Captain, Holt Devs Football Team (2024)" },
     { "text": "Senior Non-Commissioned Officer (Army), CCF at Gresham's School" },
     { "text": "1st place, Pitch Deck Presentation, Final-Year Business & Innovation Module, University of Reading" },
-    { "text": "Ran the London Marathon and my first ultra (Girona) in 2026; London Hyrox next" }
+    { "text": "London Marathon and my first ultra in 2026; Hyrox next" }
   ]
 }
