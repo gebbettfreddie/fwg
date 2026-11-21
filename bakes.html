@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saved Bakes | fwg.fyi</title>
+<meta name="description" content="Seven baking reels from my Instagram saves, written up as recipes in grams, each with a batch slider.">
+<meta property="og:title" content="Saved Bakes">
+<meta property="og:description" content="Seven saved baking reels, written up as recipes in grams, each with a batch slider.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fwg.fyi/bakes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  body { margin: 0; }
+  img { max-width: 100%; }
+  /* Layout: a baker's docket, ivory paper, stamp-red accents, gram weights set like a formula sheet */
+  :root {
+    --paper: #f2efe8;
+    --card: #faf8f3;
+    --ink: #272320;
+    --soft: #6f675c;
+    --line: #ddd6c8;
+    --accent: #8f2d3b;      /* jam red, used as a stamp */
+    --accent-soft: #f0e4e2;
+    --shadow: 0 1px 0 rgba(39,35,32,.04), 0 10px 30px -18px rgba(39,35,32,.35);
+    --disp: "Fraunces", Georgia, serif;
+    --body: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #16130f;
+      --card: #201b16;
+      --ink: #ece4d6;
+      --soft: #a39986;
+      --line: #342d24;
+      --accent: #e08a7e;
+      --accent-soft: #2e201d;
+      --shadow: 0 1px 0 rgba(0,0,0,.2), 0 14px 34px -20px rgba(0,0,0,.8);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #16130f;
+    --card: #201b16;
+    --ink: #ece4d6;
+    --soft: #a39986;
+    --line: #342d24;
+    --accent: #e08a7e;
+    --accent-soft: #2e201d;
+    --shadow: 0 1px 0 rgba(0,0,0,.2), 0 14px 34px -20px rgba(0,0,0,.8);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--body); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 920px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0; }
+
+  /* ---- Masthead ---- */
+  header { padding-block: 2.8rem 1.4rem; }
+  .eyebrow { font-family: var(--mono); font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin: 0 0 .9rem; }
+  h1 { font-family: var(--disp); font-weight: 600; font-size: clamp(2.6rem, 8vw, 4.6rem); line-height: .95; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+  h1 em { font-style: italic; font-weight: 400; }
+  .lede { max-width: 56ch; margin: 1.1rem 0 0; color: var(--soft); font-size: 1.02rem; }
+  .meta-line { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; margin-top: 1.3rem; font-family: var(--mono); font-size: .76rem; letter-spacing: .04em; color: var(--soft); }
+  .meta-line b { color: var(--ink); font-weight: 600; }
+
+  /* ---- Filter bar ---- */
+  .filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(8px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 1.6rem; }
+  .filters .wrap { display: flex; flex-wrap: wrap; gap: .5rem; padding-block: .7rem; }
+  .chip { font-family: var(--mono); font-size: .76rem; letter-spacing: .04em; color: var(--soft); background: none; border: 1px solid var(--line); border-radius: 999px; padding: .34rem .8rem; cursor: pointer; transition: .15s; }
+  .chip:hover { color: var(--ink); border-color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .chip[aria-pressed="true"] { color: #1a1510; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chip[aria-pressed="true"] { color: #1a1510; } }
+  .chip .ct { opacity: .6; }
+
+  /* ---- Recipe grid ---- */
+  main { padding-block: 1.8rem 4rem; display: grid; gap: 1.4rem; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .card-head { padding: 1.5rem 1.5rem 1.2rem; border-bottom: 1px dashed var(--line); }
+  .kicker { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; font-family: var(--mono); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: .7rem; }
+  .kicker .num { color: var(--soft); }
+  .tag-badge { border: 1px solid var(--line); border-radius: 999px; padding: .1rem .5rem; color: var(--soft); letter-spacing: .1em; }
+  .card h2 { font-family: var(--disp); font-weight: 600; font-size: clamp(1.7rem, 4.6vw, 2.3rem); line-height: 1.02; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+  .byline { margin: .6rem 0 0; font-size: .92rem; color: var(--soft); }
+  .byline a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+  .byline a:hover { border-bottom-color: var(--accent); }
+  .facts { display: flex; flex-wrap: wrap; gap: .35rem 1.3rem; margin-top: 1rem; font-family: var(--mono); font-size: .76rem; color: var(--soft); }
+  .facts span b { color: var(--ink); font-weight: 600; }
+
+  /* ---- Batch slider ---- */
+  .batch { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .85rem 1.5rem; background: var(--accent-soft); border-bottom: 1px dashed var(--line); }
+  .batch label { font-family: var(--mono); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .batch input[type="range"] { flex: 1 1 150px; min-width: 120px; accent-color: var(--accent); height: 1.5rem; cursor: pointer; }
+  .batch .read { font-family: var(--mono); font-size: .82rem; color: var(--soft); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .batch .read .mult { color: var(--ink); font-weight: 600; }
+  .batch .read .yield { color: var(--accent); }
+
+  .card-body { padding: 1.3rem 1.5rem 1.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 2.2rem; }
+  @media (max-width: 640px) { .card-body { grid-template-columns: 1fr; } }
+  .col-ing { min-width: 0; }
+  .col-method { min-width: 0; }
+
+  .sec-label { font-family: var(--mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--soft); margin: 0 0 .7rem; padding-bottom: .4rem; border-bottom: 1px solid var(--line); }
+  .sub + .sub { margin-top: 1.2rem; }
+  .sub-name { font-family: var(--disp); font-style: italic; font-size: 1.05rem; margin: 0 0 .5rem; color: var(--ink); }
+
+  ul.ings { list-style: none; margin: 0; padding: 0; }
+  ul.ings li { display: flex; align-items: baseline; gap: .4rem; padding: .18rem 0; }
+  ul.ings .n { min-width: 0; }
+  ul.ings .lead { flex: 1 1 auto; border-bottom: 1px dotted var(--line); transform: translateY(-.28em); min-width: 12px; }
+  ul.ings .a { font-family: var(--mono); font-size: .86rem; white-space: nowrap; color: var(--ink); font-variant-numeric: tabular-nums; }
+  ul.ings .a .dry { color: var(--soft); font-size: .82em; }
+  ul.ings li.no-amt .lead { display: none; }
+  ul.ings li.no-amt .n { color: var(--soft); font-style: italic; }
+
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: .7rem; }
+  ol.steps li { position: relative; padding-left: 2rem; }
+  ol.steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: .05em; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-family: var(--mono); font-size: .74rem; font-weight: 600; display: grid; place-items: center; }
+  .tip { margin-top: 1rem; padding: .85rem 1rem; background: var(--accent-soft); border-radius: 10px; font-size: .9rem; }
+  .tip b { font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: .3rem; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 1.8rem 3rem; color: var(--soft); font-size: .85rem; }
+  footer p { margin: 0 0 .5rem; max-width: 62ch; }
+  .empty { text-align: center; color: var(--soft); font-family: var(--mono); font-size: .85rem; padding: 3rem 0; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Pulled from my saved reels</p>
+    <h1>Saved <em>Bakes</em></h1>
+    <p class="lede">Seven baking reels from my Instagram saves, transcribed into real recipes. Weights, method, a link back to each clip, and a batch slider on every one to scale it up or down.</p>
+    <div class="meta-line">
+      <span><b>7</b> recipes</span>
+      <span><b>6</b> bakers</span>
+      <span>drag a slider to <b>rescale</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="filters" aria-label="Filter recipes by type">
+  <div class="wrap" id="chips"></div>
+</nav>
+
+<main class="wrap" id="grid"></main>
+
+<footer class="wrap">
+  <p><b>A note on faithfulness.</b> Every recipe is transcribed from the reel's own caption (or, for the cookies, the free PDF the baker links in her bio), lightly tidied for reading. Nothing is invented. Every ingredient amount is in grams or millilitres. Where a baker used ounces, cups or spoons, those have been converted and rounded (for example, 1 tsp became 5 ml, and dry spoon measures became grams). All temperatures are in &deg;C, converted and rounded where the baker used &deg;F.</p>
+  <p><b>About the slider.</b> It scales each ingredient by batch, from a half batch up to 4&times;, and shows the rough yield. Weights are rounded for the kitchen, so sanity-check at the extremes. A few amounts stay fixed on purpose, such as the salt-bread butter block, which is per piece. Scaling bread this far can shift timings and hydration feel, so treat large multiples as a starting point.</p>
+</footer>
+
+<script>
+const RECIPES = [
+  {
+    tag: "Cakes & Loaves",
+    title: "Maple Banana Bread",
+    baker: "Selena Valentina",
+    handle: "@theselena_v",
+    url: "https://www.instagram.com/reel/DZlOp2nJL4I/",
+    yield: { n: 1, one: "smaller loaf", many: "smaller loaves" },
+    facts: [["Oven", "165°C"], ["Finish", "Maple + flaky salt"], ["Internal", "93–96°C"]],
+    note: "Scaled to 0.8 of the original recipe, rounded to the nearest 5 g, with the two eggs kept whole.",
+    ings: [
+      [["Softened unsalted butter", "135 g"], ["Brown sugar", "180 g"], ["White sugar", "60 g"], ["Mashed banana", "270 g"], ["Eggs", "2"], ["Vanilla paste", "5 g"], ["Molasses", "5 g"], ["AP flour", "200 g"], ["Baking soda", "5 g"], ["Salt", "5 g"], ["Buttermilk", "95 ml"], ["Grade A maple syrup", "50 ml"], ["Flaky sea salt", "to top"]]
+    ],
+    steps: [
+      "Cream the softened butter and both sugars together.",
+      "Add the mashed banana and mix until combined.",
+      "Add the eggs and vanilla, then mix again. The butter will split, don't worry.",
+      "Whisk the flour, baking soda and salt in a separate bowl.",
+      "Combine the wet and dry ingredients.",
+      "Add the buttermilk half at a time, mixing thoroughly after each addition.",
+      "Pour into a lightly sprayed, parchment-lined loaf pan.",
+      "Bake at 165°C until deeply golden and firm to the touch (93–96°C internal).",
+      "Out of the oven, immediately pour maple syrup over the top. It absorbs fast, so brush it on in small sections.",
+      "Top with flaky sea salt and cool completely before slicing."
+    ],
+    tip: "Even better the next day. At its peak if you slice it, wrap each slice in plastic, freeze, then thaw, the moisture redistributes and takes it to the next level."
+  },
+  {
+    tag: "Bread",
+    title: "No-Knead Baguettes",
+    baker: "Bradley's Bakehouse",
+    url: "https://www.instagram.com/reel/DeI5zEUpv8r/",
+    yield: { n: 4, one: "baguette", many: "baguettes" },
+    facts: [["Ferment", "12–16 hrs"], ["Oven", "240°C → 200°C"]],
+    ings: [
+      [["Flour", "560 g"], ["Wholemeal flour", "30 g"], ["Water (fridge cold)", "400 g"], ["Instant yeast", "1.2 g"], ["Salt", "11 g"]]
+    ],
+    steps: [
+      "Combine all ingredients in a container and mix until no dry spots remain.",
+      "Rest 30 minutes, then fold. Repeat twice more at 30-minute intervals. The dough should boule up easily with a smooth top.",
+      "Ferment at room temp (around 18–21°C) for 12–16 hours.",
+      "Cut into four 250 g pieces and preshape into blunt tubes. Bench-rest 20 minutes, then shape into long baguettes.",
+      "Place each seam-side up in a well-floured couche. Proof 50–60 minutes while heating the oven to 240°C with a baking steel or stone and a pan for steam.",
+      "Flip each baguette onto a peel and score with a sharp blade. Load, make as much steam as you can, and bake 20 minutes at 240°C.",
+      "Drop to 200°C, rotate, and bake until the crust and colour are where you want them.",
+      "Cool fully before slicing, or tuck in now. “Do what you want. I'm not your dad.”"
+    ]
+  },
+  {
+    tag: "Cookies & Donuts",
+    title: "Mini Cinnamon Sugar Donuts",
+    baker: "Cookwithhali",
+    url: "https://www.instagram.com/reel/De4cUeAR3Sx/",
+    yield: { n: 24, one: "mini donut", many: "mini donuts" },
+    facts: [["Style", "No-knead, fried"], ["Rise", "~2 hrs"]],
+    ings: [
+      [["Yeast", "3 g"], ["Sugar", "38 g"], ["Milk", "110 ml"], ["Egg", "1"], ["Flour", "280 g"], ["Salt", "6 g"], ["Softened butter", "38 g"]],
+      { name: "Cinnamon sugar coating", list: [["Sugar", "140 g"], ["Ground cinnamon", "3 g"]] }
+    ],
+    steps: [
+      "Mix the milk, yeast and sugar. Add the egg, flour, salt and softened butter all at once; mix and coil-fold several times. Cover and rest 20 minutes. Coil-fold again, cover, and rise 2 hours or until doubled.",
+      "Turn onto a work surface, shape into a long log, and cut into 24 equal pieces.",
+      "Roll each into a ball on a small square of parchment. Flatten gently, cover, and rise 30 minutes. Uncover and rest 5 minutes before frying.",
+      "Heat the oil until hot. Fry the donuts, gently peeling away the parchment, until golden on both sides.",
+      "Mix the sugar and cinnamon. While still warm, coat both sides."
+    ]
+  },
+  {
+    tag: "Cookies & Donuts",
+    title: "Brown Butter Chocolate Chip Cookies",
+    baker: "Selena Valentina",
+    handle: "@theselena_v",
+    url: "https://www.instagram.com/reel/DZ58ThppnHg/",
+    yield: { n: 16, one: "cookie", many: "cookies", approx: true },
+    facts: [["Oven", "165°C"], ["Portion", "80 g balls"], ["Rest", "3 hrs – overnight"]],
+    note: "Her most-requested recipe. Brown butter plus milk powder is the backbone, rest the dough at least 3 hours, ideally overnight, and have your eggs and cream at room temperature before you start.",
+    ings: [
+      [["Unsalted butter", "302 g"], ["Milk powder", "10 g"], ["Light brown sugar", "200 g"], ["Granulated sugar", "110 g"], ["Eggs (room temp)", "2"], ["Heavy cream (room temp)", "45 g"], ["Vanilla paste", "22 ml"], ["Molasses", "22 ml"], ["All-purpose flour", "340 g"], ["Baking soda", "5 g"], ["Baking powder", "4 g"], ["Kosher salt", "6 g"], ["Chocolate chips", "to taste"], ["Maldon salt, to finish", "sprinkle"]]
+    ],
+    steps: [
+      "Combine both sugars in a heatproof bowl and set aside.",
+      "Brown the butter in a saucepan over medium-low heat until brown bits form at the bottom. It takes a while, then browns fast, stay attentive.",
+      "As soon as the milk solids begin to brown, add the milk powder. It will foam and expand a lot, so use a roomy pan.",
+      "Don't step away now. Stir constantly until all the solids are golden, about 1–2 minutes, lifting from the bottom with a heatproof spatula. When brown bits mix into the foam, it's ready. Pull it early rather than late; a light-coloured pan and spatula make it easier to judge.",
+      "Immediately pour the golden butter over the sugars and whisk to combine.",
+      "Add the vanilla and molasses, and mix.",
+      "Add the room-temperature heavy cream and mix. The butter won't want to combine yet, don't fight it, the eggs will do the work.",
+      "Add the eggs and whisk, with a little more aggression, until it forms a caramel-like consistency. Careful not to splash, it's still hot.",
+      "In a separate bowl, whisk the flour, baking soda, baking powder and salt.",
+      "Add the dry mix to the still-hot wet ingredients.",
+      "Let the dough sit on the counter about 30 minutes to cool before adding chocolate. Too early and it melts into brown streaks.",
+      "Once slightly warm, add chocolate chips to taste. If they start to melt while mixing, stop, chill a few minutes, then continue.",
+      "Cover the dough with plastic pressed against its surface (or a lidded container) and chill at least 3 hours, ideally overnight. This sets the texture and flavour.",
+      "Portion into 80 g dough balls, a #20 blue-handle scoop. Keep them as cold as possible, returning them to the fridge while the oven preheats.",
+      "Preheat the oven to 165°C.",
+      "Space the dough balls on a parchment-lined sheet (6 per half-sheet). Bake 10–15 minutes, checking at 10, until the edges are deeply golden and the centre is still light but not wet.",
+      "Out of the oven, immediately sprinkle with sea salt. Cool 5–7 minutes on the tray, they finish cooking there, before moving to a rack. Enjoy."
+    ],
+    tip: "Best fresh, but keep 1–2 days in an airtight container. Dough balls keep 5 days in the fridge or 3 months frozen, add a few minutes to the bake and expect a thicker cookie; thaw overnight in the fridge first."
+  },
+  {
+    tag: "Bread",
+    title: "Everyday Bread",
+    baker: "James Sharman",
+    url: "https://www.instagram.com/reel/DcDiMgGsrlk/",
+    yield: { n: 4, one: "600 g loaf", many: "600 g loaves" },
+    facts: [["Build", "Two-day"], ["Oven", "220°C, 30–40 min"]],
+    note: "One dough for everything, loaves, baguettes, tins, even focaccia. A two-day build. Dry-yeast equivalents are shown beside the fresh weights.",
+    ings: [
+      { name: "Day 1 dough (mix, chill overnight)", list: [["Strong bread flour", "430 g"], ["Plain flour", "150 g"], ["Cold water", "375 g"], { n: "Fresh yeast", a: "30 g", dry: "10 g" }] },
+      { name: "Day 2 dough", list: [["Strong bread flour", "845 g"], ["Salt", "34 g"], ["Sugar", "28 g"], ["Cold water", "480 g"], { n: "Fresh yeast", a: "12 g", dry: "4 g" }, ["Olive oil", "30 g"]] }
+    ],
+    steps: [
+      "Day 1: mix on low speed 4 minutes, then chill overnight.",
+      "Day 2: mix on low 3 minutes, then rest 10 minutes.",
+      "Mix on low 2 minutes, then add yesterday's dough.",
+      "Mix on low 3 minutes, then rest 10 minutes.",
+      "Add the olive oil and mix on low 1 minute, then rest 20 minutes.",
+      "Shape whatever you're making: loaves at 600 g, baguettes 250–300 g each.",
+      "For best results, prove overnight in the fridge. It's ready when a finger-press bounces back halfway.",
+      "Bake at 220°C for 30–40 minutes. A Dutch oven works great; in a regular oven, add ice or a tray of water for steam at the start."
+    ]
+  },
+  {
+    tag: "Cakes & Loaves",
+    title: "Almond Croissant Loaf",
+    baker: "Anna Whitley",
+    url: "https://www.instagram.com/reel/De1eEe_IYGO/",
+    yield: { n: 1, one: "loaf", many: "loaves" },
+    facts: [["Oven", "170°C / 150°C fan"], ["Bake", "~50 min"], ["Gas", "Mark 3"]],
+    note: "Frangipane swirled through a vanilla sponge, topped with flaked almonds and plenty of icing sugar.",
+    ings: [
+      { name: "Sponge", list: [["Butter, softened", "160 g"], ["Caster sugar", "160 g"], ["Medium eggs", "3"], ["Vanilla bean paste", "5 ml"], ["Self-raising flour", "160 g"]] },
+      { name: "Frangipane", list: [["Butter, softened", "75 g"], ["Caster sugar", "75 g"], ["Medium egg", "1"], ["Ground almonds", "75 g"]] },
+      { name: "To finish", list: [["Icing sugar (glaze)", "25 g"], ["Flaked almonds", ""], ["Icing sugar, to dust", ""]] }
+    ],
+    steps: [
+      "Heat the oven to 170°C / 150°C fan / Gas 3.",
+      "Beat the softened butter and sugar in a stand mixer until pale and fluffy, about 2 minutes.",
+      "Add the eggs one by one, mixing after each. Scrape down the bowl, add the self-raising flour, and mix to combine.",
+      "Fill a lined loaf tin with the batter. Return the same bowl to the mixer (residue is fine) and beat the remaining butter and sugar for the frangipane base.",
+      "Add the egg and mix. Don't worry if it looks split, the almonds bring it back. On low speed, mix through the ground almonds.",
+      "Spoon the frangipane over the batter and swirl it through with a chopstick or toothpick. Cover generously with flaked almonds.",
+      "Bake 50 minutes, or until a skewer comes out clean. Cover with foil for the last 15 minutes if the top is colouring too fast.",
+      "For the glaze, stir water into the icing sugar 5 ml at a time until it's the consistency of double cream.",
+      "Cool, spoon over the glaze, and dust liberally with icing sugar."
+    ]
+  },
+  {
+    tag: "Bread",
+    title: "Japanese Salt Breads",
+    baker: "Haydon",
+    handle: "Cantoast Bakery",
+    url: "https://www.instagram.com/reel/DerwY3dOqpK/",
+    yield: { n: 15, one: "salt bread", many: "salt breads" },
+    facts: [["Dough temp", "22–24°C"], ["Oven", "230°C → 180°C"]],
+    note: "Scaled down from a bakery shift. Start the poolish the night before.",
+    ings: [
+      { name: "Poolish (mix, fridge overnight)", list: [["Water", "145 g"], ["Bread flour", "145 g"], ["Dry yeast", "1 g"]] },
+      { name: "Final dough", list: [["Water (some as ice)", "249 g"], ["Poolish", "193 g"], ["Strong bread flour", "368 g"], ["T45 flour", "124 g"], ["Milk powder", "28 g"], ["Salt", "13 g"], ["Sugar", "49 g"], ["Dry yeast", "9 g"], ["Butter", "41 g"], ["Total", "1073 g"], ["Butter block, per piece", "13–15 g", true]] }
+    ],
+    steps: [
+      "Mix all ingredients except the butter for 10 minutes.",
+      "Autolyse / rest for 10 minutes.",
+      "Add the butter and mix another 15–20 minutes, until strong and the dough temp reaches 22–24°C.",
+      "Proof at 25–28°C for 60–90 minutes.",
+      "Portion into 70 g pieces and shape into tadpoles. Rest in the fridge at least 30 minutes.",
+      "Roll out and shape each around a 13–15 g butter block.",
+      "Proof at 25–28°C for 60–90 minutes, or until more than doubled.",
+      "Preheat to 230°C, add steam, then turn down to 180°C and bake 4 minutes.",
+      "Turn the tray and bake another 4–5 minutes, until golden brown."
+    ]
+  }
+];
+
+const TAGS = ["All", "Bread", "Cakes & Loaves", "Cookies & Donuts"];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+
+/* ---------- quantity scaling ---------- */
+const UFRAC = { "½": .5, "⅓": 1/3, "⅔": 2/3, "¼": .25, "¾": .75, "⅛": .125, "⅜": .375, "⅝": .625, "⅞": .875, "⅕": .2, "⅖": .4, "⅙": 1/6, "⅚": 5/6 };
+const UCHARS = Object.keys(UFRAC).join("");
+
+function parseNum(tok) {
+  tok = tok.trim();
+  if (!tok) return null;
+  let m = tok.match(new RegExp("^(\\d+)?\\s*([" + UCHARS + "])$"));
+  if (m) { return (m[1] ? parseInt(m[1], 10) : 0) + UFRAC[m[2]]; }
+  m = tok.match(/^(\d+)\s+(\d+)\/(\d+)$/);
+  if (m) { return parseInt(m[1], 10) + parseInt(m[2], 10) / parseInt(m[3], 10); }
+  m = tok.match(/^(\d+)\/(\d+)$/);
+  if (m) { return parseInt(m[1], 10) / parseInt(m[2], 10); }
+  if (/^\d*\.?\d+$/.test(tok)) return parseFloat(tok);
+  return null;
+}
+
+function fracStr(v) {
+  if (v < 0) return "0";
+  const whole = Math.floor(v + 1e-9);
+  const eighths = Math.round((v - whole) * 8);
+  const map = { 0: "", 1: "⅛", 2: "¼", 3: "⅜", 4: "½", 5: "⅝", 6: "¾", 7: "⅞" };
+  const w = whole + (eighths === 8 ? 1 : 0);
+  const f = eighths === 8 ? "" : map[eighths];
+  const out = (w > 0 ? String(w) : "") + f;
+  return out === "" ? "0" : out;
+}
+
+function fmtQty(v, unit) {
+  const u = unit.trim();
+  if (u === "" || /^(tsp|tbs|tbsp|c|cup|cups)\b/i.test(u)) return fracStr(v);
+  let r = v >= 10 ? Math.round(v) : Math.round(v * 10) / 10;
+  if (r >= 1000) return r.toLocaleString("en-US");
+  return String(r);
+}
+
+function scaleAmount(raw, factor) {
+  const s = String(raw).trim();
+  if (s === "" || !/\d/.test(s)) return s;           // "to taste", "sprinkle", "to top"
+  let m = s.match(/^([\d.]+)\s*[–-]\s*([\d.]+)\s*(.*)$/);  // ranges: 13–15 g
+  if (m) {
+    const lo = fmtQty(parseFloat(m[1]) * factor, m[3]);
+    const hi = fmtQty(parseFloat(m[2]) * factor, m[3]);
+    return (m[3] ? `${lo}–${hi} ${m[3]}` : `${lo}–${hi}`);
+  }
+  m = s.match(new RegExp("^(\\d+\\s*[" + UCHARS + "]|\\d*\\.?\\d+|[" + UCHARS + "])\\s*(.*)$"));
+  if (!m) return s;
+  const val = parseNum(m[1]);
+  if (val == null) return s;
+  const unit = m[2];
+  const scaled = fmtQty(val * factor, unit);
+  return unit ? `${scaled} ${unit}` : scaled;
+}
+
+function yieldText(r, f) {
+  const n = Math.round(r.yield.n * f);
+  const unit = n === 1 ? r.yield.one : r.yield.many;
+  return (r.yield.approx ? "≈" : "") + n + " " + unit;
+}
+
+/* ---------- rendering ---------- */
+function scalableSpan(a) {
+  return `<span data-base="${esc(a)}">${esc(scaleAmount(a, 1))}</span>`;
+}
+function ingList(list) {
+  return `<ul class="ings">` + list.map(row => {
+    if (!Array.isArray(row)) {
+      // object row with a dry-yeast companion: { n, a, dry }
+      const amt = `<span class="a">${scalableSpan(row.a)} <span class="dry">(${scalableSpan(row.dry)} dry)</span></span>`;
+      return `<li><span class="n">${esc(row.n)}</span><span class="lead"></span>${amt}</li>`;
+    }
+    const [n, a, fixed] = row;
+    if (!a) return `<li class="no-amt"><span class="n">${esc(n)}</span></li>`;
+    const amt = fixed
+      ? `<span class="a">${esc(scaleAmount(a, 1))}</span>`
+      : `<span class="a" data-base="${esc(a)}">${esc(scaleAmount(a, 1))}</span>`;
+    return `<li><span class="n">${esc(n)}</span><span class="lead"></span>${amt}</li>`;
+  }).join("") + `</ul>`;
+}
+
+function ingColumn(r) {
+  let html = `<p class="sec-label">Ingredients</p>`;
+  r.ings.forEach(block => {
+    if (Array.isArray(block)) html += `<div class="sub">${ingList(block)}</div>`;
+    else html += `<div class="sub"><p class="sub-name">${esc(block.name)}</p>${ingList(block.list)}</div>`;
+  });
+  return html;
+}
+
+function card(r, i) {
+  const num = String(i + 1).padStart(2, "0");
+  const handle = r.handle ? ` <span style="color:var(--soft)">&middot; ${esc(r.handle)}</span>` : "";
+  const head = `<div class="card-head">
+      <div class="kicker"><span class="num">${num}</span><span class="tag-badge">${esc(r.tag)}</span></div>
+      <h2>${esc(r.title)}</h2>
+      <p class="byline">by ${esc(r.baker)}${handle} &nbsp;&middot;&nbsp; <a href="${esc(r.url)}" target="_blank" rel="noopener">Watch the reel &#8599;</a></p>
+      ${r.facts ? `<div class="facts">${r.facts.map(([k, v]) => `<span>${esc(k)} <b>${esc(v)}</b></span>`).join("")}</div>` : ""}
+    </div>`;
+
+  const batch = `<div class="batch">
+      <label for="sl-${i}">Batch</label>
+      <input id="sl-${i}" data-idx="${i}" type="range" min="0.5" max="4" step="0.5" value="1" aria-label="Batch size for ${esc(r.title)}">
+      <span class="read"><span class="mult">×1</span> &middot; <span class="yield">${esc(yieldText(r, 1))}</span></span>
+    </div>`;
+
+  const body = `<div class="card-body">
+      <div class="col-ing">${ingColumn(r)}</div>
+      <div class="col-method">
+        <p class="sec-label">Method</p>
+        ${r.note ? `<p style="margin:0 0 .9rem;color:var(--soft);font-size:.92rem">${esc(r.note)}</p>` : ""}
+        <ol class="steps">${r.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>
+        ${r.tip ? `<div class="tip"><b>Baker's tip</b>${esc(r.tip)}</div>` : ""}
+      </div>
+    </div>`;
+
+  return `<article class="card" data-tag="${esc(r.tag)}">${head}${batch}${body}</article>`;
+}
+
+const grid = document.getElementById("grid");
+const chipsEl = document.getElementById("chips");
+let active = "All";
+
+function bindSliders() {
+  grid.querySelectorAll('.batch input[type="range"]').forEach(sl => {
+    sl.addEventListener("input", () => {
+      const f = parseFloat(sl.value);
+      const cardEl = sl.closest(".card");
+      cardEl.querySelectorAll("[data-base]").forEach(sp => {
+        sp.textContent = scaleAmount(sp.getAttribute("data-base"), f);
+      });
+      const mult = cardEl.querySelector(".mult");
+      if (mult) mult.textContent = "×" + f;
+      const yl = cardEl.querySelector(".yield");
+      if (yl) yl.textContent = yieldText(RECIPES[+sl.dataset.idx], f);
+    });
+  });
+}
+
+function render() {
+  const shown = RECIPES.filter(r => active === "All" || r.tag === active);
+  grid.innerHTML = shown.length
+    ? shown.map(r => card(r, RECIPES.indexOf(r))).join("")
+    : `<p class="empty">Nothing here yet.</p>`;
+  bindSliders();
+}
+
+function renderChips() {
+  chipsEl.innerHTML = TAGS.map(t => {
+    const n = t === "All" ? RECIPES.length : RECIPES.filter(r => r.tag === t).length;
+    return `<button class="chip" data-tag="${esc(t)}" aria-pressed="${t === active}">${esc(t)} <span class="ct">${n}</span></button>`;
+  }).join("");
+  chipsEl.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => {
+    active = c.dataset.tag;
+    renderChips();
+    render();
+  }));
+}
+
+renderChips();
+render();
+</script>
+</body>
+</html>
