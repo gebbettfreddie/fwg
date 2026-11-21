@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Saved Bakes | fwg.fyi</title>
-<meta name="description" content="Seven baking reels from my Instagram saves, written up as recipes in grams, each with a batch slider.">
+<meta name="description" content="Eight saved bakes, written up as recipes in grams, each with a batch slider.">
 <meta property="og:title" content="Saved Bakes">
-<meta property="og:description" content="Seven saved baking reels, written up as recipes in grams, each with a batch slider.">
+<meta property="og:description" content="Eight saved bakes, written up as recipes in grams, each with a batch slider.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fwg.fyi/bakes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,12 +133,12 @@
 <body>
 <header>
   <div class="wrap">
-    <p class="eyebrow">Pulled from my saved reels</p>
+    <p class="eyebrow">Pulled from my saves</p>
     <h1>Saved <em>Bakes</em></h1>
-    <p class="lede">Seven baking reels from my Instagram saves, transcribed into real recipes. Weights, method, a link back to each clip, and a batch slider on every one to scale it up or down.</p>
+    <p class="lede">Eight saved bakes, mostly Instagram reels, transcribed into real recipes. Weights, method, a link back to each source, and a batch slider on every one to scale it up or down.</p>
     <div class="meta-line">
-      <span><b>7</b> recipes</span>
-      <span><b>6</b> bakers</span>
+      <span><b>8</b> recipes</span>
+      <span><b>7</b> bakers</span>
       <span>drag a slider to <b>rescale</b></span>
     </div>
   </div>
@@ -151,7 +151,7 @@
 <main class="wrap" id="grid"></main>
 
 <footer class="wrap">
-  <p><b>A note on faithfulness.</b> Every recipe is transcribed from the reel's own caption (or, for the cookies, the free PDF the baker links in her bio), lightly tidied for reading. Nothing is invented. Every ingredient amount is in grams or millilitres. Where a baker used ounces, cups or spoons, those have been converted and rounded (for example, 1 tsp became 5 ml, and dry spoon measures became grams). All temperatures are in &deg;C, converted and rounded where the baker used &deg;F.</p>
+  <p><b>A note on faithfulness.</b> Every recipe is transcribed from the reel's own caption (or, for the cookies, the free PDF the baker links in her bio, and for the honey butter rolls, the baker's own recipe page), lightly tidied for reading. Nothing is invented. Every ingredient amount is in grams or millilitres. Where a baker used ounces, cups or spoons, those have been converted and rounded (for example, 1 tsp became 5 ml, and dry spoon measures became grams). All temperatures are in &deg;C, converted and rounded where the baker used &deg;F.</p>
   <p><b>About the slider.</b> It scales each ingredient by batch, from a half batch up to 4&times;, and shows the rough yield. Weights are rounded for the kitchen, so sanity-check at the extremes. A few amounts stay fixed on purpose, such as the salt-bread butter block, which is per piece. Scaling bread this far can shift timings and hydration feel, so treat large multiples as a starting point.</p>
 </footer>
 
@@ -328,6 +328,39 @@ const RECIPES = [
       "Preheat to 230°C, add steam, then turn down to 180°C and bake 4 minutes.",
       "Turn the tray and bake another 4–5 minutes, until golden brown."
     ]
+  },
+  {
+    tag: "Bread",
+    title: "Salted Honey Butter Rolls",
+    baker: "Erin",
+    handle: "Erin's Cozy Kitchen",
+    url: "https://erinscozykitchen.com/recipe/salted-honey-butter-rolls/",
+    linkLabel: "Read the recipe",
+    yield: { n: 15, one: "roll", many: "rolls" },
+    facts: [["Oven", "175°C"], ["Bake", "25–30 min"], ["Portion", "95–100 g"]],
+    note: "A tangzhong milk-bread roll. Start with everything cold, aiming for a dough temperature of about 24°C. For bigger rolls, divide into 12 pieces of about 120 g instead.",
+    ings: [
+      { name: "Tangzhong", list: [["Bread flour", "38 g"], ["Whole milk", "180 g"]] },
+      { name: "Main dough", list: [["Bread flour", "675 g"], ["Whole milk", "180 g"], ["Heavy cream", "60 g"], ["Instant dry yeast", "7 g"], ["Honey", "25 g"], ["Granulated sugar", "50 g"], ["Salt", "15 ml"], ["Large eggs", "3"], ["Unsalted butter, cubed", "83 g"], ["All of the tangzhong", ""]] },
+      { name: "Egg wash", list: [["Large egg", "1"], ["Milk", "15 ml"], ["Flaky salt", "to top"]] },
+      { name: "Honey butter glaze", list: [["Salted butter, melted", "57 g"], ["Honey", "30 ml"]] }
+    ],
+    steps: [
+      "Tangzhong: whisk the flour and milk in a small saucepan until smooth. Cook over medium-low heat, whisking constantly, for 2–4 minutes, until it is a pudding-like paste that holds trails.",
+      "Scrape into a bowl, press plastic wrap onto the surface, and cool completely to room temperature.",
+      "In a stand mixer with a dough hook, combine the tangzhong, flour, milk, cream, yeast, honey, sugar, salt and eggs. Mix on low until no dry flour remains, then knead on medium for about 5 minutes.",
+      "Add the butter a couple of cubes at a time and knead until the dough is smooth, elastic and passes the windowpane test.",
+      "Shape into a taut ball, place in a lightly oiled bowl, cover, and rise until doubled, about 1–1.5 hours.",
+      "Turn out onto a lightly floured surface and divide into 15 equal pieces of about 95–100 g.",
+      "Shape each piece into a smooth, tight ball by cupping it and rolling it against the counter.",
+      "Set the rolls seam-side down on a parchment-lined sheet pan, about 43 × 28 cm. Cover and proof 45–60 minutes, until puffy and touching.",
+      "About 20 minutes before they are ready, heat the oven to 175°C.",
+      "Whisk the egg and milk, brush gently over the rolls, and sprinkle with flaky salt.",
+      "Bake 25–30 minutes, until deep golden brown. Tent loosely with foil if the tops colour too fast.",
+      "While they bake, stir the melted salted butter and honey together. Brush generously over the rolls as soon as they come out of the oven.",
+      "Cool 5–10 minutes and serve warm."
+    ],
+    tip: "To make ahead, knead the dough, shape it into a ball and refrigerate overnight in an airtight container. Next morning give it 30 minutes at room temperature, then shape and proof as normal. Baked rolls keep 2 days airtight; freeze them unglazed for up to 2 months."
   }
 ];
 
@@ -429,7 +462,7 @@ function card(r, i) {
   const head = `<div class="card-head">
       <div class="kicker"><span class="num">${num}</span><span class="tag-badge">${esc(r.tag)}</span></div>
       <h2>${esc(r.title)}</h2>
-      <p class="byline">by ${esc(r.baker)}${handle} &nbsp;&middot;&nbsp; <a href="${esc(r.url)}" target="_blank" rel="noopener">Watch the reel &#8599;</a></p>
+      <p class="byline">by ${esc(r.baker)}${handle} &nbsp;&middot;&nbsp; <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.linkLabel || "Watch the reel")} &#8599;</a></p>
       ${r.facts ? `<div class="facts">${r.facts.map(([k, v]) => `<span>${esc(k)} <b>${esc(v)}</b></span>`).join("")}</div>` : ""}
     </div>`;
 
