@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Saved Bakes | fwg.fyi</title>
-<meta name="description" content="Eight saved bakes, written up as recipes in grams, each with a batch slider.">
-<meta property="og:title" content="Saved Bakes">
-<meta property="og:description" content="Eight saved bakes, written up as recipes in grams, each with a batch slider.">
+<title>My Bakes | fwg.fyi</title>
+<meta name="description" content="Eight of my bakes, written up as recipes in grams, each with a batch slider.">
+<meta property="og:title" content="My Bakes">
+<meta property="og:description" content="Eight of my bakes, written up as recipes in grams, each with a batch slider.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fwg.fyi/bakes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,9 +85,6 @@
   .kicker .num { color: var(--soft); }
   .tag-badge { border: 1px solid var(--line); border-radius: 999px; padding: .1rem .5rem; color: var(--soft); letter-spacing: .1em; }
   .card h2 { font-family: var(--disp); font-weight: 600; font-size: clamp(1.7rem, 4.6vw, 2.3rem); line-height: 1.02; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
-  .byline { margin: .6rem 0 0; font-size: .92rem; color: var(--soft); }
-  .byline a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
-  .byline a:hover { border-bottom-color: var(--accent); }
   .facts { display: flex; flex-wrap: wrap; gap: .35rem 1.3rem; margin-top: 1rem; font-family: var(--mono); font-size: .76rem; color: var(--soft); }
   .facts span b { color: var(--ink); font-weight: 600; }
 
@@ -136,11 +133,10 @@
 <header>
   <div class="wrap">
     <p class="eyebrow">My recipe file</p>
-    <h1>Saved <em>Bakes</em></h1>
-    <p class="lede">Eight saved bakes, written up as real recipes. Weights, method, the baker behind each one, and a batch slider on every one to scale it up or down.</p>
+    <h1>My <em>Bakes</em></h1>
+    <p class="lede">Eight bakes I make, written up properly. Weights, method, and a batch slider on every one to scale it up or down.</p>
     <div class="meta-line">
       <span><b>8</b> recipes</span>
-      <span><b>7</b> bakers</span>
       <span>drag a slider to <b>rescale</b></span>
     </div>
   </div>
@@ -154,7 +150,7 @@
 
 <footer class="wrap">
   <p><a href="/backroom">&larr; The back room</a></p>
-  <p><b>A note on faithfulness.</b> Every recipe is transcribed from the baker's own write-up, lightly tidied for reading. Nothing is invented. Every ingredient amount is in grams or millilitres. Where a baker used ounces, cups or spoons, those have been converted and rounded (for example, 1 tsp became 5 ml, and dry spoon measures became grams). All temperatures are in &deg;C, converted and rounded where the baker used &deg;F.</p>
+  <p><b>A note on units.</b> Every ingredient amount is in grams or millilitres, with dry spoon measures given as grams. All temperatures are in &deg;C.</p>
   <p><b>About the slider.</b> It scales each ingredient by batch, from a half batch up to 4&times;, and shows the rough yield. Weights are rounded for the kitchen, so sanity-check at the extremes. A few amounts stay fixed on purpose, such as the salt-bread butter block, which is per piece. Scaling bread this far can shift timings and hydration feel, so treat large multiples as a starting point.</p>
 </footer>
 
@@ -163,7 +159,6 @@ const RECIPES = [
   {
     tag: "Cakes & Loaves",
     title: "Maple Banana Bread",
-    baker: "Selena Valentina",
     yield: { n: 1, one: "smaller loaf", many: "smaller loaves" },
     facts: [["Oven", "165°C"], ["Finish", "Maple + flaky salt"], ["Internal", "93–96°C"]],
     note: "Scaled to 0.8 of the original recipe, rounded to the nearest 5 g, with the two eggs kept whole.",
@@ -187,7 +182,6 @@ const RECIPES = [
   {
     tag: "Bread",
     title: "No-Knead Baguettes",
-    baker: "Bradley's Bakehouse",
     yield: { n: 4, one: "baguette", many: "baguettes" },
     facts: [["Ferment", "12–16 hrs"], ["Oven", "240°C → 200°C"]],
     ings: [
@@ -207,7 +201,6 @@ const RECIPES = [
   {
     tag: "Cookies & Donuts",
     title: "Mini Cinnamon Sugar Donuts",
-    baker: "Cookwithhali",
     yield: { n: 24, one: "mini donut", many: "mini donuts" },
     facts: [["Style", "No-knead, fried"], ["Rise", "~2 hrs"]],
     ings: [
@@ -225,7 +218,6 @@ const RECIPES = [
   {
     tag: "Cookies & Donuts",
     title: "Brown Butter Chocolate Chip Cookies",
-    baker: "Selena Valentina",
     yield: { n: 16, one: "cookie", many: "cookies", approx: true },
     facts: [["Oven", "165°C"], ["Portion", "80 g balls"], ["Rest", "3 hrs – overnight"]],
     note: "Her most-requested recipe. Brown butter plus milk powder is the backbone, rest the dough at least 3 hours, ideally overnight, and have your eggs and cream at room temperature before you start.",
@@ -256,7 +248,6 @@ const RECIPES = [
   {
     tag: "Bread",
     title: "Everyday Bread",
-    baker: "James Sharman",
     yield: { n: 4, one: "600 g loaf", many: "600 g loaves" },
     facts: [["Build", "Two-day"], ["Oven", "220°C, 30–40 min"]],
     note: "One dough for everything, loaves, baguettes, tins, even focaccia. A two-day build. Dry-yeast equivalents are shown beside the fresh weights.",
@@ -278,7 +269,6 @@ const RECIPES = [
   {
     tag: "Cakes & Loaves",
     title: "Almond Croissant Loaf",
-    baker: "Anna Whitley",
     yield: { n: 1, one: "loaf", many: "loaves" },
     facts: [["Oven", "170°C / 150°C fan"], ["Bake", "~50 min"], ["Gas", "Mark 3"]],
     note: "Frangipane swirled through a vanilla sponge, topped with flaked almonds and plenty of icing sugar.",
@@ -302,8 +292,6 @@ const RECIPES = [
   {
     tag: "Bread",
     title: "Japanese Salt Breads",
-    baker: "Haydon",
-    handle: "Cantoast Bakery",
     yield: { n: 15, one: "salt bread", many: "salt breads" },
     facts: [["Dough temp", "22–24°C"], ["Oven", "230°C → 180°C"]],
     note: "Scaled down from a bakery shift. Start the poolish the night before.",
@@ -326,10 +314,6 @@ const RECIPES = [
   {
     tag: "Bread",
     title: "Salted Honey Butter Rolls",
-    baker: "Erin",
-    handle: "Erin's Cozy Kitchen",
-    url: "https://erinscozykitchen.com/recipe/salted-honey-butter-rolls/",
-    linkLabel: "Read the recipe",
     yield: { n: 15, one: "roll", many: "rolls" },
     facts: [["Oven", "175°C"], ["Bake", "25–30 min"], ["Portion", "95–100 g"]],
     note: "A tangzhong milk-bread roll. Start with everything cold, aiming for a dough temperature of about 24°C. For bigger rolls, divide into 12 pieces of about 120 g instead.",
@@ -452,12 +436,9 @@ function ingColumn(r) {
 
 function card(r, i) {
   const num = String(i + 1).padStart(2, "0");
-  const source = r.url ? ` &nbsp;&middot;&nbsp; <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.linkLabel)} &#8599;</a>` : "";
-  const handle = r.handle ? ` <span style="color:var(--soft)">&middot; ${esc(r.handle)}</span>` : "";
   const head = `<div class="card-head">
       <div class="kicker"><span class="num">${num}</span><span class="tag-badge">${esc(r.tag)}</span></div>
       <h2>${esc(r.title)}</h2>
-      <p class="byline">by ${esc(r.baker)}${handle}${source}</p>
       ${r.facts ? `<div class="facts">${r.facts.map(([k, v]) => `<span>${esc(k)} <b>${esc(v)}</b></span>`).join("")}</div>` : ""}
     </div>`;
 
