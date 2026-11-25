@@ -315,6 +315,21 @@
   .stage-foot{justify-content:space-between;flex-wrap:wrap;gap:6px 16px;
     margin:0 4px;font-size:12px;font-weight:500;color:var(--soft);letter-spacing:.04em;line-height:2}
 
+  /* ---------- THE GATE: type "admin" anywhere on the page and a login appears ---------- */
+  .gate{position:fixed;inset:0;z-index:60;display:none;place-items:center;padding:24px;background:rgba(0,0,0,.6)}
+  .gate.open{display:grid}
+  .gatebox{width:100%;max-width:380px;background:var(--card);border-radius:var(--radius);
+    padding:30px 28px 26px;box-shadow:0 24px 60px rgba(0,0,0,.3);display:flex;flex-direction:column;gap:14px}
+  .gatebox h2{font-size:26px;line-height:1.2;margin:0 0 2px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .gatebox label{display:flex;flex-direction:column;gap:6px}
+  .gatebox label span{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--soft)}
+  .gatebox input{font:inherit;font-size:16px;color:var(--ink);background:var(--card);
+    border:1px solid var(--line);padding:12px 14px;border-radius:12px;-webkit-appearance:none;appearance:none}
+  .gatebox input:focus{outline:none;border-color:var(--dark)}
+  .gatebox .btn{align-self:flex-start;margin:4px 0 0;border:0;cursor:pointer;background:var(--dark)}
+  .gatebox .btn:hover{background:#000}
+  .gatemsg{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--orange);margin:0;min-height:1.6em}
+
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{animation:none !important;transition:none !important}
   }
@@ -527,6 +542,17 @@
     </div>
   </div>
 
+  <!-- THE GATE: nothing on the page points here. Typing "admin" opens it (see the script). -->
+  <div class="gate" id="gate">
+    <form class="gatebox" id="gateform" role="dialog" aria-modal="true" aria-labelledby="gate-title" autocomplete="off">
+      <h2 id="gate-title"><span class="qtag">RESTRICTED</span> Log in</h2>
+      <label><span>USERNAME</span><input type="text" id="gateuser" autocapitalize="none" autocorrect="off" spellcheck="false" required></label>
+      <label><span>PASSWORD</span><input type="password" id="gatepass" required></label>
+      <button class="btn" type="submit">LOG IN</button>
+      <p class="gatemsg" id="gatemsg" role="status"></p>
+    </form>
+  </div>
+
   <footer>
     <span>© <span id="yr">2026</span> FREDDIE GEBBETT</span>
     <span>FWG.FYI · NO CONTINUES USED</span>
@@ -613,6 +639,43 @@
           tell("GOT IT, I'LL SEND IT OVER.");
         })
         .catch(failed);
+    });
+  })();
+
+  // ---- The gate: type "admin" anywhere (outside a text field) and a login appears. ----
+  // The right login opens the back room (backroom.html), the index of everything off the map.
+  // This is a secret knock, not security: the page is static, so the answer is right here.
+  var gate = document.getElementById("gate");
+  function gateOpen(){ return gate.classList.contains("open"); }
+  (function(){
+    var CODE = "admin", USER = "admin", PASS = "guest";
+    var PASSED = "fwg_backroom";   // sessionStorage: backroom.html lets you in only with this set
+    var form = document.getElementById("gateform");
+    var user = document.getElementById("gateuser"), pass = document.getElementById("gatepass");
+    var msg = document.getElementById("gatemsg");
+    var typed = "";
+
+    function show(){ form.reset(); msg.textContent = ""; gate.classList.add("open"); user.focus(); }
+    function hide(){ gate.classList.remove("open"); }
+
+    document.addEventListener("keydown", function(e){
+      if(gateOpen()){ if(e.key === "Escape") hide(); return; }
+      if(e.metaKey || e.ctrlKey || e.altKey || e.key.length !== 1) return;
+      if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName || "")){ typed = ""; return; }
+      typed = (typed + e.key.toLowerCase()).slice(-CODE.length);
+      if(typed === CODE){ typed = ""; e.preventDefault(); show(); }
+    });
+    gate.addEventListener("click", function(e){ if(e.target === gate) hide(); });
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      if(user.value.trim().toLowerCase() === USER && pass.value === PASS){
+        try{ sessionStorage.setItem(PASSED, "1"); }catch(err){}
+        location.href = "/backroom";
+      } else {
+        msg.textContent = "ACCESS DENIED";
+        pass.value = ""; pass.focus();
+      }
     });
   })();
 
@@ -746,6 +809,7 @@
   overlay.addEventListener("click", function(e){ if(e.target === overlay) close(); });
 
   document.addEventListener("keydown", function(e){
+    if(gateOpen()) return;                 // the login is taking the keys
     if(!mq.matches) return;
     if(reset && document.activeElement === reset) return;  // let the reset button handle its own keys
     if(openId){

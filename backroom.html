@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Back Room | fwg.fyi</title>
+<meta name="description" content="Off the map: the other corners of fwg.fyi.">
+<meta name="theme-color" content="#f0f0f0">
+<!-- This room is reached by typing "admin" on the map and logging in, not through a search engine. -->
+<meta name="robots" content="noindex">
+<!-- No login this visit? Back to the map. (A secret knock, not security.) -->
+<script>try{ if(sessionStorage.getItem("fwg_backroom") !== "1") location.replace("/"); }catch(e){}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' rx='3' fill='%23ffffff'/%3E%3Crect x='4' y='2' width='8' height='2' fill='%23ff8200'/%3E%3Crect x='4' y='4' width='2' height='10' fill='%23ff8200'/%3E%3Crect x='6' y='7' width='5' height='2' fill='%23ff8200'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Same world as the map (index.html): Inter, light grey page, white rounded cards,
+     orange accent, pixel icons in bordered tiles. */
+  :root{
+    color-scheme: light;
+    --bg:#f0f0f0;
+    --card:#ffffff;
+    --line:#dfdfdf;
+    --ink:#000000;
+    --text:#212121;
+    --soft:#686868;
+    --orange:#ff8200;
+    --green:#41c443;
+    --dark:#212121;
+    --radius:24px;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:var(--sans);font-size:16px;line-height:1.6;min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  :focus-visible{outline:2px solid var(--dark);outline-offset:2px;border-radius:4px}
+  ::selection{background:var(--orange);color:#fff}
+
+  .shell{max-width:720px;margin:0 auto;padding:20px 16px 40px}
+  @media(min-width:721px){.shell{padding:24px 24px 48px}}
+
+  .hud{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    font-size:14px;font-weight:500;color:var(--soft);
+    padding:14px 22px;background:var(--card);border:1px solid var(--line);border-radius:999px;
+    margin:0 0 28px;
+  }
+  .hud b{color:var(--ink);font-weight:700;letter-spacing:-.01em}
+  .hud a{color:var(--soft);text-decoration:none;font-weight:600}
+  .hud a:hover{color:var(--orange)}
+
+  .room{
+    background:var(--card);border-radius:var(--radius);
+    background-image:radial-gradient(var(--line) 1px, transparent 1.2px);
+    background-size:22px 22px;
+    padding:28px 20px 12px;
+  }
+  @media(min-width:721px){.room{padding:40px 40px 20px}}
+
+  .tag{
+    display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;color:#fff;
+    background:var(--orange);padding:5px 10px;border-radius:999px;
+  }
+  h1{font-size:36px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin:14px 0 10px}
+  @media(min-width:721px){h1{font-size:44px}}
+  .lede{color:var(--soft);margin:0 0 26px;max-width:46ch}
+  /* the heading block sits on the dotted wall, so give the text a clean patch to read on */
+  .lede,h1{background:var(--card);display:table;padding-right:8px}
+
+  .doors{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .door{
+    display:flex;align-items:center;gap:16px;
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:14px 16px;color:var(--soft);text-decoration:none;
+    transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease;
+  }
+  .door .tile{
+    flex:0 0 52px;width:52px;height:52px;display:grid;place-items:center;
+    background:var(--card);border:1.5px solid currentColor;border-radius:14px;
+    box-shadow:0 1px 2px rgba(0,0,0,.04),0 4px 14px rgba(0,0,0,.06);
+  }
+  .door .tile svg{width:26px;height:26px}
+  .door .l{flex:1 1 auto;min-width:0}
+  .door .name{display:block;font-size:16px;font-weight:700;letter-spacing:.04em;color:var(--ink)}
+  .door .desc{display:block;font-size:14px;color:var(--soft);margin-top:1px}
+  .door .arr{font-size:16px;color:var(--soft);transition:transform .15s ease}
+  .door:hover,.door:focus-visible{color:var(--orange);border-color:var(--orange);
+    transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+  .door:hover .name{color:var(--orange)}
+  .door:hover .arr{color:var(--orange);transform:translateX(3px)}
+
+  .more{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--soft);
+    margin:22px 0 0;padding:16px 0 8px;border-top:1px solid var(--line);background:var(--card)}
+
+  footer{
+    margin:22px 4px 0;font-size:12px;font-weight:500;color:var(--soft);letter-spacing:.04em;line-height:2;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="hud">
+    <span><b>FREDDIE GEBBETT</b> · OFF THE MAP</span>
+    <a href="/">◀ BACK TO THE MAP</a>
+  </header>
+
+  <main class="room">
+    <span class="tag">SECRET AREA</span>
+    <h1>The Back Room</h1>
+    <p class="lede">You're in. These are the corners of fwg.fyi that aren't on the map.</p>
+
+    <!-- One <li> per area. To add a new one: copy a row, point the href at the new page,
+         and draw its icon on the same 16x16 pixel grid the map uses. -->
+    <ul class="doors">
+      <li>
+        <a class="door" href="/bakes">
+          <span class="tile" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor">
+            <rect x="4" y="3" width="8" height="2"/><rect x="2" y="5" width="12" height="3"/>
+            <rect x="3" y="8" width="10" height="5"/>
+            <g fill="#ffffff"><rect x="5" y="9" width="1" height="3"/><rect x="8" y="9" width="1" height="3"/><rect x="11" y="9" width="1" height="3"/></g>
+          </svg></span>
+          <span class="l"><span class="name">BAKES</span><span class="desc">Eight saved bakes, written up in grams with a batch slider.</span></span>
+          <span class="arr" aria-hidden="true">▸</span>
+        </a>
+      </li>
+      <li>
+        <a class="door" href="/lockin">
+          <span class="tile" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor">
+            <rect x="1" y="5" width="2" height="6"/><rect x="3" y="4" width="2" height="8"/>
+            <rect x="5" y="7" width="6" height="2"/>
+            <rect x="11" y="4" width="2" height="8"/><rect x="13" y="5" width="2" height="6"/>
+          </svg></span>
+          <span class="l"><span class="name">LOCK IN</span><span class="desc">The 75 to Hyrox tracker.</span></span>
+          <span class="arr" aria-hidden="true">▸</span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="more">MORE DOORS AS I BUILD THEM</p>
+  </main>
+
+  <footer>
+    <span>© <span id="yr">2026</span> FREDDIE GEBBETT</span>
+    <span>FWG.FYI · THE BACK ROOM</span>
+  </footer>
+
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
