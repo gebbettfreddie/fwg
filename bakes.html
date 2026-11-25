@@ -135,9 +135,9 @@
 <body>
 <header>
   <div class="wrap">
-    <p class="eyebrow">Pulled from my saves</p>
+    <p class="eyebrow">My recipe file</p>
     <h1>Saved <em>Bakes</em></h1>
-    <p class="lede">Eight saved bakes, mostly Instagram reels, transcribed into real recipes. Weights, method, a link back to each source, and a batch slider on every one to scale it up or down.</p>
+    <p class="lede">Eight saved bakes, written up as real recipes. Weights, method, the baker behind each one, and a batch slider on every one to scale it up or down.</p>
     <div class="meta-line">
       <span><b>8</b> recipes</span>
       <span><b>7</b> bakers</span>
@@ -154,7 +154,7 @@
 
 <footer class="wrap">
   <p><a href="/backroom">&larr; The back room</a></p>
-  <p><b>A note on faithfulness.</b> Every recipe is transcribed from the reel's own caption (or, for the cookies, the free PDF the baker links in her bio, and for the honey butter rolls, the baker's own recipe page), lightly tidied for reading. Nothing is invented. Every ingredient amount is in grams or millilitres. Where a baker used ounces, cups or spoons, those have been converted and rounded (for example, 1 tsp became 5 ml, and dry spoon measures became grams). All temperatures are in &deg;C, converted and rounded where the baker used &deg;F.</p>
+  <p><b>A note on faithfulness.</b> Every recipe is transcribed from the baker's own write-up, lightly tidied for reading. Nothing is invented. Every ingredient amount is in grams or millilitres. Where a baker used ounces, cups or spoons, those have been converted and rounded (for example, 1 tsp became 5 ml, and dry spoon measures became grams). All temperatures are in &deg;C, converted and rounded where the baker used &deg;F.</p>
   <p><b>About the slider.</b> It scales each ingredient by batch, from a half batch up to 4&times;, and shows the rough yield. Weights are rounded for the kitchen, so sanity-check at the extremes. A few amounts stay fixed on purpose, such as the salt-bread butter block, which is per piece. Scaling bread this far can shift timings and hydration feel, so treat large multiples as a starting point.</p>
 </footer>
 
@@ -164,8 +164,6 @@ const RECIPES = [
     tag: "Cakes & Loaves",
     title: "Maple Banana Bread",
     baker: "Selena Valentina",
-    handle: "@theselena_v",
-    url: "https://www.instagram.com/reel/DZlOp2nJL4I/",
     yield: { n: 1, one: "smaller loaf", many: "smaller loaves" },
     facts: [["Oven", "165°C"], ["Finish", "Maple + flaky salt"], ["Internal", "93–96°C"]],
     note: "Scaled to 0.8 of the original recipe, rounded to the nearest 5 g, with the two eggs kept whole.",
@@ -190,7 +188,6 @@ const RECIPES = [
     tag: "Bread",
     title: "No-Knead Baguettes",
     baker: "Bradley's Bakehouse",
-    url: "https://www.instagram.com/reel/DeI5zEUpv8r/",
     yield: { n: 4, one: "baguette", many: "baguettes" },
     facts: [["Ferment", "12–16 hrs"], ["Oven", "240°C → 200°C"]],
     ings: [
@@ -211,7 +208,6 @@ const RECIPES = [
     tag: "Cookies & Donuts",
     title: "Mini Cinnamon Sugar Donuts",
     baker: "Cookwithhali",
-    url: "https://www.instagram.com/reel/De4cUeAR3Sx/",
     yield: { n: 24, one: "mini donut", many: "mini donuts" },
     facts: [["Style", "No-knead, fried"], ["Rise", "~2 hrs"]],
     ings: [
@@ -230,8 +226,6 @@ const RECIPES = [
     tag: "Cookies & Donuts",
     title: "Brown Butter Chocolate Chip Cookies",
     baker: "Selena Valentina",
-    handle: "@theselena_v",
-    url: "https://www.instagram.com/reel/DZ58ThppnHg/",
     yield: { n: 16, one: "cookie", many: "cookies", approx: true },
     facts: [["Oven", "165°C"], ["Portion", "80 g balls"], ["Rest", "3 hrs – overnight"]],
     note: "Her most-requested recipe. Brown butter plus milk powder is the backbone, rest the dough at least 3 hours, ideally overnight, and have your eggs and cream at room temperature before you start.",
@@ -263,7 +257,6 @@ const RECIPES = [
     tag: "Bread",
     title: "Everyday Bread",
     baker: "James Sharman",
-    url: "https://www.instagram.com/reel/DcDiMgGsrlk/",
     yield: { n: 4, one: "600 g loaf", many: "600 g loaves" },
     facts: [["Build", "Two-day"], ["Oven", "220°C, 30–40 min"]],
     note: "One dough for everything, loaves, baguettes, tins, even focaccia. A two-day build. Dry-yeast equivalents are shown beside the fresh weights.",
@@ -286,7 +279,6 @@ const RECIPES = [
     tag: "Cakes & Loaves",
     title: "Almond Croissant Loaf",
     baker: "Anna Whitley",
-    url: "https://www.instagram.com/reel/De1eEe_IYGO/",
     yield: { n: 1, one: "loaf", many: "loaves" },
     facts: [["Oven", "170°C / 150°C fan"], ["Bake", "~50 min"], ["Gas", "Mark 3"]],
     note: "Frangipane swirled through a vanilla sponge, topped with flaked almonds and plenty of icing sugar.",
@@ -312,7 +304,6 @@ const RECIPES = [
     title: "Japanese Salt Breads",
     baker: "Haydon",
     handle: "Cantoast Bakery",
-    url: "https://www.instagram.com/reel/DerwY3dOqpK/",
     yield: { n: 15, one: "salt bread", many: "salt breads" },
     facts: [["Dough temp", "22–24°C"], ["Oven", "230°C → 180°C"]],
     note: "Scaled down from a bakery shift. Start the poolish the night before.",
@@ -461,11 +452,12 @@ function ingColumn(r) {
 
 function card(r, i) {
   const num = String(i + 1).padStart(2, "0");
+  const source = r.url ? ` &nbsp;&middot;&nbsp; <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.linkLabel)} &#8599;</a>` : "";
   const handle = r.handle ? ` <span style="color:var(--soft)">&middot; ${esc(r.handle)}</span>` : "";
   const head = `<div class="card-head">
       <div class="kicker"><span class="num">${num}</span><span class="tag-badge">${esc(r.tag)}</span></div>
       <h2>${esc(r.title)}</h2>
-      <p class="byline">by ${esc(r.baker)}${handle} &nbsp;&middot;&nbsp; <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.linkLabel || "Watch the reel")} &#8599;</a></p>
+      <p class="byline">by ${esc(r.baker)}${handle}${source}</p>
       ${r.facts ? `<div class="facts">${r.facts.map(([k, v]) => `<span>${esc(k)} <b>${esc(v)}</b></span>`).join("")}</div>` : ""}
     </div>`;
 
