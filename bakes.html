@@ -96,6 +96,10 @@
   .batch .read .mult { color: var(--ink); font-weight: 600; }
   .batch .read .yield { color: var(--accent); }
 
+  /* ---- Photos (optional, up to a couple per bake) ---- */
+  .photos { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; border-bottom: 1px dashed var(--line); background: var(--line); }
+  .photos img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
   .card-body { padding: 1.3rem 1.5rem 1.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 2.2rem; }
   @media (max-width: 640px) { .card-body { grid-template-columns: 1fr; } }
   .col-ing { min-width: 0; }
@@ -452,6 +456,13 @@ function ingColumn(r) {
   return html;
 }
 
+// A bake's photos live in bake-photos/, listed on the recipe as photos: [{ src: "file.jpg", alt: "what it shows" }].
+function photoStrip(r) {
+  if (!r.photos || !r.photos.length) return "";
+  return `<div class="photos">` + r.photos.map(ph =>
+    `<img src="bake-photos/${esc(ph.src)}" alt="${esc(ph.alt)}" loading="lazy">`).join("") + `</div>`;
+}
+
 function card(r, i) {
   const num = String(i + 1).padStart(2, "0");
   const head = `<div class="card-head">
@@ -476,7 +487,7 @@ function card(r, i) {
       </div>
     </div>`;
 
-  return `<article class="card" data-tag="${esc(r.tag)}">${head}${batch}${body}</article>`;
+  return `<article class="card" data-tag="${esc(r.tag)}">${head}${photoStrip(r)}${batch}${body}</article>`;
 }
 
 const grid = document.getElementById("grid");
