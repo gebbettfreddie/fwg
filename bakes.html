@@ -122,8 +122,6 @@
 
   footer { border-top: 1px solid var(--line); padding-block: 1.8rem 3rem; color: var(--soft); font-size: .85rem; }
   footer p { margin: 0 0 .5rem; max-width: 62ch; }
-  footer a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
-  footer a:hover { border-bottom-color: var(--accent); }
   .empty { text-align: center; color: var(--soft); font-family: var(--mono); font-size: .85rem; padding: 3rem 0; }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -149,7 +147,6 @@
 <main class="wrap" id="grid"></main>
 
 <footer class="wrap">
-  <p><a href="/backroom">&larr; The back room</a></p>
   <p><b>A note on units.</b> Every ingredient amount is in grams or millilitres, with dry spoon measures given as grams. All temperatures are in &deg;C.</p>
   <p><b>About the slider.</b> It scales each ingredient by batch, from a half batch up to 4&times;, and shows the rough yield. Weights are rounded for the kitchen, so sanity-check at the extremes. A few amounts stay fixed on purpose, such as the salt-bread butter block, which is per piece. Scaling bread this far can shift timings and hydration feel, so treat large multiples as a starting point.</p>
 </footer>
